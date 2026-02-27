@@ -25,7 +25,11 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5.5rem;
+    }
+    section[id], footer[id] { scroll-margin-top: 5.5rem; }
     body {
       font-family: 'Outfit', sans-serif;
       background: var(--bg);
@@ -1239,8 +1243,6 @@
       justify-content: center;
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.7rem;
-      font-weight: 700;
       transition: color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .team-socials a:hover {
@@ -1248,6 +1250,12 @@
       border-color: rgba(34, 197, 94, 0.5);
       transform: scale(1.1);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.2);
+    }
+    .team-socials a svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
     }
     .team-card.reveal.visible {
       opacity: 0;
@@ -1273,20 +1281,47 @@
       .team-grid { gap: 1.25rem; }
     }
 
-    /* Trading Bots section — center-aligned, futuristic retro + motion */
+    /* Trading Bots section — futuristic, retro, interactive + motion */
     .bots-section {
+      position: relative;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 3.5rem 2rem;
+      padding: 4rem 2rem;
       border-top: 1px solid rgba(34, 197, 94, 0.15);
       text-align: center;
+      overflow: hidden;
     }
+    .bots-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 5%, transparent 60%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 5%, transparent 60%);
+      opacity: 0.9;
+    }
+    .bots-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+      opacity: 0.4;
+    }
+    .bots-section .section-label,
+    .bots-section .section-title,
+    .bots-section .section-body,
+    .bots-subsections { position: relative; z-index: 1; }
     .bots-section .section-body { margin-bottom: 2rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .bots-subsections { display: flex; flex-direction: column; align-items: center; }
     .bots-subsection {
       width: 100%;
       max-width: 960px;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
     .bots-subsection:last-of-type { margin-bottom: 0; }
     .bots-subsection h3 {
@@ -1295,70 +1330,124 @@
       font-weight: 700;
       color: var(--primary);
       letter-spacing: 0.2em;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
       text-align: center;
+      position: relative;
+      display: inline-block;
+      padding: 0 0.5rem;
+    }
+    .bots-subsection h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.6;
+      animation: bot-subtitle-line 2.5s ease-in-out infinite;
+    }
+    @keyframes bot-subtitle-line {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.9; }
     }
     .bots-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .bot-card {
       position: relative;
       width: 100%;
       max-width: 280px;
-      background: linear-gradient(165deg, rgba(18, 22, 18, 0.98) 0%, var(--bg-card) 100%);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: linear-gradient(165deg, rgba(12, 16, 12, 0.98) 0%, var(--bg-card) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 1.75rem;
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.35s ease;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset, 0 4px 24px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5) inset, 0 4px 24px rgba(0, 0, 0, 0.25);
+      animation: bot-card-float 5s ease-in-out infinite;
+    }
+    .bot-card:nth-child(odd) { animation-delay: -1.5s; }
+    .bot-card:nth-child(3n) { animation-delay: -3s; }
+    @keyframes bot-card-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
     }
     .bot-card::before {
       content: '';
       position: absolute;
       left: 0;
       top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--primary), transparent);
-      opacity: 0.5;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+      opacity: 0.7;
       transition: opacity 0.3s ease, box-shadow 0.3s ease;
-    }
-    .bot-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(34, 197, 94, 0.45);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset,
-                  0 0 28px rgba(34, 197, 94, 0.12),
-                  0 12px 36px rgba(0, 0, 0, 0.25);
     }
     .bot-card:hover::before {
       opacity: 1;
-      box-shadow: 0 0 10px var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .bot-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.4), transparent 30%, transparent 70%, rgba(34, 197, 94, 0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .bot-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(34, 197, 94, 0.5);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset,
+                  0 0 40px rgba(34, 197, 94, 0.15),
+                  0 20px 50px rgba(0, 0, 0, 0.3);
+      animation: none;
+    }
+    .bot-card:hover::after {
+      opacity: 1;
     }
     .bot-card .bot-logo-wrap {
-      width: 56px;
-      height: 56px;
+      position: relative;
+      width: 60px;
+      height: 60px;
       margin: 0 auto 1rem;
-      border-radius: 10px;
+      border-radius: 14px;
       overflow: hidden;
-      background: rgba(34, 197, 94, 0.06);
+      background: rgba(34, 197, 94, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      animation: bot-logo-pulse 4s ease-in-out infinite;
+    }
+    .bot-card:nth-child(even) .bot-logo-wrap { animation-delay: -2s; }
+    @keyframes bot-logo-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.1); }
+      50% { box-shadow: 0 0 20px 2px rgba(34, 197, 94, 0.08); }
     }
     .bot-card:hover .bot-logo-wrap {
-      transform: scale(1.08);
-      box-shadow: 0 0 24px rgba(34, 197, 94, 0.15);
+      transform: scale(1.12);
+      box-shadow: 0 0 28px rgba(34, 197, 94, 0.25);
+      animation: none;
     }
     .bot-card .bot-logo {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       object-fit: contain;
     }
     .bot-card .bot-platform {
@@ -1377,60 +1466,110 @@
       margin-bottom: 1rem;
     }
     .bot-card .btn {
-      padding: 0.55rem 1.15rem;
+      padding: 0.6rem 1.25rem;
       font-size: 0.875rem;
       font-weight: 600;
-      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
     }
     .bot-card .btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
     }
     .bot-card.reveal.visible {
       opacity: 0;
-      animation: bot-card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: bot-card-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    .bots-grid .bot-card.reveal.visible:nth-child(1) { animation-delay: 0.05s; }
-    .bots-grid .bot-card.reveal.visible:nth-child(2) { animation-delay: 0.1s; }
-    .bots-grid .bot-card.reveal.visible:nth-child(3) { animation-delay: 0.15s; }
-    .bots-grid .bot-card.reveal.visible:nth-child(4) { animation-delay: 0.2s; }
-    .bots-grid .bot-card.reveal.visible:nth-child(5) { animation-delay: 0.25s; }
-    .bots-grid .bot-card.reveal.visible:nth-child(6) { animation-delay: 0.3s; }
+    .bot-card.reveal.visible:nth-child(1) { animation-delay: 0.05s; }
+    .bot-card.reveal.visible:nth-child(2) { animation-delay: 0.1s; }
+    .bot-card.reveal.visible:nth-child(3) { animation-delay: 0.15s; }
+    .bot-card.reveal.visible:nth-child(4) { animation-delay: 0.2s; }
+    .bot-card.reveal.visible:nth-child(5) { animation-delay: 0.25s; }
+    .bot-card.reveal.visible:nth-child(6) { animation-delay: 0.3s; }
+    .bot-card.reveal.visible:nth-child(7) { animation-delay: 0.35s; }
+    .bot-card.reveal.visible:nth-child(8) { animation-delay: 0.4s; }
     @keyframes bot-card-in {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(24px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Social feeds — live Facebook & X timeline embeds */
+    /* Social feeds — live Facebook & X embeds, futuristic retro + motion */
     .social-feeds-section {
+      position: relative;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 3.5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
+      overflow: hidden;
     }
+    .social-feeds-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(34, 197, 94, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 5%, transparent 55%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 5%, transparent 55%);
+      opacity: 0.9;
+    }
+    .social-feeds-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.025) 2px, rgba(0, 0, 0, 0.025) 4px);
+      opacity: 0.5;
+    }
+    .social-feeds-section .section-label,
+    .social-feeds-section .section-title,
+    .social-feeds-section .section-body,
+    .social-feeds-grid,
+    .social-feeds-discord-cta { position: relative; z-index: 1; }
     .social-feeds-section .section-label { margin-bottom: 0.5rem; }
     .social-feeds-section .section-title { margin-bottom: 0.6rem; }
-    .social-feeds-section .section-body { margin-bottom: 1.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .social-feeds-section .section-body { margin-bottom: 1.75rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.75rem;
+      gap: 2rem;
       align-items: stretch;
+      margin-bottom: 2rem;
     }
     .social-feed-card {
-      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(12, 14, 12, 0.98) 100%);
-      border: 1px solid rgba(34, 197, 94, 0.18);
-      border-radius: 14px;
+      position: relative;
+      background: linear-gradient(165deg, rgba(12, 16, 12, 0.98) 0%, var(--bg-card) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.22);
+      border-radius: 16px;
       overflow: hidden;
       min-height: 580px;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 4px 24px rgba(0, 0, 0, 0.15);
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset, 0 6px 28px rgba(0, 0, 0, 0.2);
+    }
+    .social-feed-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.7;
+      transition: opacity 0.3s ease, box-shadow 0.3s ease;
     }
     .social-feed-card:hover {
-      border-color: rgba(34, 197, 94, 0.35);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 24px rgba(34, 197, 94, 0.08), 0 8px 32px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+      border-color: rgba(34, 197, 94, 0.4);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 32px rgba(34, 197, 94, 0.1), 0 14px 40px rgba(0, 0, 0, 0.25);
+    }
+    .social-feed-card:hover::before {
+      opacity: 1;
+      box-shadow: 0 0 14px var(--primary-glow);
     }
     .social-feed-card-header {
       display: flex;
@@ -1475,8 +1614,8 @@
       animation: social-live-pulse 2s ease-in-out infinite;
     }
     @keyframes social-live-pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-      50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+      50% { opacity: 0.85; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
     }
     .social-feed-embed-wrap {
       flex: 1;
@@ -1505,23 +1644,38 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
       min-height: 500px;
       padding: 2rem;
       background: var(--bg-elevated);
       color: var(--muted);
       font-size: 0.9375rem;
       text-align: center;
+      border-radius: 0 0 14px 14px;
     }
+    .x-embed-fallback p { margin: 0; max-width: 320px; }
     .x-embed-fallback a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
     }
     .x-embed-fallback a:hover { text-decoration: underline; }
+    .x-embed-fallback .btn { margin-top: 0.5rem; }
+    .social-feeds-discord-cta {
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .social-feeds-discord-cta p {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.9375rem;
+      color: var(--muted);
+    }
+    .social-feeds-discord-cta .btn { margin: 0 0.25rem; }
     @media (max-width: 900px) {
       .social-feeds-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .social-feed-card { min-height: 520px; }
       .social-feed-embed-wrap { min-height: 440px; }
       .social-feed-embed { min-height: 440px; }
       .social-feed-embed.fb-embed { min-height: 480px; }
@@ -2043,11 +2197,11 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="noise" aria-hidden="true"></div>
 
   <nav class="navbar" id="navbar">
-    <a href="#" class="nav-logo">
+    <a href="#top" class="nav-logo" aria-label="Alpha Intel home">
       <img src="assets/logo.png" alt="Alpha Intel" width="40" height="40">
       <span>Alpha<span class="accent">Intel</span></span>
     </a>
@@ -2446,8 +2600,8 @@
         <div class="team-display-name">Zygfrid</div>
         <div class="team-name">@Zygfrid</div>
         <div class="team-socials">
-          <a href="https://x.com/ZygfridS" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-          <a href="https://www.facebook.com/zygtvofficial/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+          <a href="https://x.com/ZygfridS" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.facebook.com/zygtvofficial/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2457,10 +2611,10 @@
         <div class="team-display-name">Pancake</div>
         <div class="team-name">@Pancake</div>
         <div class="team-socials">
-          <a href="https://www.facebook.com/pancakesyruplex" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-          <a href="https://x.com/PancakeSyrupNFT" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-          <a href="https://www.instagram.com/lex.on.track/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-          <a href="https://www.tiktok.com/@lex.on.track" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
+          <a href="https://www.facebook.com/pancakesyruplex" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://x.com/PancakeSyrupNFT" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/lex.on.track/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.265.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://www.tiktok.com/@lex.on.track" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.27 1.07-.23 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2470,7 +2624,7 @@
         <div class="team-display-name">Stable Jezreelino</div>
         <div class="team-name">@Stable Jezreelino</div>
         <div class="team-socials">
-          <a href="https://x.com/jezreelino" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://x.com/jezreelino" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2480,8 +2634,8 @@
         <div class="team-display-name">Souei</div>
         <div class="team-name">@Souei</div>
         <div class="team-socials">
-          <a href="https://www.facebook.com/profile.php?id=61581812799877" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-          <a href="https://x.com/souei_nft" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://www.facebook.com/profile.php?id=61581812799877" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://x.com/souei_nft" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2491,8 +2645,8 @@
         <div class="team-display-name">King Bisakol</div>
         <div class="team-name">@King Bisakol</div>
         <div class="team-socials">
-          <a href="https://www.facebook.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-          <a href="https://x.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://www.facebook.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://x.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2502,7 +2656,7 @@
         <div class="team-display-name">Nabong</div>
         <div class="team-name">@Nabong</div>
         <div class="team-socials">
-          <a href="https://x.com/__nabongggg" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://x.com/__nabongggg" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2512,7 +2666,7 @@
         <div class="team-display-name">! MAIDEN</div>
         <div class="team-name">@! MAIDEN</div>
         <div class="team-socials">
-          <a href="https://x.com/0xmaidentrades" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://x.com/0xmaidentrades" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2522,7 +2676,7 @@
         <div class="team-display-name">Chillwil</div>
         <div class="team-name">@Chillwil · Will not DM you</div>
         <div class="team-socials">
-          <a href="https://x.com/ChillWil31" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://x.com/ChillWil31" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
       </div>
       <div class="team-card reveal">
@@ -2532,9 +2686,9 @@
         <div class="team-display-name">takaw</div>
         <div class="team-name">@takaw</div>
         <div class="team-socials">
-          <a href="https://x.com/takawtv" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-          <a href="https://www.tiktok.com/@takawtv" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
-          <a href="https://www.twitch.tv/takawtv" target="_blank" rel="noopener noreferrer" aria-label="Twitch">Tw</a>
+          <a href="https://x.com/takawtv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.tiktok.com/@takawtv" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.27 1.07-.23 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.twitch.tv/takawtv" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></a>
         </div>
       </div>
     </div>
@@ -2630,7 +2784,7 @@
   <section id="social-feeds" class="section social-feeds-section reveal">
     <span class="section-label">Latest from us</span>
     <h2 class="section-title">Stay updated with our posts</h2>
-    <p class="section-body">Follow us on <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> and <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">X</a> for news, alpha, and community updates. The feeds below load live from our pages and update automatically.</p>
+    <p class="section-body">Feeds below load live from our <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> and <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">X</a> pages. For real-time alpha, announcements, and community discussion, join our Discord.</p>
     <div class="social-feeds-grid">
       <div class="social-feed-card">
         <div class="social-feed-card-header">
@@ -2651,11 +2805,16 @@
             <blockquote class="twitter-timeline" data-height="560" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders" data-tweet-limit="5"><a href="https://twitter.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
           </div>
           <div class="x-embed-fallback" id="x-embed-fallback" style="display: none;">
-            <p>Timeline didn’t load? View our latest posts on X.</p>
-            <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Open @AlphaIntelMedia on X →</a>
+            <p>Timeline didn’t load? Follow us on X for live updates.</p>
+            <a href="https://x.com/AlphaIntelMedia" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Open @AlphaIntelMedia on X →</a>
           </div>
         </div>
       </div>
+    </div>
+    <div class="social-feeds-discord-cta">
+      <p>For real-time alpha, trade calls, and announcements — join our Discord. Updates are posted across Discord, Facebook, and X.</p>
+      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord</a>
+      <a href="https://discord.com/channels/1393229110251229304/1439487032136171580" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Latest updates channel →</a>
     </div>
   </section>
 
@@ -2832,7 +2991,7 @@
 
   <script>
     (function() {
-      // Load X (Twitter) timeline: run when widget SDK is ready and when section is visible
+      // Load X (Twitter) timeline: run when widget SDK is ready and when section is visible; retry to improve load
       var socialSection = document.getElementById('social-feeds');
       var xFallback = document.getElementById('x-embed-fallback');
       var xContainer = document.getElementById('x-embed-container');
@@ -2848,18 +3007,23 @@
           xContainer.style.display = 'none';
         }
       }
+      function scheduleFallbackCheck(delay) {
+        setTimeout(checkAndShowFallback, delay);
+      }
       window.addEventListener('load', function() {
         runTwitterLoad();
-        setTimeout(checkAndShowFallback, 6000);
+        scheduleFallbackCheck(3000);
+        scheduleFallbackCheck(7000);
       });
       if (socialSection) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (!entry.isIntersecting) return;
             runTwitterLoad();
-            setTimeout(checkAndShowFallback, 6000);
+            scheduleFallbackCheck(2500);
+            scheduleFallbackCheck(6000);
           });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
         io.observe(socialSection);
       }
 
@@ -2869,6 +3033,29 @@
       }
       window.addEventListener('scroll', onScroll);
       onScroll();
+
+      // Header nav: scroll to section when link is clicked
+      var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          if (href === '#' || href === '#top') return;
+          var id = href.slice(1);
+          var target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (history.pushState) history.pushState(null, '', href);
+          }
+        });
+      });
+
+      // On load, scroll to hash target if present (e.g. direct link to #contact)
+      if (window.location.hash) {
+        var id = window.location.hash.slice(1);
+        var el = document.getElementById(id);
+        if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+      }
 
       var reveals = document.querySelectorAll('.reveal');
       var observer = new IntersectionObserver(function(entries) {
