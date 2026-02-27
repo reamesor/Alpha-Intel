@@ -7,9 +7,7 @@
   <meta name="description" content="Get the sharpest crypto intel. 24/7 breaking news, trade calls, Web3 alpha — free. Filipino-led. Join Discord.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://platform.twitter.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script async src="https://platform.twitter.com/widgets.js"></script>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -1606,10 +1604,10 @@
     .social-feeds-section .section-body { margin-bottom: 1.25rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 1.25rem;
       align-items: stretch;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       width: 100%;
       max-width: 1200px;
       margin-left: auto;
@@ -1770,6 +1768,16 @@
       text-decoration: none;
     }
     .social-feed-x-cta a:hover { text-decoration: underline; }
+    .social-feeds-x-cta-wrap {
+      text-align: center;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    .social-feeds-x-cta-wrap .btn {
+      font-weight: 600;
+      padding: 0.65rem 1.5rem;
+    }
     .social-feeds-discord-cta {
       padding: 1rem 1.25rem;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
@@ -3031,7 +3039,7 @@
   <section id="social-feeds" class="section social-feeds-section reveal">
     <span class="section-label">Latest from us</span>
     <h2 class="section-title">Stay updated with our posts</h2>
-    <p class="section-body">Feeds below load live from our <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> and <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">X</a> pages. For real-time alpha, announcements, and community discussion, join our Discord.</p>
+    <p class="section-body">The feed below loads live from our <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> page. You can also check our latest updates on X. For real-time alpha, announcements, and community discussion, join our Discord.</p>
     <div class="social-feeds-grid">
       <div class="social-feed-card">
         <div class="social-feed-card-header">
@@ -3042,24 +3050,9 @@
           <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100% !important; max-width: 100% !important; min-width: 0 !important; border: none; overflow: hidden;" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
         </div>
       </div>
-      <div class="social-feed-card">
-        <div class="social-feed-card-header">
-          <h3>X · <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">@AlphaIntelMedia</a></h3>
-          <span class="social-feed-live-badge" aria-hidden="true">Live</span>
-        </div>
-        <div class="social-feed-embed-wrap">
-          <div class="social-feed-embed x-embed" id="x-embed-container">
-            <blockquote class="twitter-timeline" data-height="560" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders" data-tweet-limit="5" data-width="100%"><a href="https://x.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
-          </div>
-          <div class="x-embed-fallback" id="x-embed-fallback" style="display: none;">
-            <p>Follow us on X for live updates, alpha, and market intel.</p>
-            <a href="https://x.com/AlphaIntelMedia" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Follow @AlphaIntelMedia on X →</a>
-          </div>
-          <p class="social-feed-x-cta">
-            <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">View on X →</a>
-          </p>
-        </div>
-      </div>
+    </div>
+    <div class="social-feeds-x-cta-wrap">
+      <a href="https://x.com/AlphaIntelMedia" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Check latest updates on X →</a>
     </div>
     <div class="social-feeds-discord-cta">
       <p>For real-time alpha, trade calls, and announcements — join our Discord. Updates are posted across Discord, Facebook, and X.</p>
@@ -3240,53 +3233,6 @@
 
   <script>
     (function() {
-      // X timeline: load widgets when script is ready; show fallback only if iframe never appears.
-      var socialSection = document.getElementById('social-feeds');
-      var xFallback = document.getElementById('x-embed-fallback');
-      var xContainer = document.getElementById('x-embed-container');
-      var fallbackShown = false;
-      function runTwitterLoad() {
-        if (typeof twttr === 'undefined' || !twttr.widgets || !twttr.widgets.load) return;
-        twttr.widgets.load(); // parse full document so timeline blockquote is found
-      }
-      function checkAndShowFallback() {
-        if (fallbackShown || !xFallback || !xContainer) return;
-        var hasIframe = xContainer.querySelector('iframe');
-        if (!hasIframe) {
-          fallbackShown = true;
-          xFallback.style.display = 'flex';
-          xContainer.style.display = 'none';
-        }
-      }
-      function scheduleFallbackCheck(delay) {
-        setTimeout(checkAndShowFallback, delay);
-      }
-      function whenReady() {
-        if (typeof twttr !== 'undefined' && twttr.ready) {
-          twttr.ready(function() {
-            runTwitterLoad();
-            [500, 1200, 2500, 4000, 6000].forEach(function(ms) {
-              setTimeout(runTwitterLoad, ms);
-            });
-            scheduleFallbackCheck(20000); // give timeline 20s to render before showing fallback
-          });
-        } else {
-          setTimeout(whenReady, 80);
-        }
-      }
-      whenReady();
-      window.addEventListener('load', whenReady);
-      if (socialSection) {
-        var io = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (!entry.isIntersecting || fallbackShown) return;
-            whenReady();
-            scheduleFallbackCheck(20000);
-          });
-        }, { threshold: 0.1 });
-        io.observe(socialSection);
-      }
-
       var nav = document.getElementById('navbar');
       function onScroll() {
         nav.classList.toggle('scrolled', window.scrollY > 20);
