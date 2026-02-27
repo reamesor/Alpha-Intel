@@ -1562,15 +1562,18 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Social feeds — live Facebook & X embeds, futuristic retro + motion */
+    /* Social feeds — live Facebook embed, centered, no dead space */
     .social-feeds-section {
       position: relative;
       width: 100%;
       max-width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem;
+      padding: 6rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
       box-sizing: border-box;
     }
     .social-feeds-section::before {
@@ -1603,20 +1606,20 @@
     .social-feeds-section .section-title { margin-bottom: 0.4rem; }
     .social-feeds-section .section-body { margin-bottom: 1.25rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-      align-items: stretch;
-      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 680px;
+      margin: 0 auto 1rem;
+      gap: 1.25rem;
       box-sizing: border-box;
       min-width: 0;
     }
     .social-feed-card {
       position: relative;
+      width: 100%;
+      max-width: 100%;
       min-width: 0;
       background: linear-gradient(165deg, rgba(12, 16, 12, 0.98) 0%, var(--bg-card) 100%);
       border: 1px solid rgba(34, 197, 94, 0.22);
@@ -1698,13 +1701,22 @@
       flex: 1;
       min-height: 500px;
       display: flex;
-      flex-direction: column;
-      position: relative;
+      justify-content: center;
+      align-items: center;
       width: 100%;
-      max-width: 100%;
       overflow: hidden;
       min-width: 0;
       box-sizing: border-box;
+      position: relative;
+    }
+    .social-feed-embed-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      overflow: hidden;
     }
     .social-feed-embed {
       width: 100%;
@@ -1773,6 +1785,10 @@
       margin-bottom: 1.25rem;
       position: relative;
       z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .social-feeds-x-cta-wrap .btn {
       font-weight: 600;
@@ -1780,6 +1796,10 @@
     }
     .social-feeds-discord-cta {
       padding: 1rem 1.25rem;
+      width: 100%;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -2307,7 +2327,7 @@
       #contact.contact-section { padding: 2.5rem 1.5rem; }
     }
     @media (max-width: 900px) {
-      .social-feeds-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 100%; }
+      .social-feeds-grid { max-width: 100%; }
       .social-feeds-section .section-body { margin-bottom: 1.5rem; }
       .contact-cards { grid-template-columns: 1fr; gap: 1.5rem; }
       .contact-section { padding: 2.5rem 1.5rem; }
@@ -2370,10 +2390,11 @@
       .bots-section { padding: 1.75rem 1rem; }
       .bots-subsection { margin-bottom: 1.25rem; }
       .bots-grid { gap: 0.875rem; }
-      .social-feeds-section { padding: 1.75rem 1rem; }
+      .social-feeds-section { padding: 1.75rem 1rem; overflow-x: hidden; }
       .social-feed-card { min-height: 380px; min-width: 0; }
       .social-feed-embed-wrap { min-height: 340px; min-width: 0; }
       .social-feed-embed { min-height: 340px; min-width: 0; }
+      .social-feed-embed-inner { max-width: 100%; }
       .social-feed-embed.fb-embed { min-height: 360px; }
       .social-feed-embed.x-embed { min-height: 360px; }
       .social-feed-embed.x-embed iframe { min-height: 360px !important; }
@@ -3047,7 +3068,9 @@
           <span class="social-feed-live-badge" aria-hidden="true">Live</span>
         </div>
         <div class="social-feed-embed-wrap">
-          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100% !important; max-width: 100% !important; min-width: 0 !important; border: none; overflow: hidden;" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+          <div class="social-feed-embed-inner">
+            <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100% !important; max-width: 100% !important; min-width: 0 !important; border: none; overflow: hidden;" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+          </div>
         </div>
       </div>
     </div>
