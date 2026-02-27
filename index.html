@@ -1562,7 +1562,7 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Social feeds — live Facebook embed, centered, no dead space */
+    /* Social feeds — futuristic hub: glass, glow, motion, synced layout */
     .social-feeds-section {
       position: relative;
       width: 100%;
@@ -1582,36 +1582,51 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(34, 197, 94, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 197, 94, 0.035) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 5%, transparent 55%);
-      -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, black 5%, transparent 55%);
-      opacity: 0.9;
+        linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 10%, transparent 60%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 50%, black 10%, transparent 60%);
+      opacity: 0.95;
+      animation: social-grid-pulse 8s ease-in-out infinite;
+    }
+    @keyframes social-grid-pulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
     }
     .social-feeds-section::after {
       content: '';
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.025) 2px, rgba(0, 0, 0, 0.025) 4px);
-      opacity: 0.5;
+      background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+                  repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 197, 94, 0.02) 2px, rgba(34, 197, 94, 0.02) 4px);
+      opacity: 0.8;
     }
     .social-feeds-section .section-label,
     .social-feeds-section .section-title,
     .social-feeds-section .section-body,
     .social-feeds-grid,
+    .social-feeds-actions,
     .social-feeds-discord-cta { position: relative; z-index: 1; }
-    .social-feeds-section .section-label { margin-bottom: 0.35rem; }
+    .social-feeds-section .section-label {
+      margin-bottom: 0.35rem;
+      animation: social-label-glow 3s ease-in-out infinite;
+      letter-spacing: 0.25em;
+    }
+    @keyframes social-label-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+      50% { text-shadow: 0 0 30px rgba(34, 197, 94, 0.5); }
+    }
     .social-feeds-section .section-title { margin-bottom: 0.4rem; }
-    .social-feeds-section .section-body { margin-bottom: 1.25rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .social-feeds-section .section-body { margin-bottom: 1.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
       max-width: 680px;
-      margin: 0 auto 1rem;
+      margin: 0 auto 1.5rem;
       gap: 1.25rem;
       box-sizing: border-box;
       min-width: 0;
@@ -1621,15 +1636,17 @@
       width: 100%;
       max-width: 100%;
       min-width: 0;
-      background: linear-gradient(165deg, rgba(12, 16, 12, 0.98) 0%, var(--bg-card) 100%);
-      border: 1px solid rgba(34, 197, 94, 0.22);
-      border-radius: 16px;
+      background: linear-gradient(165deg, rgba(10, 14, 10, 0.92) 0%, rgba(18, 24, 18, 0.95) 50%, var(--bg-card) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 20px;
       overflow: hidden;
       min-height: 580px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset, 0 6px 28px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset, 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 60px rgba(34, 197, 94, 0.03);
     }
     .social-feed-card::before {
       content: '';
@@ -1637,19 +1654,42 @@
       left: 0;
       top: 0;
       right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary), transparent);
-      opacity: 0.7;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--primary) 20%, var(--highlight) 50%, var(--primary) 80%, transparent 100%);
+      opacity: 0.8;
       transition: opacity 0.3s ease, box-shadow 0.3s ease;
+      animation: social-top-line 4s ease-in-out infinite;
+    }
+    @keyframes social-top-line {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    .social-feed-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 21px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), transparent 40%, transparent 60%, rgba(34, 197, 94, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
     .social-feed-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(34, 197, 94, 0.4);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 32px rgba(34, 197, 94, 0.1), 0 14px 40px rgba(0, 0, 0, 0.25);
+      transform: translateY(-8px) scale(1.005);
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 80px rgba(34, 197, 94, 0.08);
     }
     .social-feed-card:hover::before {
       opacity: 1;
-      box-shadow: 0 0 14px var(--primary-glow);
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .social-feed-card:hover::after {
+      opacity: 1;
     }
     .social-feed-card-header {
       display: flex;
@@ -1658,7 +1698,8 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.12);
+      background: linear-gradient(180deg, rgba(34, 197, 94, 0.04) 0%, transparent 100%);
     }
     .social-feed-card h3 {
       font-family: 'Syne', sans-serif;
@@ -1672,18 +1713,28 @@
     .social-feed-card h3 a {
       color: var(--primary);
       text-decoration: none;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
     }
-    .social-feed-card h3 a:hover { text-decoration: underline; }
+    .social-feed-card h3 a:hover {
+      text-decoration: underline;
+      color: var(--highlight);
+      text-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+    }
     .social-feed-live-badge {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       font-weight: 700;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      animation: social-live-badge-pulse 2.5s ease-in-out infinite;
     }
     .social-feed-live-badge::before {
       content: '';
@@ -1691,12 +1742,32 @@
       height: 6px;
       background: var(--primary);
       border-radius: 50%;
-      animation: social-live-pulse 2s ease-in-out infinite;
+      animation: social-live-pulse 1.5s ease-in-out infinite;
     }
     @keyframes social-live-pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-      50% { opacity: 0.85; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+      50% { opacity: 0.9; transform: scale(1.1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
     }
+    @keyframes social-live-badge-pulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.15); }
+      50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.25); }
+    }
+    .social-feeds-section.reveal .social-feeds-reveal-1,
+    .social-feeds-section.reveal .social-feeds-reveal-2,
+    .social-feeds-section.reveal .social-feeds-reveal-3,
+    .social-feeds-section.reveal .social-feeds-reveal-4,
+    .social-feeds-section.reveal .social-feeds-reveal-5,
+    .social-feeds-section.reveal .social-feeds-reveal-6 {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-1 { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-2 { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-3 { opacity: 1; transform: translateY(0); transition-delay: 0.19s; }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-4 { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-5 { opacity: 1; transform: translateY(0); transition-delay: 0.33s; }
+    .social-feeds-section.reveal.visible .social-feeds-reveal-6 { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
     .social-feed-embed-wrap {
       flex: 1;
       min-height: 500px;
@@ -1780,6 +1851,30 @@
       text-decoration: none;
     }
     .social-feed-x-cta a:hover { text-decoration: underline; }
+    .social-feeds-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .social-feeds-actions .btn {
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+    }
+    .social-feeds-actions .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.2);
+    }
+    .social-feeds-actions .btn-primary:hover {
+      box-shadow: 0 8px 28px rgba(34, 197, 94, 0.35), 0 0 40px rgba(34, 197, 94, 0.1);
+    }
     .social-feeds-x-cta-wrap {
       text-align: center;
       margin-bottom: 1.25rem;
@@ -1795,22 +1890,27 @@
       padding: 0.65rem 1.5rem;
     }
     .social-feeds-discord-cta {
-      padding: 1rem 1.25rem;
+      padding: 1.25rem 1.5rem;
       width: 100%;
       max-width: 680px;
       margin-left: auto;
       margin-right: auto;
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      border-radius: 16px;
       text-align: center;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .social-feeds-discord-cta:hover {
+      border-color: rgba(34, 197, 94, 0.25);
+      box-shadow: 0 0 40px rgba(34, 197, 94, 0.06);
     }
     .social-feeds-discord-cta p {
-      margin: 0 0 0.75rem 0;
+      margin: 0 0 1rem 0;
       font-size: 0.9375rem;
       color: var(--muted);
     }
-    .social-feeds-discord-cta .btn { margin: 0 0.25rem; }
+    .social-feeds-discord-cta .btn { margin: 0 0.35rem; }
     .x-embed-fallback .btn { margin-top: 0.5rem; }
     .social-feed-x-cta { margin-top: 0.75rem; }
     .cta-banner {
@@ -2391,6 +2491,8 @@
       .bots-subsection { margin-bottom: 1.25rem; }
       .bots-grid { gap: 0.875rem; }
       .social-feeds-section { padding: 1.75rem 1rem; overflow-x: hidden; }
+      .social-feeds-actions { flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem; }
+      .social-feeds-actions .btn { width: 100%; max-width: 280px; justify-content: center; }
       .social-feed-card { min-height: 380px; min-width: 0; }
       .social-feed-embed-wrap { min-height: 340px; min-width: 0; }
       .social-feed-embed { min-height: 340px; min-width: 0; }
@@ -3058,10 +3160,10 @@
   </section>
 
   <section id="social-feeds" class="section social-feeds-section reveal">
-    <span class="section-label">Latest from us</span>
-    <h2 class="section-title">Stay updated with our posts</h2>
-    <p class="section-body">The feed below loads live from our <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> page. You can also check our latest updates on X. For real-time alpha, announcements, and community discussion, join our Discord.</p>
-    <div class="social-feeds-grid">
+    <span class="section-label social-feeds-reveal-1">Latest from us</span>
+    <h2 class="section-title social-feeds-reveal-2">Stay updated with our posts</h2>
+    <p class="section-body social-feeds-reveal-3">The feed below loads live from our <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> page. You can also check our latest updates on X. For real-time alpha, announcements, and community discussion, join our Discord.</p>
+    <div class="social-feeds-grid social-feeds-reveal-4">
       <div class="social-feed-card">
         <div class="social-feed-card-header">
           <h3>Facebook · <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Alpha Intel</a></h3>
@@ -3074,12 +3176,12 @@
         </div>
       </div>
     </div>
-    <div class="social-feeds-x-cta-wrap">
+    <div class="social-feeds-actions social-feeds-reveal-5">
       <a href="https://x.com/AlphaIntelMedia" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Check latest updates on X →</a>
-    </div>
-    <div class="social-feeds-discord-cta">
-      <p>For real-time alpha, trade calls, and announcements — join our Discord. Updates are posted across Discord, Facebook, and X.</p>
       <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord</a>
+    </div>
+    <div class="social-feeds-discord-cta social-feeds-reveal-6">
+      <p>For real-time alpha, trade calls, and announcements — join our Discord. Updates are posted across Discord, Facebook, and X.</p>
       <a href="https://discord.com/channels/1393229110251229304/1439487032136171580" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Latest updates channel →</a>
     </div>
   </section>
