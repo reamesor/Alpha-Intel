@@ -1565,13 +1565,13 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Intel Feed — tabbed Live Intel Feed, 3 panels, platform pills */
+    /* Latest posts — single Facebook embed + X/Discord links */
     .intel-feed-section {
       position: relative;
       width: 100%;
       max-width: 100%;
       margin: 0 auto;
-      padding: 6rem 1.5rem;
+      padding: 4rem 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1586,88 +1586,23 @@
       position: relative;
       z-index: 1;
     }
-    .intel-feed-eyebrow {
-      display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.25em;
-      margin-bottom: 0.5rem;
-    }
     .intel-feed-headline {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
       letter-spacing: -0.02em;
     }
     .intel-feed-subhead {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .intel-feed-tab-bar {
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      padding: 6px;
-      display: inline-flex;
-      gap: 4px;
       margin-bottom: 1.5rem;
     }
-    .intel-tab {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 0.6rem 1.25rem;
-      border: none;
-      border-radius: 8px;
-      background: transparent;
-      color: #6b7fa3;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .intel-tab:hover {
-      color: #fff;
-      background: rgba(255,255,255,0.06);
-    }
-    .intel-tab.active {
-      background: #0c1225;
-      color: #fff;
-      border-bottom: 2px solid #39ff14;
-      box-shadow: 0 0 12px rgba(57,255,20,0.15);
-    }
-    .intel-feed-panels {
-      position: relative;
-      min-height: 420px;
-      text-align: left;
-    }
-    .tab-panel {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-    }
-    .tab-panel.active {
-      position: relative;
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .tab-panel.exiting {
-      opacity: 0;
-      transform: translateY(-8px);
-      transition-duration: 0.18s;
-    }
-    .intel-panel-fb-grid {
-      display: grid;
-      grid-template-columns: 60% 1fr;
-      gap: 1.5rem;
-      align-items: start;
+    .posts-embed-wrap {
+      width: 100%;
+      margin-bottom: 1.5rem;
     }
     .fb-embed-card {
       background: #0c1225;
@@ -1731,230 +1666,18 @@
     .fb-embed-card .fb-page { margin: 0; }
     .fb-embed-card .fb_iframe_widget { width: 100% !important; }
     .fb-embed-card .fb_iframe_widget iframe { width: 100% !important; max-width: 100% !important; }
-    .intel-fb-sidebar {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-    }
-    .intel-fb-sidebar-icon {
-      width: 32px; height: 32px;
-      background: #1877f2;
-      color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .intel-fb-sidebar-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .intel-fb-sidebar-count { font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
-    .intel-fb-trend { color: var(--primary); }
-    .intel-fb-verified { font-size: 0.8rem; color: #1877f2; margin-bottom: 12px; }
-    .intel-fb-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
-    .intel-fb-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 12px; }
-    .intel-fb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .intel-fb-tags span { font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.06); border-radius: 100px; color: var(--muted); }
-    .intel-fb-cta {
-      display: inline-block;
-      padding: 0.6rem 1.25rem;
-      border: 1px solid #1877f2;
-      color: #1877f2;
-      background: transparent;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .intel-fb-cta:hover { background: #1877f2; color: #fff; }
-    .intel-fb-cta-note { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 8px; }
-    .intel-twitter-feed { max-width: 560px; margin: 0 auto; }
-    .intel-twitter-header {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 1rem;
-    }
-    .intel-twitter-logo { font-size: 1.5rem; }
-    .intel-twitter-name { font-weight: 700; color: var(--text); }
-    .intel-twitter-handle { color: var(--muted); font-size: 0.9rem; }
-    .intel-twitter-follow {
-      margin-left: auto;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      border-radius: 999px;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .intel-twitter-follow:hover { background: rgba(255,255,255,0.08); }
-    .intel-tweet-card {
-      background: #0c1225;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
-    }
-    .intel-tweet-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .intel-tweet-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .intel-tweet-avatar-ai { background: var(--primary); color: var(--bg); }
-    .intel-tweet-meta { font-size: 0.9rem; color: var(--muted); }
-    .intel-tweet-handle { color: var(--muted); }
-    .intel-tweet-text { font-size: 0.95rem; color: var(--text); line-height: 1.5; margin-bottom: 8px; }
-    .intel-tweet-eng { font-size: 0.85rem; color: var(--muted); }
-    .intel-tweet-disclaimer { font-size: 0.7rem; color: var(--muted); margin: 1rem 0 1rem; text-align: center; }
-    .intel-twitter-cta {
-      display: block;
-      text-align: center;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid #fff;
-      color: #fff;
-      background: transparent;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .intel-twitter-cta:hover { background: #fff; color: #000; }
-    .intel-panel-discord-grid {
-      display: grid;
-      grid-template-columns: 55% 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-    .intel-discord-mockup {
-      background: #0c1225;
-      border: 1px solid rgba(88,101,242,0.2);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .intel-discord-mock-top {
-      background: #5865f2;
-      padding: 10px 16px;
-      font-weight: 600;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-    .intel-discord-online { font-size: 0.75rem; opacity: 0.9; }
-    .intel-discord-mock-body { display: flex; min-height: 280px; }
-    .intel-discord-sidebar {
-      width: 130px;
-      background: rgba(0,0,0,0.2);
-      padding: 12px 8px;
-    }
-    .intel-discord-channel {
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 4px 8px;
-      margin-bottom: 2px;
-      border-radius: 4px;
-    }
-    .intel-discord-channel:hover { background: rgba(255,255,255,0.05); color: var(--text); }
-    .intel-discord-main { flex: 1; padding: 12px; }
-    .intel-discord-msg {
-      font-size: 0.85rem;
-      color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-    .intel-discord-msg-time { color: var(--muted); font-size: 0.75rem; font-weight: normal; }
-    .intel-discord-input {
-      margin-top: 12px;
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 6px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .intel-discord-sidebar-cta {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-    }
-    .intel-discord-icon { font-size: 36px; color: #5865f2; margin-bottom: 12px; }
-    .intel-discord-cta-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .intel-discord-stat { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 16px; }
-    .intel-discord-stat span { font-weight: 400; font-size: 0.9rem; color: var(--muted); }
-    .intel-discord-features { list-style: none; margin: 0 0 20px; padding: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
-    .intel-discord-cta-btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #5865f2;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .intel-discord-cta-btn:hover { background: #4752c4; box-shadow: 0 0 24px rgba(88,101,242,0.4); }
-    .intel-discord-cta-note { display: block; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-top: 10px; }
-    .intel-feed-pills {
+    .posts-other-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
-      margin-top: 40px;
+      gap: 0.75rem;
     }
-    .intel-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 100px;
-      color: var(--text);
-      font-size: 0.9rem;
+    .posts-link-btn {
       text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .intel-pill:hover { transform: translateY(-2px); border-color: var(--primary); }
-    .intel-feed-section.reveal .intel-feed-reveal-1,
-    .intel-feed-section.reveal .intel-feed-reveal-2,
-    .intel-feed-section.reveal .intel-feed-reveal-3,
-    .intel-feed-section.reveal .intel-feed-reveal-4,
-    .intel-feed-section.reveal .intel-feed-reveal-5,
-    .intel-feed-section.reveal .intel-feed-reveal-6,
-    .intel-feed-section.reveal .intel-feed-reveal-7,
-    .intel-feed-section.reveal .intel-feed-reveal-8 {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-1 { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-2 { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-3 { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-4 { opacity: 1; transform: translateY(0) scale(1); transition-delay: 300ms; }
-    .intel-feed-section.reveal .intel-feed-reveal-4 { transform: translateY(20px) scale(0.95); }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-5 { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-6 { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-7 { opacity: 1; transform: translateY(0); transition-delay: 600ms; }
-    .intel-feed-section.reveal.visible .intel-feed-reveal-8 { opacity: 1; transform: translateY(0); transition-delay: 700ms; }
-    @media (max-width: 1024px) {
-      .intel-panel-fb-grid,
-      .intel-panel-discord-grid { grid-template-columns: 1fr; }
+      cursor: pointer;
     }
     @media (max-width: 768px) {
-      .intel-feed-section { padding: 60px 20px; }
-      .intel-feed-tab-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-      .intel-feed-pills { flex-wrap: wrap; }
+      .intel-feed-section { padding: 3rem 1.25rem; }
     }
 
     .cta-banner {
@@ -3206,145 +2929,45 @@
 
   <section id="latest-posts" class="intel-feed-section reveal">
     <div class="intel-feed-inner">
-      <span class="intel-feed-eyebrow intel-feed-reveal-1">ALWAYS ON · 24/7</span>
-      <h2 class="intel-feed-headline intel-feed-reveal-2">Live Intel Feed</h2>
-      <p class="intel-feed-subhead intel-feed-reveal-3">Track the signal. Ignore the noise.</p>
+      <h2 class="intel-feed-headline">Stay updated with our posts</h2>
+      <p class="intel-feed-subhead">Our latest updates appear here on Facebook. You can also check for updates on X (Twitter) and Discord.</p>
 
-      <div class="intel-feed-tab-bar intel-feed-reveal-4">
-        <button type="button" class="intel-tab active" data-tab="facebook" aria-selected="true">● Facebook</button>
-        <button type="button" class="intel-tab" data-tab="twitter" aria-selected="false">𝕏 Twitter</button>
-        <button type="button" class="intel-tab" data-tab="discord" aria-selected="false">⬡ Discord</button>
-      </div>
-
-      <div class="intel-feed-panels">
-        <div id="panel-facebook" class="tab-panel active intel-feed-reveal-5" role="tabpanel">
-          <div class="intel-panel-fb-grid">
-            <div class="fb-embed-card">
-              <div class="fb-embed-topbar">
-                <div class="fb-embed-dots">
-                  <span class="dot red"></span>
-                  <span class="dot yellow"></span>
-                  <span class="dot green"></span>
-                </div>
-                <div class="fb-embed-url">facebook.com/AlphaIntelMedia</div>
-                <div class="fb-live-badge">
-                  <span class="pulse-dot"></span> LIVE
-                </div>
-              </div>
-              <div class="fb-embed-body">
-                <div class="fb-page"
-                  data-href="https://www.facebook.com/AlphaIntelMedia"
-                  data-tabs="timeline"
-                  data-width="500"
-                  data-height="600"
-                  data-small-header="true"
-                  data-adapt-container-width="true"
-                  data-hide-cover="false"
-                  data-show-facepile="false">
-                  <blockquote
-                    cite="https://www.facebook.com/AlphaIntelMedia"
-                    class="fb-xfbml-parse-ignore">
-                    <a href="https://www.facebook.com/AlphaIntelMedia">Alpha Intel</a>
-                  </blockquote>
-                </div>
-              </div>
+      <div class="posts-embed-wrap">
+        <div class="fb-embed-card">
+          <div class="fb-embed-topbar">
+            <div class="fb-embed-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
             </div>
-            <div class="intel-fb-sidebar">
-              <div class="intel-fb-sidebar-icon">f</div>
-              <h3 class="intel-fb-sidebar-title">Alpha Intel</h3>
-              <p class="intel-fb-sidebar-count">14,228 Followers <span class="intel-fb-trend">↑</span></p>
-              <p class="intel-fb-verified">✓ Official Page</p>
-              <hr class="intel-fb-divider">
-              <p class="intel-fb-desc">Get daily crypto news, market updates, and community highlights directly on Facebook.</p>
-              <div class="intel-fb-tags">
-                <span>📰 Daily News</span>
-                <span>📊 Market Updates</span>
-                <span>🏆 Community</span>
-              </div>
-              <a href="https://www.facebook.com/AlphaIntelMedia" class="btn intel-fb-cta" target="_blank" rel="noopener noreferrer">Follow Our Page →</a>
-              <span class="intel-fb-cta-note">Opens Facebook in new tab</span>
+            <div class="fb-embed-url">facebook.com/AlphaIntelMedia</div>
+            <div class="fb-live-badge">
+              <span class="pulse-dot"></span> LIVE
             </div>
           </div>
-        </div>
-
-        <div id="panel-twitter" class="tab-panel" role="tabpanel" aria-hidden="true">
-          <div class="intel-twitter-feed">
-            <div class="intel-twitter-header">
-              <span class="intel-twitter-logo">𝕏</span>
-              <span class="intel-twitter-name">Alpha Intel</span>
-              <span class="intel-twitter-handle">@AlphaIntelMedia</span>
-              <a href="https://x.com/AlphaIntelMedia" class="btn intel-twitter-follow" target="_blank" rel="noopener noreferrer">Follow</a>
-            </div>
-            <div class="intel-tweet-card">
-              <div class="intel-tweet-head">
-                <span class="intel-tweet-avatar intel-tweet-avatar-ai">AI</span>
-                <span class="intel-tweet-meta">Alpha Intel <span class="intel-tweet-handle">@AlphaIntelMedia</span> · 2h</span>
-              </div>
-              <p class="intel-tweet-text">🚨 BTC holding above $94K support zone. Bulls defending hard. Watch for a breakout above $96K — next major target is $100K pre-Q2. Stay locked in. #Bitcoin #Crypto #AlphaIntel</p>
-              <div class="intel-tweet-eng">💬 84 · 🔁 210 · ❤️ 1.2K · 📊</div>
-            </div>
-            <div class="intel-tweet-card">
-              <div class="intel-tweet-head">
-                <span class="intel-tweet-avatar intel-tweet-avatar-ai">AI</span>
-                <span class="intel-tweet-meta">Alpha Intel <span class="intel-tweet-handle">@AlphaIntelMedia</span> · 6h</span>
-              </div>
-              <p class="intel-tweet-text">🌐 New Web3 airdrop opportunity just dropped — MEXC listing confirmed for next week. Details in our Discord. Free to join 👇 discord.gg/alphaintel #Web3 #Airdrop #MEXC</p>
-              <div class="intel-tweet-eng">💬 52 · 🔁 178 · ❤️ 934</div>
-            </div>
-            <div class="intel-tweet-card">
-              <div class="intel-tweet-head">
-                <span class="intel-tweet-avatar intel-tweet-avatar-ai">AI</span>
-                <span class="intel-tweet-meta">Alpha Intel <span class="intel-tweet-handle">@AlphaIntelMedia</span> · 12h</span>
-              </div>
-              <p class="intel-tweet-text">📊 SOL showing strong accumulation signals on the 4H. Our callers are watching $185 as the key breakout level. Trade calls posted in Discord. #Solana #CryptoTrading</p>
-              <div class="intel-tweet-eng">💬 41 · 🔁 156 · ❤️ 820</div>
-            </div>
-            <p class="intel-tweet-disclaimer">Sample posts — follow us on X for live updates</p>
-            <a href="https://x.com/AlphaIntelMedia" class="btn intel-twitter-cta" target="_blank" rel="noopener noreferrer">Follow @AlphaIntelMedia on X →</a>
-          </div>
-        </div>
-
-        <div id="panel-discord" class="tab-panel" role="tabpanel" aria-hidden="true">
-          <div class="intel-panel-discord-grid">
-            <div class="intel-discord-mockup">
-              <div class="intel-discord-mock-top">Alpha Intel · <span class="intel-discord-online">500+ online</span></div>
-              <div class="intel-discord-mock-body">
-                <div class="intel-discord-sidebar">
-                  <div class="intel-discord-channel"># announcements</div>
-                  <div class="intel-discord-channel"># trade-calls</div>
-                  <div class="intel-discord-channel"># airdrop-alerts</div>
-                  <div class="intel-discord-channel"># support-ticket</div>
-                  <div class="intel-discord-channel"># ph-channel 🇵🇭</div>
-                </div>
-                <div class="intel-discord-main">
-                  <div class="intel-discord-msg"><strong>Diablo</strong> <span class="intel-discord-msg-time">Today 02:15</span><br>BTC long 94.2k — stop 93.8. Target 96k.</div>
-                  <div class="intel-discord-msg"><strong>BullyBoy</strong> <span class="intel-discord-msg-time">Today 01:42</span><br>New airdrop in #airdrop-alerts. Check it.</div>
-                  <div class="intel-discord-msg"><strong>Alpha Intel</strong> <span class="intel-discord-msg-time">Today 00:30</span><br>Welcome to the server. Read #announcements.</div>
-                  <div class="intel-discord-input">Message #trade-calls</div>
-                </div>
-              </div>
-            </div>
-            <div class="intel-discord-sidebar-cta">
-              <div class="intel-discord-icon">⬡</div>
-              <h3 class="intel-discord-cta-title">Join the Community</h3>
-              <p class="intel-discord-stat">500+ <span>Members Online Now</span></p>
-              <ul class="intel-discord-features">
-                <li>✓ Real-time trade alerts from verified callers</li>
-                <li>✓ Web3 & airdrop alpha drops</li>
-                <li>✓ Filipino-led with global reach</li>
-                <li>✓ 100% free, no subscription needed</li>
-              </ul>
-              <a href="https://discord.gg/alphaintel" class="btn intel-discord-cta-btn" target="_blank" rel="noopener noreferrer">Join Alpha Intel Discord</a>
-              <span class="intel-discord-cta-note">discord.gg/alphaintel</span>
+          <div class="fb-embed-body">
+            <div class="fb-page"
+              data-href="https://www.facebook.com/AlphaIntelMedia"
+              data-tabs="timeline"
+              data-width="500"
+              data-height="600"
+              data-small-header="true"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="false">
+              <blockquote
+                cite="https://www.facebook.com/AlphaIntelMedia"
+                class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/AlphaIntelMedia">Alpha Intel</a>
+              </blockquote>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="intel-feed-pills">
-        <a href="https://www.facebook.com/AlphaIntelMedia" class="intel-pill intel-feed-reveal-6" target="_blank" rel="noopener noreferrer">🟦 Facebook · 14,228 followers</a>
-        <a href="https://x.com/AlphaIntelMedia" class="intel-pill intel-feed-reveal-7" target="_blank" rel="noopener noreferrer">⬛ X / Twitter · @AlphaIntelMedia</a>
-        <a href="https://discord.gg/alphaintel" class="intel-pill intel-feed-reveal-8" target="_blank" rel="noopener noreferrer">🟣 Discord · 500+ online</a>
+      <div class="posts-other-links">
+        <a href="https://x.com/AlphaIntelMedia" class="btn btn-outline posts-link-btn" target="_blank" rel="noopener noreferrer">Check latest updates on X →</a>
+        <a href="https://discord.gg/alphaintel" class="btn btn-outline posts-link-btn" target="_blank" rel="noopener noreferrer">Check updates on Discord →</a>
       </div>
     </div>
   </section>
@@ -3635,50 +3258,6 @@
           var pane = document.getElementById(id);
           if (pane) pane.classList.add('active');
           if (solutionVisual) solutionVisual.setAttribute('data-active', id);
-        });
-      });
-
-      // Intel Feed: tab switch with exit/enter animation
-      var intelTabs = document.querySelectorAll('.intel-tab');
-      var intelPanels = document.querySelectorAll('#latest-posts .tab-panel');
-      var panelFacebook = document.getElementById('panel-facebook');
-      intelTabs.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var tabId = this.getAttribute('data-tab');
-          if (!tabId) return;
-          var nextPanel = document.getElementById('panel-' + tabId);
-          if (!nextPanel || nextPanel.classList.contains('active')) return;
-          var currentPanel = document.querySelector('#latest-posts .tab-panel.active');
-          if (currentPanel) {
-            currentPanel.classList.add('exiting');
-            setTimeout(function() {
-              currentPanel.classList.remove('active', 'exiting');
-              currentPanel.setAttribute('aria-hidden', 'true');
-              document.querySelectorAll('#latest-posts .intel-tab').forEach(function(t) {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-              });
-              btn.classList.add('active');
-              btn.setAttribute('aria-selected', 'true');
-              nextPanel.classList.add('active');
-              nextPanel.setAttribute('aria-hidden', 'false');
-              if (tabId === 'facebook' && window.FB && window.FB.XFBML) {
-                try { window.FB.XFBML.parse(panelFacebook); } catch (e) {}
-              }
-            }, 180);
-          } else {
-            document.querySelectorAll('#latest-posts .intel-tab').forEach(function(t) {
-              t.classList.remove('active');
-              t.setAttribute('aria-selected', 'false');
-            });
-            btn.classList.add('active');
-            btn.setAttribute('aria-selected', 'true');
-            nextPanel.classList.add('active');
-            nextPanel.setAttribute('aria-hidden', 'false');
-            if (tabId === 'facebook' && window.FB && window.FB.XFBML) {
-              try { window.FB.XFBML.parse(panelFacebook); } catch (e) {}
-            }
-          }
         });
       });
 
