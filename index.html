@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://platform.twitter.com/widgets.js" defer></script>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -1350,18 +1351,19 @@
       align-items: stretch;
     }
     .social-feed-card {
-      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(15, 15, 15, 0.98) 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(12, 14, 12, 0.98) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.18);
+      border-radius: 14px;
       overflow: hidden;
-      min-height: 520px;
+      min-height: 580px;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 4px 24px rgba(0, 0, 0, 0.15);
     }
     .social-feed-card:hover {
-      border-color: rgba(34, 197, 94, 0.25);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 24px rgba(34, 197, 94, 0.08), 0 8px 32px rgba(0, 0, 0, 0.2);
     }
     .social-feed-card-header {
       display: flex;
@@ -1411,7 +1413,7 @@
     }
     .social-feed-embed-wrap {
       flex: 1;
-      min-height: 420px;
+      min-height: 500px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -1419,16 +1421,17 @@
     .social-feed-embed {
       width: 100%;
       flex: 1;
-      min-height: 420px;
+      min-height: 500px;
       border: none;
+      overflow: auto;
+    }
+    .social-feed-embed.fb-embed { min-height: 560px; }
+    .social-feed-embed.x-embed {
+      min-height: 560px;
+      display: block;
       overflow: hidden;
     }
-    .social-feed-embed.fb-embed { min-height: 480px; }
-    .social-feed-embed.x-embed {
-      min-height: 480px;
-      display: block;
-    }
-    .social-feed-embed.x-embed iframe { width: 100% !important; max-width: 100% !important; }
+    .social-feed-embed.x-embed iframe { width: 100% !important; max-width: 100% !important; min-height: 560px !important; }
     .x-embed-fallback {
       display: none;
       flex: 1;
@@ -1436,7 +1439,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 1rem;
-      min-height: 420px;
+      min-height: 500px;
       padding: 2rem;
       background: var(--bg-elevated);
       color: var(--muted);
@@ -1451,9 +1454,12 @@
     .x-embed-fallback a:hover { text-decoration: underline; }
     @media (max-width: 900px) {
       .social-feeds-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .social-feed-card { min-height: 460px; }
-      .social-feed-embed-wrap { min-height: 380px; }
-      .social-feed-embed { min-height: 380px; }
+      .social-feed-card { min-height: 520px; }
+      .social-feed-embed-wrap { min-height: 440px; }
+      .social-feed-embed { min-height: 440px; }
+      .social-feed-embed.fb-embed { min-height: 480px; }
+      .social-feed-embed.x-embed { min-height: 480px; }
+      .social-feed-embed.x-embed iframe { min-height: 480px !important; }
     }
 
     /* Final CTA banner */
@@ -1559,7 +1565,216 @@
       font-weight: 700;
     }
 
-    /* Resources / blog cards */
+    /* Contact / Inquire section */
+    #contact.contact-section {
+      background: #070b18;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(34, 197, 94, 0.12);
+      text-align: center;
+    }
+    .contact-section .section-label { margin-bottom: 0.5rem; }
+    .contact-section .section-title { margin-bottom: 0.6rem; }
+    .contact-section .section-body { margin-bottom: 2.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      text-align: left;
+    }
+    .contact-card {
+      background: #0c1225;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+    .contact-card.contact-card-discord::before { background: #5865f2; }
+    .contact-card.contact-card-discord { border-color: rgba(88, 101, 242, 0.25); }
+    .contact-card.contact-card-discord:hover { border-color: rgba(88, 101, 242, 0.5); box-shadow: 0 12px 40px rgba(88, 101, 242, 0.15); }
+    .contact-card.contact-card-facebook::before { background: #1877f2; }
+    .contact-card.contact-card-facebook { border-color: rgba(24, 119, 242, 0.25); }
+    .contact-card.contact-card-facebook:hover { border-color: rgba(24, 119, 242, 0.5); box-shadow: 0 12px 40px rgba(24, 119, 242, 0.15); }
+    .contact-card.contact-card-instagram::before { background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af); }
+    .contact-card.contact-card-instagram { border-color: rgba(221, 42, 123, 0.25); }
+    .contact-card.contact-card-instagram:hover { border-color: rgba(221, 42, 123, 0.5); box-shadow: 0 12px 40px rgba(221, 42, 123, 0.12); }
+    .contact-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .contact-card-discord .contact-card-icon { background: rgba(88, 101, 242, 0.2); }
+    .contact-card-facebook .contact-card-icon { background: rgba(24, 119, 242, 0.2); }
+    .contact-card-instagram .contact-card-icon { background: linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.2)); }
+    .contact-card-badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+    .contact-card-discord .contact-card-badge { background: rgba(88, 101, 242, 0.2); color: #9baaf2; }
+    .contact-card-facebook .contact-card-badge { background: rgba(24, 119, 242, 0.2); color: #6eb4ff; }
+    .contact-card-instagram .contact-card-badge { background: rgba(221, 42, 123, 0.15); color: #e88bb8; }
+    .contact-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .contact-card-desc {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .contact-card-steps, .contact-card-pills {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+    .contact-card-steps ol { margin: 0; padding-left: 1.2rem; }
+    .contact-card-steps li { margin-bottom: 0.35rem; }
+    .contact-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .contact-card-pills span {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .contact-card-discord .contact-card-pills span { background: rgba(88, 101, 242, 0.15); color: #9baaf2; }
+    .contact-card-facebook .contact-card-pills span { background: rgba(24, 119, 242, 0.15); color: #6eb4ff; }
+    .contact-card-instagram .contact-card-pills span { background: rgba(221, 42, 123, 0.15); color: #e88bb8; }
+    .contact-card .contact-cta {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-card .contact-cta:hover { transform: scale(1.02); }
+    .contact-card-discord .contact-cta { background: #5865f2; color: #fff; }
+    .contact-card-discord .contact-cta:hover { box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4); }
+    .contact-card-facebook .contact-cta { background: #1877f2; color: #fff; }
+    .contact-card-facebook .contact-cta:hover { box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4); }
+    .contact-card-instagram .contact-cta {
+      background: transparent;
+      color: #e88bb8;
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #f58529, #dd2a7b, #8134af) 1;
+    }
+    .contact-card-instagram .contact-cta:hover { box-shadow: 0 4px 20px rgba(221, 42, 123, 0.3); }
+    .contact-card-note {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+    .faq-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+    }
+    .faq-item {
+      background: #0c1225;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .faq-q:hover { background: rgba(255, 255, 255, 0.03); }
+    .faq-q .faq-chevron {
+      flex-shrink: 0;
+      margin-left: 0.5rem;
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-a-wrap { max-height: 500px; }
+    .faq-a {
+      padding: 0 1.25rem 1rem;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .contact-warning-banner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.05) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 10px;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: #fcd34d;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .contact-cards { grid-template-columns: 1fr; }
+    }
     .resources-section { padding: 3.5rem 2rem; text-align: center; }
     .resources-section .section-body { margin-left: auto; margin-right: auto; }
     .resources-grid {
@@ -1717,6 +1932,7 @@
       <a href="#team">Team</a>
       <a href="#platforms">Platforms</a>
       <a href="#social-feeds">Latest posts</a>
+      <a href="#contact">Contact</a>
     </div>
     <div class="nav-ctas">
       <a href="https://t.me/alphaintelpublic" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Join Telegram</a>
@@ -2483,7 +2699,7 @@
           <span class="social-feed-live-badge" aria-hidden="true">Live</span>
         </div>
         <div class="social-feed-embed-wrap">
-          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=550&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
         </div>
       </div>
       <div class="social-feed-card">
@@ -2493,7 +2709,7 @@
         </div>
         <div class="social-feed-embed-wrap">
           <div class="social-feed-embed x-embed" id="x-embed-container">
-            <blockquote class="twitter-timeline" data-height="520" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders noscrollbar" data-tweet-limit="5"><a href="https://x.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
+            <blockquote class="twitter-timeline" data-height="560" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders" data-tweet-limit="5"><a href="https://twitter.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
           </div>
           <div class="x-embed-fallback" id="x-embed-fallback" style="display: none;">
             <p>Timeline didn’t load? View our latest posts on X.</p>
@@ -2514,6 +2730,123 @@
         <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord — Free</a>
         <span class="badge">FREE · No credit card needed</span>
       </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section reveal">
+    <span class="section-label">Get in touch</span>
+    <h2 class="section-title">Got Questions? We've Got You.</h2>
+    <p class="section-body">Whether you're a newbie finding your footing in crypto or looking to partner with us — reach out through any channel below. We're always online.</p>
+
+    <div class="contact-cards">
+      <div class="contact-card contact-card-discord">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        </div>
+        <span class="contact-card-badge">500+ Members Online</span>
+        <h3>Discord Support Ticket</h3>
+        <p class="contact-card-desc">The fastest way to get help. Open a support ticket directly inside our Discord server. Our team and moderators respond quickly — for questions about subscriptions, roles, trading help, or anything else.</p>
+        <div class="contact-card-steps">
+          <ol>
+            <li>Click the button below to join our Discord</li>
+            <li>Go to the #support-ticket channel</li>
+            <li>Click "Create Ticket" and type your question</li>
+            <li>A team member will respond ASAP</li>
+          </ol>
+        </div>
+        <a href="https://discord.gg/alphaintel" class="contact-cta" target="_blank" rel="noopener noreferrer">Open a Support Ticket</a>
+        <span class="contact-card-note">Free to join · No credit card needed</span>
+      </div>
+
+      <div class="contact-card contact-card-facebook">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        </div>
+        <span class="contact-card-badge">14K Followers · Verified Page ✓</span>
+        <h3>Message Us on Facebook</h3>
+        <p class="contact-card-desc">Prefer Facebook? Send us a direct message on our official page. Great for partnership inquiries, business collaborations, or if you just want to say hi. We read every message.</p>
+        <div class="contact-card-pills">
+          <span>Business Inquiries</span>
+          <span>Partnerships</span>
+          <span>General Questions</span>
+          <span>Merch Orders</span>
+        </div>
+        <a href="https://m.me/AlphaIntelMedia" class="contact-cta" target="_blank" rel="noopener noreferrer">Message on Facebook</a>
+        <span class="contact-card-note">m.me/AlphaIntelMedia</span>
+      </div>
+
+      <div class="contact-card contact-card-instagram">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.265.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <span class="contact-card-badge">1,511 Followers · 658 Posts</span>
+        <h3>Slide Into Our DMs</h3>
+        <p class="contact-card-desc">Follow us on Instagram for daily crypto content, community highlights, and market updates. DM us directly for collabs, questions, or just to connect with the Alpha Intel team.</p>
+        <div class="contact-card-pills">
+          <span>Content Collabs</span>
+          <span>Quick Questions</span>
+          <span>Community Vibes</span>
+          <span>Stay Updated</span>
+        </div>
+        <a href="https://www.instagram.com/AlphaIntelMedia/" class="contact-cta" target="_blank" rel="noopener noreferrer">DM on Instagram</a>
+        <span class="contact-card-note">@AlphaIntelMedia</span>
+      </div>
+    </div>
+
+    <h3 class="faq-heading">Frequently Asked Questions</h3>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Is Alpha Intel free to join?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Yes — 100% free. Our Discord, Telegram, and all social platforms are completely free. No subscriptions, no paywalls. Just show up and get access to all our intel, trade calls, and community.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">How do I get trade alerts from the callers?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Join our Discord at discord.gg/alphaintel. Once you're in, go to the #trade-calls channel. Our verified callers — Diablo, BullyBoy, and BASCHI GLAZER OG — post real-time alerts there. You can also follow them on Twitter for extra updates.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Are there any paid tiers or VIP subscriptions?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">We have community roles you can earn by being active — including VIP. For the latest on any premium offerings, open a support ticket in Discord or message us on Facebook and we'll walk you through everything.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">I'm a complete beginner. Is Alpha Intel for me?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Absolutely. We have a dedicated #newbies-guide channel and Filipino-language support. Our community welcomes all levels — from first-time crypto buyers to experienced traders. Everyone started somewhere.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">How do I become a KOL or Caller?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Reach out to us through Discord support ticket or Facebook Messenger. We evaluate based on track record, community value, and engagement. DM us and let's talk.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">How can I partner or collaborate with Alpha Intel?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">For business partnerships, media collabs, or exchange listings — send us a message on Facebook (facebook.com/AlphaIntelMedia) or Instagram (@AlphaIntelMedia). Our team reviews all partnership requests.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">What trading bots does Alpha Intel support?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">We partner with several trusted trading bots including Trojan, Padre, Axiom (web-based), and Bloom, Banana Gun, Bonkbot, Maestro (Telegram-based). You can find all the referral links in the Trading Bots section of this site.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false">Where can I report a scammer pretending to be Alpha Intel?<span class="faq-chevron" aria-hidden="true">▼</span></button>
+        <div class="faq-a-wrap">
+          <p class="faq-a">Open a support ticket in Discord immediately. Important: Alpha Intel team members and callers will NEVER DM you first asking for money or wallet access. Always verify through official channels.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-warning-banner" role="alert">
+      Official Warning: Alpha Intel staff will NEVER DM you first. We will never ask for your seed phrase, private keys, or send you unsolicited investment offers. If someone claims to be from Alpha Intel and DMs you first — it's a scam. Report them immediately.
     </div>
   </section>
 
@@ -2541,6 +2874,7 @@
         <a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer">Linktree</a>
         <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer">Join Discord</a>
         <a href="#social-feeds">Latest posts</a>
+        <a href="#contact">Contact</a>
         <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">X / Latest News</a>
       </div>
     </div>
@@ -2557,39 +2891,36 @@
     </div>
   </footer>
 
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     (function() {
-      // Load X (Twitter) timeline when social-feeds section is visible (ensures live embed renders)
+      // Load X (Twitter) timeline: run when widget SDK is ready and when section is visible
       var socialSection = document.getElementById('social-feeds');
       var xFallback = document.getElementById('x-embed-fallback');
+      var xContainer = document.getElementById('x-embed-container');
+      function runTwitterLoad() {
+        if (typeof twttr === 'undefined' || !twttr.widgets || !twttr.widgets.load) return;
+        twttr.widgets.load();
+      }
+      function checkAndShowFallback() {
+        if (!xFallback || !xContainer) return;
+        var hasIframe = xContainer.querySelector('iframe');
+        if (!hasIframe) {
+          xFallback.style.display = 'flex';
+          xContainer.style.display = 'none';
+        }
+      }
+      window.addEventListener('load', function() {
+        runTwitterLoad();
+        setTimeout(checkAndShowFallback, 6000);
+      });
       if (socialSection) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (!entry.isIntersecting) return;
-            function loadTwitter() {
-              if (typeof twttr !== 'undefined' && twttr.widgets && twttr.widgets.load) {
-                twttr.widgets.load(socialSection);
-                setTimeout(function() {
-                  var container = document.getElementById('x-embed-container');
-                  var hasIframe = container && container.querySelector('iframe');
-                  if (xFallback && container && !hasIframe) {
-                    xFallback.style.display = 'flex';
-                    container.style.display = 'none';
-                  }
-                }, 4000);
-                return true;
-              }
-              return false;
-            }
-            if (!loadTwitter()) {
-              var attempts = 0;
-              var t = setInterval(function() {
-                if (loadTwitter() || ++attempts > 25) clearInterval(t);
-              }, 200);
-            }
+            runTwitterLoad();
+            setTimeout(checkAndShowFallback, 6000);
           });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.15 });
         io.observe(socialSection);
       }
 
@@ -2609,6 +2940,20 @@
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
       reveals.forEach(function(el) { observer.observe(el); });
+
+      var faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function(item) {
+        var btn = item.querySelector('.faq-q');
+        if (!btn) return;
+        btn.addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+          faqItems.forEach(function(i) { i.classList.remove('open'); i.querySelector('.faq-q') && i.querySelector('.faq-q').setAttribute('aria-expanded', 'false'); });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
 
       var liveFeedItems = document.querySelectorAll('.hero-live-feed-item');
       var liveFeedIndex = 0;
