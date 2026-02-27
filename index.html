@@ -7,7 +7,9 @@
   <meta name="description" content="Get the sharpest crypto intel. 24/7 breaking news, trade calls, Web3 alpha — free. Filipino-led. Join Discord.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://platform.twitter.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script async src="https://platform.twitter.com/widgets.js"></script>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -1568,7 +1570,7 @@
       width: 100%;
       max-width: 100%;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       overflow: hidden;
       box-sizing: border-box;
@@ -1599,15 +1601,15 @@
     .social-feeds-section .section-body,
     .social-feeds-grid,
     .social-feeds-discord-cta { position: relative; z-index: 1; }
-    .social-feeds-section .section-label { margin-bottom: 0.5rem; }
-    .social-feeds-section .section-title { margin-bottom: 0.6rem; }
-    .social-feeds-section .section-body { margin-bottom: 1.75rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .social-feeds-section .section-label { margin-bottom: 0.35rem; }
+    .social-feeds-section .section-title { margin-bottom: 0.4rem; }
+    .social-feeds-section .section-body { margin-bottom: 1.25rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: stretch;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       width: 100%;
       max-width: 1200px;
       margin-left: auto;
@@ -1769,7 +1771,7 @@
     }
     .social-feed-x-cta a:hover { text-decoration: underline; }
     .social-feeds-discord-cta {
-      padding: 1.25rem 1.5rem;
+      padding: 1rem 1.25rem;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -3236,18 +3238,16 @@
     </div>
   </footer>
 
-  <script src="https://platform.twitter.com/widgets.js"></script>
   <script>
     (function() {
-      // X timeline + single tweets: blockquote is in the page; load widgets so tweets show.
+      // X timeline: load widgets when script is ready; show fallback only if iframe never appears.
       var socialSection = document.getElementById('social-feeds');
       var xFallback = document.getElementById('x-embed-fallback');
       var xContainer = document.getElementById('x-embed-container');
-      var xWrap = xContainer && xContainer.closest('.social-feed-embed-wrap');
       var fallbackShown = false;
       function runTwitterLoad() {
         if (typeof twttr === 'undefined' || !twttr.widgets || !twttr.widgets.load) return;
-        twttr.widgets.load(xWrap || undefined);
+        twttr.widgets.load(); // parse full document so timeline blockquote is found
       }
       function checkAndShowFallback() {
         if (fallbackShown || !xFallback || !xContainer) return;
@@ -3265,13 +3265,13 @@
         if (typeof twttr !== 'undefined' && twttr.ready) {
           twttr.ready(function() {
             runTwitterLoad();
-            [800, 1600, 2400, 3500, 5000, 7000].forEach(function(ms) {
+            [500, 1200, 2500, 4000, 6000].forEach(function(ms) {
               setTimeout(runTwitterLoad, ms);
             });
-            scheduleFallbackCheck(12000);
+            scheduleFallbackCheck(20000); // give timeline 20s to render before showing fallback
           });
         } else {
-          setTimeout(whenReady, 50);
+          setTimeout(whenReady, 80);
         }
       }
       whenReady();
@@ -3281,9 +3281,9 @@
           entries.forEach(function(entry) {
             if (!entry.isIntersecting || fallbackShown) return;
             whenReady();
-            scheduleFallbackCheck(12000);
+            scheduleFallbackCheck(20000);
           });
-        }, { threshold: 0.05 });
+        }, { threshold: 0.1 });
         io.observe(socialSection);
       }
 
