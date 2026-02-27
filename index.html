@@ -962,9 +962,9 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    .callers-section .section-body { margin-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
+    .callers-section .section-body { margin-bottom: 2rem; margin-left: auto; margin-right: auto; }
     .callers-subsection {
-      margin-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
     }
     .callers-subsection:last-of-type { margin-bottom: 0; }
     .callers-subsection-title {
@@ -973,120 +973,130 @@
       font-weight: 700;
       color: var(--primary);
       letter-spacing: 0.2em;
-      margin-bottom: 0.75rem;
-      text-align: left;
+      margin-bottom: 1.25rem;
+      text-align: center;
     }
-    .callers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.25rem;
-      text-align: left;
+    .voices-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
     }
-    .caller-card {
+    .voice-pod {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
       position: relative;
-      background: linear-gradient(160deg, rgba(20, 22, 18, 0.98) 0%, var(--bg-card) 100%);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .caller-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, var(--primary), transparent);
-      opacity: 0.6;
-      transition: opacity 0.3s ease, box-shadow 0.3s ease;
+    .voice-pod:hover {
+      transform: translateY(-8px) scale(1.05);
     }
-    .caller-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(34, 197, 94, 0.45);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset,
-                  0 0 30px rgba(34, 197, 94, 0.1),
-                  0 12px 40px rgba(0, 0, 0, 0.25);
-    }
-    .caller-card:hover::before {
-      opacity: 1;
-      box-shadow: 0 0 12px var(--primary);
-    }
-    .caller-card-top {
+    .voice-pod-ring {
+      position: relative;
+      width: 88px;
+      height: 88px;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
+      justify-content: center;
+      animation: voice-pod-float 4s ease-in-out infinite;
     }
-    .caller-card .caller-pfp {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
-      border-radius: 10px;
+    .voice-pod:nth-child(odd) .voice-pod-ring { animation-delay: -1s; }
+    .voice-pod:nth-child(3n) .voice-pod-ring { animation-delay: -2.5s; }
+    @keyframes voice-pod-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .voice-pod-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg, var(--voice-color, var(--primary)) 60deg, transparent 120deg, transparent 180deg, var(--voice-color, var(--primary)) 240deg, transparent 300deg);
+      animation: voice-ring-rotate 4s linear infinite;
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
+      opacity: 0.85;
+    }
+    .voice-pod:hover .voice-pod-ring::before {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px var(--voice-color, var(--primary)));
+      animation-duration: 2s;
+    }
+    @keyframes voice-ring-rotate {
+      to { transform: rotate(360deg); }
+    }
+    .voice-pod-avatar {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
       object-fit: cover;
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.3s ease;
     }
-    .caller-card:hover .caller-pfp {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    .voice-pod:hover .voice-pod-avatar {
+      box-shadow: 0 0 24px var(--voice-color), 0 0 48px rgba(34, 197, 94, 0.2);
     }
-    .caller-card-head {
-      flex: 1;
-      min-width: 0;
-    }
-    .caller-card .role {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.25rem;
-    }
-    .caller-card h3 {
+    .voice-pod-label {
+      margin-top: 0.75rem;
       font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--text);
+      text-align: center;
+      max-width: 100px;
+      transition: color 0.25s ease;
     }
-    .caller-card p {
-      margin: 0 0 0.4rem 0;
+    .voice-pod:hover .voice-pod-label {
+      color: var(--voice-color, var(--primary));
+    }
+    .voice-pod-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       color: var(--muted);
-      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+      text-align: center;
     }
-    .caller-card a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: var(--primary);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.2s ease, gap 0.2s ease;
-    }
-    .caller-card a:hover { color: var(--highlight); gap: 0.5rem; }
-    .caller-card.reveal.visible {
+    .voice-pod-cta {
+      font-size: 0.7rem;
+      color: var(--voice-color, var(--primary));
+      margin-top: 0.35rem;
       opacity: 0;
-      animation: caller-card-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    .callers-grid .caller-card.reveal.visible:nth-child(1) { animation-delay: 0.05s; }
-    .callers-grid .caller-card.reveal.visible:nth-child(2) { animation-delay: 0.1s; }
-    .callers-grid .caller-card.reveal.visible:nth-child(3) { animation-delay: 0.15s; }
-    .callers-grid .caller-card.reveal.visible:nth-child(4) { animation-delay: 0.2s; }
-    .callers-grid .caller-card.reveal.visible:nth-child(5) { animation-delay: 0.25s; }
-    .callers-grid .caller-card.reveal.visible:nth-child(6) { animation-delay: 0.3s; }
-    @keyframes caller-card-in {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .voice-pod:hover .voice-pod-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .voice-pod-caller { --voice-color: #22c55e; }
+    .voice-pod-kol { --voice-color: #b388ff; }
+    .voice-pod-analyst { --voice-color: #4fc3f7; }
+    .voice-pod.reveal.visible {
+      opacity: 0;
+      animation: voice-pod-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .voices-row .voice-pod.reveal.visible:nth-child(1) { animation-delay: 0.05s; }
+    .voices-row .voice-pod.reveal.visible:nth-child(2) { animation-delay: 0.1s; }
+    .voices-row .voice-pod.reveal.visible:nth-child(3) { animation-delay: 0.15s; }
+    .voices-row .voice-pod.reveal.visible:nth-child(4) { animation-delay: 0.2s; }
+    .voices-row .voice-pod.reveal.visible:nth-child(5) { animation-delay: 0.25s; }
+    .voices-row .voice-pod.reveal.visible:nth-child(6) { animation-delay: 0.3s; }
+    @keyframes voice-pod-in {
+      from { opacity: 0; transform: scale(0.8) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @media (max-width: 640px) {
+      .voices-row { gap: 1.5rem; }
+      .voice-pod-ring { width: 72px; height: 72px; }
+      .voice-pod-avatar { width: 64px; height: 64px; }
+      .voice-pod-label { font-size: 0.8rem; max-width: 90px; }
     }
 
     /* Team section — filter tabs + role cards */
@@ -1232,10 +1242,10 @@
       text-align: center;
     }
     .bots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.25rem;
-      justify-items: center;
       text-align: center;
     }
     .bot-card {
@@ -1803,27 +1813,47 @@
     .resource-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
     .resource-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
-    /* Footer — center-aligned, compact */
+    /* Footer — center-aligned, improved spacing */
     footer {
       border-top: 1px solid var(--border);
-      padding: 3rem 2rem 1.5rem;
+      padding: 4rem 2rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
     }
     .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5rem 3rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand {
+      flex: 0 1 auto;
+      min-width: 200px;
+      max-width: 320px;
     }
     .footer-brand .logo-img {
       width: 36px;
       height: 36px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-left: auto; margin-right: auto; }
-    .footer-col { text-align: center; }
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 320px;
+      line-height: 1.6;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .footer-col {
+      text-align: center;
+      min-width: 100px;
+    }
     .footer-col h4 {
       font-family: 'Syne', sans-serif;
       font-size: 0.8125rem;
@@ -1842,11 +1872,11 @@
     }
     .footer-col a:hover { color: var(--primary); }
     .newsletter {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--border);
+      text-align: center;
     }
-    .newsletter-input-wrap { margin-left: auto; margin-right: auto; }
     .newsletter label {
       display: block;
       font-family: 'Syne', sans-serif;
@@ -1859,6 +1889,7 @@
       display: flex;
       gap: 0.5rem;
       max-width: 400px;
+      margin: 0 auto;
     }
     .newsletter-input-wrap input {
       flex: 1;
@@ -1873,15 +1904,17 @@
     .newsletter-input-wrap input::placeholder { color: var(--muted); }
     .newsletter-input-wrap .btn { flex-shrink: 0; }
     .footer-bottom {
-      padding-top: 1.25rem;
+      padding-top: 2rem;
+      margin-top: 0;
       border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: 1rem 1.5rem;
       color: var(--muted);
       font-size: 0.875rem;
+      text-align: center;
     }
 
     @media (max-width: 1024px) {
@@ -1891,7 +1924,7 @@
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .callers-grid { grid-template-columns: repeat(2, 1fr); }
       .resources-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { gap: 2rem; }
       .team-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
@@ -1912,7 +1945,8 @@
       .stats-row { grid-template-columns: 1fr; }
       .callers-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid { flex-direction: column; align-items: center; gap: 2rem; }
+      .footer-brand { max-width: 100%; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
   </style>
@@ -2148,7 +2182,7 @@
         <div class="step-num">1</div>
         <div>
           <h3>Join Free</h3>
-          <p>Join our Discord or follow on Telegram and X. No credit card, no subscription — just show up and get access instantly.</p>
+          <p>Join our Discord or follow on Telegram and X. No subscription — just show up and get access instantly.</p>
         </div>
       </div>
       <div class="step-item">
@@ -2196,139 +2230,115 @@
 
   <section id="callers" class="callers-section reveal">
     <div class="callers-inner">
-    <span class="section-label">Callers & KOLs</span>
-    <h2 class="section-title">Voices you can trust.</h2>
-    <p class="section-body">Verified callers and key opinion leaders sharing trade setups and alpha daily.</p>
+      <span class="section-label">Callers & KOLs</span>
+      <h2 class="section-title">Voices you can trust.</h2>
+      <p class="section-body">Verified callers and key opinion leaders sharing trade setups and alpha daily.</p>
 
-    <div class="callers-subsection">
-      <div class="callers-subsection-title">Callers</div>
-      <div class="callers-grid">
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://unavatar.io/twitter/DiabloBuilder" data-fallback="https://ui-avatars.com/api/?name=Diablo&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-            <div class="caller-card-head">
-              <div class="role">CALLER</div>
-              <h3>@Diablo</h3>
+      <div class="callers-subsection">
+        <div class="callers-subsection-title">Callers</div>
+        <div class="voices-row">
+          <a href="https://x.com/DiabloBuilder" class="voice-pod voice-pod-caller reveal" target="_blank" rel="noopener noreferrer" aria-label="@Diablo on Twitter">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://unavatar.io/twitter/DiabloBuilder" data-fallback="https://ui-avatars.com/api/?name=Diablo&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
             </div>
-          </div>
-          <a href="https://x.com/DiabloBuilder" target="_blank" rel="noopener noreferrer">Twitter →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://unavatar.io/twitter/tonyboiixxx" data-fallback="https://ui-avatars.com/api/?name=BullyBoy&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-            <div class="caller-card-head">
-              <div class="role">CALLER</div>
-              <h3>@BullyBoy</h3>
+            <span class="voice-pod-label">@Diablo</span>
+            <span class="voice-pod-role">CALLER</span>
+            <span class="voice-pod-cta">Twitter →</span>
+          </a>
+          <a href="https://x.com/tonyboiixxx" class="voice-pod voice-pod-caller reveal" target="_blank" rel="noopener noreferrer" aria-label="@BullyBoy on Twitter">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://unavatar.io/twitter/tonyboiixxx" data-fallback="https://ui-avatars.com/api/?name=BullyBoy&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
             </div>
-          </div>
-          <a href="https://x.com/tonyboiixxx" target="_blank" rel="noopener noreferrer">Twitter →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://unavatar.io/twitter/fakesohji" data-fallback="https://ui-avatars.com/api/?name=BASCHI+GLAZER+OG&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-            <div class="caller-card-head">
-              <div class="role">CALLER</div>
-              <h3>@BASCHI GLAZER OG</h3>
+            <span class="voice-pod-label">@BullyBoy</span>
+            <span class="voice-pod-role">CALLER</span>
+            <span class="voice-pod-cta">Twitter →</span>
+          </a>
+          <a href="https://x.com/fakesohji" class="voice-pod voice-pod-caller reveal" target="_blank" rel="noopener noreferrer" aria-label="@BASCHI GLAZER OG on Twitter">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://unavatar.io/twitter/fakesohji" data-fallback="https://ui-avatars.com/api/?name=BASCHI+GLAZER+OG&size=104&background=22c55e&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
             </div>
-          </div>
-          <a href="https://x.com/fakesohji" target="_blank" rel="noopener noreferrer">Twitter →</a>
+            <span class="voice-pod-label">@BASCHI GLAZER OG</span>
+            <span class="voice-pod-role">CALLER</span>
+            <span class="voice-pod-cta">Twitter →</span>
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="callers-subsection">
-      <div class="callers-subsection-title">KOL</div>
-      <div class="callers-grid">
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=Josh+Linan&size=104&background=b388ff&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">KOL</div>
-              <h3>Josh Linan</h3>
+      <div class="callers-subsection">
+        <div class="callers-subsection-title">KOL</div>
+        <div class="voices-row">
+          <a href="https://www.facebook.com/0xjosh" class="voice-pod voice-pod-kol reveal" target="_blank" rel="noopener noreferrer" aria-label="Josh Linan on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=Josh+Linan&size=104&background=b388ff&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/0xjosh" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=Carrot&size=104&background=b388ff&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">KOL</div>
-              <h3>!Carrot</h3>
-              <p>#1 Copy Trader</p>
+            <span class="voice-pod-label">Josh Linan</span>
+            <span class="voice-pod-role">KOL</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100079622287391" class="voice-pod voice-pod-kol reveal" target="_blank" rel="noopener noreferrer" aria-label="!Carrot on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=Carrot&size=104&background=b388ff&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/profile.php?id=100079622287391" target="_blank" rel="noopener noreferrer">Facebook →</a>
+            <span class="voice-pod-label">!Carrot</span>
+            <span class="voice-pod-role">KOL · #1 Copy Trader</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="callers-subsection">
-      <div class="callers-subsection-title">Trading Analysts</div>
-      <div class="callers-grid">
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=Baschiqt&size=104&background=4fc3f7&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@Baschiqt</h3>
+      <div class="callers-subsection">
+        <div class="callers-subsection-title">Trading Analysts</div>
+        <div class="voices-row">
+          <a href="https://www.facebook.com/basch1" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@Baschiqt on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=Baschiqt&size=104&background=4fc3f7&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/basch1" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=LARRY+GADON+AI&size=104&background=4fc3f7&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@LARRY GADON AI</h3>
-              <p>I DONT DM!!!</p>
+            <span class="voice-pod-label">@Baschiqt</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://www.facebook.com/share/19kZeXxwtW/?mibextid=wwXIfr" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@LARRY GADON AI on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=LARRY+GADON+AI&size=104&background=4fc3f7&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/share/19kZeXxwtW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=Ramen+AI&size=104&background=4fc3f7&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@Ramen/AI</h3>
+            <span class="voice-pod-label">@LARRY GADON AI</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61579147065139" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@Ramen/AI on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=Ramen+AI&size=104&background=4fc3f7&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/profile.php?id=61579147065139" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=Angkol+Jeen&size=104&background=4fc3f7&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@Angkol Jeen</h3>
+            <span class="voice-pod-label">@Ramen/AI</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61581650404303" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@Angkol Jeen on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=Angkol+Jeen&size=104&background=4fc3f7&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/profile.php?id=61581650404303" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://ui-avatars.com/api/?name=shnncrypt&size=104&background=4fc3f7&color=fff" alt="">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@shnncrypt</h3>
+            <span class="voice-pod-label">@Angkol Jeen</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://www.facebook.com/shnncrypt" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@shnncrypt on Facebook">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://ui-avatars.com/api/?name=shnncrypt&size=104&background=4fc3f7&color=fff" alt="">
             </div>
-          </div>
-          <a href="https://www.facebook.com/shnncrypt" target="_blank" rel="noopener noreferrer">Facebook →</a>
-        </div>
-        <div class="caller-card reveal">
-          <div class="caller-card-top">
-            <img class="caller-pfp" src="https://unavatar.io/twitter/zxjunster" data-fallback="https://ui-avatars.com/api/?name=junster&size=104&background=4fc3f7&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-            <div class="caller-card-head">
-              <div class="role">TRADING ANALYST</div>
-              <h3>@junster</h3>
+            <span class="voice-pod-label">@shnncrypt</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Facebook →</span>
+          </a>
+          <a href="https://x.com/zxjunster" class="voice-pod voice-pod-analyst reveal" target="_blank" rel="noopener noreferrer" aria-label="@junster on Twitter">
+            <div class="voice-pod-ring">
+              <img class="voice-pod-avatar" src="https://unavatar.io/twitter/zxjunster" data-fallback="https://ui-avatars.com/api/?name=junster&size=104&background=4fc3f7&color=fff" alt="" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
             </div>
-          </div>
-          <a href="https://x.com/zxjunster" target="_blank" rel="noopener noreferrer">Twitter →</a>
+            <span class="voice-pod-label">@junster</span>
+            <span class="voice-pod-role">TRADING ANALYST</span>
+            <span class="voice-pod-cta">Twitter →</span>
+          </a>
         </div>
       </div>
-    </div>
     </div>
   </section>
 
@@ -2728,7 +2738,7 @@
       <p>Join thousands of traders and Web3 hunters staying ahead of the market every day. No paywalls. Just alpha.</p>
       <div class="cta-banner-actions">
         <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord — Free</a>
-        <span class="badge">FREE · No credit card needed</span>
+        <span class="badge">FREE</span>
       </div>
     </div>
   </section>
@@ -2755,7 +2765,7 @@
           </ol>
         </div>
         <a href="https://discord.gg/alphaintel" class="contact-cta" target="_blank" rel="noopener noreferrer">Open a Support Ticket</a>
-        <span class="contact-card-note">Free to join · No credit card needed</span>
+        <span class="contact-card-note">Free to join</span>
       </div>
 
       <div class="contact-card contact-card-facebook">
