@@ -132,9 +132,9 @@
     .btn-outline {
       background: transparent;
       color: var(--text);
-      border-color: rgba(232, 237, 248, 0.4);
+      border: 1px solid rgba(34, 197, 94, 0.4);
     }
-    .btn-outline:hover { border-color: var(--text); background: rgba(232, 237, 248, 0.06); }
+    .btn-outline:hover { border-color: var(--primary); background: var(--primary-dim); color: var(--primary); }
     .nav-toggle { display: none; }
 
     /* Hero — big headline, subheadline, two CTAs, glow */
@@ -953,7 +953,7 @@
     }
     .stat-card .label { color: var(--muted); font-size: 0.9375rem; }
 
-    /* Callers / KOLs — cards like customer stories */
+    /* Callers / KOLs — centered, synced with site layout */
     .callers-section {
       padding: 3.5rem 2rem;
       text-align: center;
@@ -961,10 +961,22 @@
     .callers-section .callers-inner {
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
+      text-align: center;
     }
-    .callers-section .section-body { margin-bottom: 2rem; margin-left: auto; margin-right: auto; }
+    .callers-section .section-label,
+    .callers-section .section-title { text-align: center; }
+    .callers-section .section-body {
+      margin-bottom: 2rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 640px;
+      text-align: center;
+    }
     .callers-subsection {
       margin-bottom: 2.5rem;
+      width: 100%;
+      text-align: center;
     }
     .callers-subsection:last-of-type { margin-bottom: 0; }
     .callers-subsection-title {
@@ -980,7 +992,10 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: flex-start;
       gap: 2rem;
+      width: 100%;
+      margin: 0 auto;
     }
     .voice-pod {
       display: flex;
@@ -1099,122 +1114,164 @@
       .voice-pod-label { font-size: 0.8rem; max-width: 90px; }
     }
 
-    /* Team section — filter tabs + role cards */
+    /* Team section — centered, futuristic, motion */
     .team-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 3.5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
     }
-    .team-section .section-body { margin-bottom: 1.25rem; margin-left: auto; margin-right: auto; }
-    .team-filter-tabs {
+    .team-section .section-body { margin-bottom: 2rem; margin-left: auto; margin-right: auto; max-width: 560px; }
+    .team-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
       justify-content: center;
+      gap: 1.75rem;
+      text-align: center;
     }
-    .team-filter-tabs button {
-      padding: 0.6rem 1.25rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .team-filter-tabs button:hover { color: var(--text); border-color: rgba(34, 197, 94, 0.4); }
-    .team-filter-tabs button.active {
-      background: var(--primary-dim);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
-      transition: opacity 0.3s ease;
-      text-align: left;
-    }
-    .team-grid.filtering { opacity: 0.7; }
     .team-card {
-      background: var(--bg-card);
+      position: relative;
+      width: 160px;
+      background: linear-gradient(165deg, rgba(18, 22, 18, 0.98) 0%, var(--bg-card) 100%);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.25rem 1.5rem;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      border-radius: 16px;
+      padding: 1.5rem 1.25rem;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset;
+      overflow: hidden;
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.6;
+      transition: opacity 0.3s ease, box-shadow 0.3s ease;
     }
     .team-card:hover {
+      transform: translateY(-8px) scale(1.02);
       border-color: rgba(34, 197, 94, 0.4);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 0 28px rgba(34, 197, 94, 0.12), 0 16px 40px rgba(0, 0, 0, 0.25);
     }
-    .team-card.hidden { display: none; }
-    .team-card-top {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
+    .team-card:hover::before {
+      opacity: 1;
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+    .team-card-avatar-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      animation: team-float 4s ease-in-out infinite;
+    }
+    .team-card:nth-child(odd) .team-card-avatar-wrap { animation-delay: -1s; }
+    .team-card:nth-child(3n) .team-card-avatar-wrap { animation-delay: -2.5s; }
+    @keyframes team-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .team-card-avatar-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), transparent 50%, transparent 50%, var(--primary));
+      background-size: 200% 200%;
+      animation: team-ring-pulse 3s ease-in-out infinite;
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+      opacity: 0.7;
+    }
+    .team-card:hover .team-card-avatar-wrap::before {
+      opacity: 1;
+      animation-duration: 1.5s;
+    }
+    @keyframes team-ring-pulse {
+      0%, 100% { background-position: 0% 0%; opacity: 0.7; }
+      50% { background-position: 100% 100%; opacity: 1; }
     }
     .team-avatar {
-      width: 56px;
-      height: 56px;
-      min-width: 56px;
-      border-radius: 12px;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
       object-fit: cover;
       display: block;
-      background: var(--bg-elevated);
+      position: relative;
+      z-index: 1;
+      margin: 3px;
+      border: 2px solid rgba(34, 197, 94, 0.25);
+      transition: box-shadow 0.3s ease;
     }
-    .team-head { flex: 1; min-width: 0; }
+    .team-card:hover .team-avatar {
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.25);
+    }
     .team-card .team-display-name {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text);
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
     }
     .team-card .team-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 500;
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-    }
-    .team-card .team-role-badge {
-      display: inline-block;
       font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--muted);
       margin-bottom: 1rem;
     }
-    .team-card[data-role="caller"] .team-role-badge { background: rgba(34, 197, 94, 0.2); color: var(--primary); }
-    .team-card[data-role="kol"] .team-role-badge { background: rgba(179, 136, 255, 0.2); color: var(--highlight); }
-    .team-card[data-role="analyst"] .team-role-badge { background: rgba(79, 195, 247, 0.2); color: var(--secondary); }
     .team-socials {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.5rem;
+      justify-content: center;
     }
     .team-socials a {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(34, 197, 94, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: color 0.2s, border-color 0.2s;
+      font-size: 0.7rem;
+      font-weight: 700;
+      transition: color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .team-socials a:hover { color: var(--primary); border-color: rgba(34, 197, 94, 0.4); }
+    .team-socials a:hover {
+      color: var(--primary);
+      border-color: rgba(34, 197, 94, 0.5);
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.2);
+    }
+    .team-card.reveal.visible {
+      opacity: 0;
+      animation: team-card-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .team-grid .team-card.reveal.visible:nth-child(1) { animation-delay: 0.05s; }
+    .team-grid .team-card.reveal.visible:nth-child(2) { animation-delay: 0.1s; }
+    .team-grid .team-card.reveal.visible:nth-child(3) { animation-delay: 0.15s; }
+    .team-grid .team-card.reveal.visible:nth-child(4) { animation-delay: 0.2s; }
+    .team-grid .team-card.reveal.visible:nth-child(5) { animation-delay: 0.25s; }
+    .team-grid .team-card.reveal.visible:nth-child(6) { animation-delay: 0.3s; }
+    .team-grid .team-card.reveal.visible:nth-child(7) { animation-delay: 0.35s; }
+    .team-grid .team-card.reveal.visible:nth-child(8) { animation-delay: 0.4s; }
+    .team-grid .team-card.reveal.visible:nth-child(9) { animation-delay: 0.45s; }
+    @keyframes team-card-in {
+      from { opacity: 0; transform: translateY(24px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (max-width: 640px) {
+      .team-card { width: 140px; padding: 1.25rem 1rem; }
+      .team-card-avatar-wrap { width: 64px; height: 64px; margin-bottom: 0.75rem; }
+      .team-avatar { width: 58px; height: 58px; margin: 3px; }
+      .team-grid { gap: 1.25rem; }
+    }
 
     /* Trading Bots section — center-aligned, futuristic retro + motion */
     .bots-section {
@@ -1575,14 +1632,39 @@
       font-weight: 700;
     }
 
-    /* Contact / Inquire section */
+    /* Contact / Inquire section — green, retro, futuristic (no blue) */
     #contact.contact-section {
-      background: #070b18;
+      position: relative;
+      background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse 80% 40% at 50% 100%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+                  var(--bg);
       padding: 4rem 2rem;
-      border-top: 1px solid rgba(34, 197, 94, 0.12);
+      border-top: 1px solid var(--border);
       text-align: center;
+      overflow: hidden;
     }
-    .contact-section .section-label { margin-bottom: 0.5rem; }
+    #contact.contact-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black 10%, transparent 65%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black 10%, transparent 65%);
+      opacity: 0.8;
+    }
+    #contact.contact-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 4px);
+      opacity: 0.5;
+    }
+    .contact-section .section-label { margin-bottom: 0.5rem; color: var(--primary); }
     .contact-section .section-title { margin-bottom: 0.6rem; }
     .contact-section .section-body { margin-bottom: 2.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .contact-cards {
@@ -1592,15 +1674,18 @@
       max-width: 1100px;
       margin: 0 auto 3rem;
       text-align: left;
+      position: relative;
+      z-index: 1;
     }
     .contact-card {
-      background: #0c1225;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(165deg, rgba(18, 22, 18, 0.98) 0%, var(--bg-card) 100%);
+      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 1.75rem;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset;
     }
     .contact-card::before {
       content: '';
@@ -1609,22 +1694,19 @@
       left: 0;
       right: 0;
       height: 3px;
-      opacity: 0.6;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.8;
       transition: opacity 0.3s ease, box-shadow 0.3s ease;
     }
     .contact-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.08), 0 12px 40px rgba(0, 0, 0, 0.25);
     }
-    .contact-card.contact-card-discord::before { background: #5865f2; }
-    .contact-card.contact-card-discord { border-color: rgba(88, 101, 242, 0.25); }
-    .contact-card.contact-card-discord:hover { border-color: rgba(88, 101, 242, 0.5); box-shadow: 0 12px 40px rgba(88, 101, 242, 0.15); }
-    .contact-card.contact-card-facebook::before { background: #1877f2; }
-    .contact-card.contact-card-facebook { border-color: rgba(24, 119, 242, 0.25); }
-    .contact-card.contact-card-facebook:hover { border-color: rgba(24, 119, 242, 0.5); box-shadow: 0 12px 40px rgba(24, 119, 242, 0.15); }
-    .contact-card.contact-card-instagram::before { background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af); }
-    .contact-card.contact-card-instagram { border-color: rgba(221, 42, 123, 0.25); }
-    .contact-card.contact-card-instagram:hover { border-color: rgba(221, 42, 123, 0.5); box-shadow: 0 12px 40px rgba(221, 42, 123, 0.12); }
+    .contact-card:hover::before {
+      opacity: 1;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
     .contact-card-icon {
       width: 48px;
       height: 48px;
@@ -1634,10 +1716,10 @@
       justify-content: center;
       margin-bottom: 1rem;
       font-size: 1.5rem;
+      background: var(--primary-dim);
+      color: var(--primary);
+      border: 1px solid rgba(34, 197, 94, 0.2);
     }
-    .contact-card-discord .contact-card-icon { background: rgba(88, 101, 242, 0.2); }
-    .contact-card-facebook .contact-card-icon { background: rgba(24, 119, 242, 0.2); }
-    .contact-card-instagram .contact-card-icon { background: linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.2)); }
     .contact-card-badge {
       display: inline-block;
       font-family: 'Space Mono', monospace;
@@ -1646,10 +1728,10 @@
       padding: 0.3rem 0.6rem;
       border-radius: 6px;
       margin-bottom: 0.75rem;
+      background: var(--primary-dim);
+      color: var(--highlight);
+      border: 1px solid rgba(34, 197, 94, 0.15);
     }
-    .contact-card-discord .contact-card-badge { background: rgba(88, 101, 242, 0.2); color: #9baaf2; }
-    .contact-card-facebook .contact-card-badge { background: rgba(24, 119, 242, 0.2); color: #6eb4ff; }
-    .contact-card-instagram .contact-card-badge { background: rgba(221, 42, 123, 0.15); color: #e88bb8; }
     .contact-card h3 {
       font-family: 'Syne', sans-serif;
       font-size: 1.2rem;
@@ -1682,10 +1764,10 @@
       border-radius: 6px;
       font-size: 0.75rem;
       font-weight: 600;
+      background: var(--primary-dim);
+      color: var(--muted);
+      border: 1px solid rgba(34, 197, 94, 0.12);
     }
-    .contact-card-discord .contact-card-pills span { background: rgba(88, 101, 242, 0.15); color: #9baaf2; }
-    .contact-card-facebook .contact-card-pills span { background: rgba(24, 119, 242, 0.15); color: #6eb4ff; }
-    .contact-card-instagram .contact-card-pills span { background: rgba(221, 42, 123, 0.15); color: #e88bb8; }
     .contact-card .contact-cta {
       display: inline-block;
       padding: 0.75rem 1.5rem;
@@ -1695,20 +1777,25 @@
       font-size: 0.9375rem;
       text-decoration: none;
       text-align: center;
+      background: var(--primary);
+      color: var(--bg);
+      border: 1px solid rgba(34, 197, 94, 0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .contact-card .contact-cta:hover { transform: scale(1.02); }
-    .contact-card-discord .contact-cta { background: #5865f2; color: #fff; }
-    .contact-card-discord .contact-cta:hover { box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4); }
-    .contact-card-facebook .contact-cta { background: #1877f2; color: #fff; }
-    .contact-card-facebook .contact-cta:hover { box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4); }
-    .contact-card-instagram .contact-cta {
-      background: transparent;
-      color: #e88bb8;
-      border: 2px solid transparent;
-      border-image: linear-gradient(135deg, #f58529, #dd2a7b, #8134af) 1;
+    .contact-card .contact-cta:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px var(--primary-glow), 0 4px 20px rgba(34, 197, 94, 0.3);
     }
-    .contact-card-instagram .contact-cta:hover { box-shadow: 0 4px 20px rgba(221, 42, 123, 0.3); }
+    /* Force green theme — no Discord/Facebook/Instagram blue or purple in contact */
+    .contact-card-discord .contact-card-icon,
+    .contact-card-facebook .contact-card-icon,
+    .contact-card-instagram .contact-card-icon { background: var(--primary-dim); color: var(--primary); border-color: rgba(34, 197, 94, 0.2); }
+    .contact-card-discord .contact-cta,
+    .contact-card-facebook .contact-cta,
+    .contact-card-instagram .contact-cta { background: var(--primary); color: var(--bg); border-color: rgba(34, 197, 94, 0.4); }
+    .contact-card-discord .contact-cta:hover,
+    .contact-card-facebook .contact-cta:hover,
+    .contact-card-instagram .contact-cta:hover { box-shadow: 0 0 20px var(--primary-glow), 0 4px 20px rgba(34, 197, 94, 0.3); }
     .contact-card-note {
       display: block;
       font-size: 0.75rem;
@@ -1726,13 +1813,16 @@
     .faq-list {
       max-width: 720px;
       margin: 0 auto 2rem;
+      position: relative;
+      z-index: 1;
     }
     .faq-item {
-      background: #0c1225;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(165deg, rgba(18, 22, 18, 0.95) 0%, var(--bg-card) 100%);
+      border: 1px solid var(--border);
       border-radius: 10px;
       margin-bottom: 0.5rem;
       overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
     }
     .faq-q {
       width: 100%;
@@ -1773,6 +1863,8 @@
     .contact-warning-banner {
       max-width: 720px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
       padding: 1rem 1.25rem;
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.05) 100%);
       border: 1px solid rgba(245, 158, 11, 0.25);
@@ -1876,6 +1968,8 @@
       padding-top: 2rem;
       border-top: 1px solid var(--border);
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .newsletter label {
       display: block;
@@ -1925,7 +2019,6 @@
       .callers-grid { grid-template-columns: repeat(2, 1fr); }
       .resources-grid { grid-template-columns: 1fr; }
       .footer-grid { gap: 2rem; }
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -1944,7 +2037,6 @@
       .hero h1 { font-size: 2rem; }
       .stats-row { grid-template-columns: 1fr; }
       .callers-grid { grid-template-columns: 1fr; }
-      .team-grid { grid-template-columns: 1fr; }
       .footer-grid { flex-direction: column; align-items: center; gap: 2rem; }
       .footer-brand { max-width: 100%; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -2346,75 +2438,24 @@
     <span class="section-label">Meet the Team</span>
     <h2 class="section-title">The People Behind the Alpha</h2>
     <p class="section-body">Callers, analysts, and community builders — real people with real track records.</p>
-    <div class="team-filter-tabs">
-      <button type="button" class="team-filter active" data-filter="all">All</button>
-      <button type="button" class="team-filter" data-filter="caller">Callers</button>
-      <button type="button" class="team-filter" data-filter="kol">KOLs</button>
-      <button type="button" class="team-filter" data-filter="analyst">Trading Analysts</button>
-    </div>
     <div class="team-grid" id="teamGrid">
-      <div class="team-card" data-role="caller">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/DiabloBuilder" data-fallback="https://ui-avatars.com/api/?name=Diablo&size=112&background=22c55e&color=fff" alt="Diablo" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Diablo</div>
-            <div class="team-name">@Diablo</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/ZygfridS" data-fallback="https://ui-avatars.com/api/?name=Zygfrid&size=148&background=22c55e&color=fff" alt="Zygfrid" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">Caller</span>
-        <div class="team-socials">
-          <a href="https://x.com/DiabloBuilder" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="caller">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/tonyboiixxx" data-fallback="https://ui-avatars.com/api/?name=BullyBoy&size=112&background=22c55e&color=fff" alt="BullyBoy" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">BullyBoy</div>
-            <div class="team-name">@BullyBoy</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Caller</span>
-        <div class="team-socials">
-          <a href="https://x.com/tonyboiixxx" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="caller">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/fakesohji" data-fallback="https://ui-avatars.com/api/?name=BASCHI+GLAZER+OG&size=112&background=22c55e&color=fff" alt="BASCHI GLAZER OG" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">BASCHI GLAZER OG</div>
-            <div class="team-name">@BASCHI GLAZER OG</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Caller</span>
-        <div class="team-socials">
-          <a href="https://x.com/fakesohji" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/ZygfridS" data-fallback="https://ui-avatars.com/api/?name=Zygfrid&size=112&background=b388ff&color=fff" alt="Zygfrid" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Zygfrid</div>
-            <div class="team-name">@Zygfrid</div>
-          </div>
-        </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">Zygfrid</div>
+        <div class="team-name">@Zygfrid</div>
         <div class="team-socials">
           <a href="https://x.com/ZygfridS" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
           <a href="https://www.facebook.com/zygtvofficial/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/PancakeSyrupNFT" data-fallback="https://ui-avatars.com/api/?name=Pancake&size=112&background=b388ff&color=fff" alt="Pancake" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Pancake</div>
-            <div class="team-name">@Pancake</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/PancakeSyrupNFT" data-fallback="https://ui-avatars.com/api/?name=Pancake&size=148&background=22c55e&color=fff" alt="Pancake" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">Pancake</div>
+        <div class="team-name">@Pancake</div>
         <div class="team-socials">
           <a href="https://www.facebook.com/pancakesyruplex" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
           <a href="https://x.com/PancakeSyrupNFT" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
@@ -2422,190 +2463,78 @@
           <a href="https://www.tiktok.com/@lex.on.track" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/jezreelino" data-fallback="https://ui-avatars.com/api/?name=Stable+Jezreelino&size=112&background=b388ff&color=fff" alt="Stable Jezreelino" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Stable Jezreelino</div>
-            <div class="team-name">@Stable Jezreelino</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/jezreelino" data-fallback="https://ui-avatars.com/api/?name=Stable+Jezreelino&size=148&background=22c55e&color=fff" alt="Stable Jezreelino" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">Stable Jezreelino</div>
+        <div class="team-name">@Stable Jezreelino</div>
         <div class="team-socials">
           <a href="https://x.com/jezreelino" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/souei_nft" data-fallback="https://ui-avatars.com/api/?name=Souei&size=112&background=b388ff&color=fff" alt="Souei" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Souei</div>
-            <div class="team-name">@Souei</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/souei_nft" data-fallback="https://ui-avatars.com/api/?name=Souei&size=148&background=22c55e&color=fff" alt="Souei" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">Souei</div>
+        <div class="team-name">@Souei</div>
         <div class="team-socials">
           <a href="https://www.facebook.com/profile.php?id=61581812799877" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
           <a href="https://x.com/souei_nft" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/kngcsms" data-fallback="https://ui-avatars.com/api/?name=King+Bisakol&size=112&background=b388ff&color=fff" alt="King Bisakol" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">King Bisakol</div>
-            <div class="team-name">@King Bisakol</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/kngcsms" data-fallback="https://ui-avatars.com/api/?name=King+Bisakol&size=148&background=22c55e&color=fff" alt="King Bisakol" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">King Bisakol</div>
+        <div class="team-name">@King Bisakol</div>
         <div class="team-socials">
           <a href="https://www.facebook.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
           <a href="https://x.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/__nabongggg" data-fallback="https://ui-avatars.com/api/?name=Nabong&size=112&background=b388ff&color=fff" alt="Nabong" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Nabong</div>
-            <div class="team-name">@Nabong</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/__nabongggg" data-fallback="https://ui-avatars.com/api/?name=Nabong&size=148&background=22c55e&color=fff" alt="Nabong" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">Nabong</div>
+        <div class="team-name">@Nabong</div>
         <div class="team-socials">
           <a href="https://x.com/__nabongggg" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/0xmaidentrades" data-fallback="https://ui-avatars.com/api/?name=MAiDEN&size=112&background=b388ff&color=fff" alt="MAiDEN" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">MAiDEN</div>
-            <div class="team-name">@! MAiDEN</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/0xmaidentrades" data-fallback="https://ui-avatars.com/api/?name=MAIDEN&size=148&background=22c55e&color=fff" alt="! MAIDEN" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-display-name">! MAIDEN</div>
+        <div class="team-name">@! MAIDEN</div>
         <div class="team-socials">
           <a href="https://x.com/0xmaidentrades" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/ChillWil31" data-fallback="https://ui-avatars.com/api/?name=Chillwil&size=112&background=b388ff&color=fff" alt="Chillwil" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">Chillwil</div>
-            <div class="team-name">@Chillwil</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/ChillWil31" data-fallback="https://ui-avatars.com/api/?name=Chillwil&size=148&background=22c55e&color=fff" alt="Chillwil" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Team (Will not DM you)</span>
+        <div class="team-display-name">Chillwil</div>
+        <div class="team-name">@Chillwil · Will not DM you</div>
         <div class="team-socials">
           <a href="https://x.com/ChillWil31" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/takawtv" data-fallback="https://ui-avatars.com/api/?name=takaw&size=112&background=b388ff&color=fff" alt="takaw" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">takaw</div>
-            <div class="team-name">@takaw</div>
-          </div>
+      <div class="team-card reveal">
+        <div class="team-card-avatar-wrap">
+          <img class="team-avatar" src="https://unavatar.io/twitter/takawtv" data-fallback="https://ui-avatars.com/api/?name=takaw&size=148&background=22c55e&color=fff" alt="takaw" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
         </div>
-        <span class="team-role-badge">KOL / Streamer</span>
+        <div class="team-display-name">takaw</div>
+        <div class="team-name">@takaw</div>
         <div class="team-socials">
           <a href="https://x.com/takawtv" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
           <a href="https://www.tiktok.com/@takawtv" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
           <a href="https://www.twitch.tv/takawtv" target="_blank" rel="noopener noreferrer" aria-label="Twitch">Tw</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="kol">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=Josh+Linan&size=112&background=b388ff&color=fff" alt="Josh Linan">
-          <div class="team-head">
-            <div class="team-display-name">Josh Linan</div>
-            <div class="team-name">@Josh Linan</div>
-          </div>
-        </div>
-        <span class="team-role-badge">KOL</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/0xjosh" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=Baschiqt&size=112&background=4fc3f7&color=fff" alt="Baschiqt">
-          <div class="team-head">
-            <div class="team-display-name">Baschiqt</div>
-            <div class="team-name">@Baschiqt</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/basch1" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=LARRY+GADON+AI&size=112&background=4fc3f7&color=fff" alt="LARRY GADON AI">
-          <div class="team-head">
-            <div class="team-display-name">LARRY GADON AI</div>
-            <div class="team-name">@LARRY GADON AI</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst (I DONT DM!!!)</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/share/19kZeXxwtW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=Ramen+AI&size=112&background=4fc3f7&color=fff" alt="Ramen/AI">
-          <div class="team-head">
-            <div class="team-display-name">Ramen/AI</div>
-            <div class="team-name">@Ramen/AI</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/profile.php?id=61579147065139" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=Angkol+Jeen&size=112&background=4fc3f7&color=fff" alt="Angkol Jeen">
-          <div class="team-head">
-            <div class="team-display-name">Angkol Jeen</div>
-            <div class="team-name">@Angkol Jeen</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/profile.php?id=61581650404303" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://ui-avatars.com/api/?name=shnncrypt&size=112&background=4fc3f7&color=fff" alt="shnncrypt">
-          <div class="team-head">
-            <div class="team-display-name">shnncrypt</div>
-            <div class="team-name">@shnncrypt</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst</span>
-        <div class="team-socials">
-          <a href="https://www.facebook.com/shnncrypt" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        </div>
-      </div>
-      <div class="team-card" data-role="analyst">
-        <div class="team-card-top">
-          <img class="team-avatar" src="https://unavatar.io/twitter/zxjunster" data-fallback="https://ui-avatars.com/api/?name=junster&size=112&background=4fc3f7&color=fff" alt="junster" onerror="this.onerror=null;this.src=this.dataset.fallback||'';">
-          <div class="team-head">
-            <div class="team-display-name">junster</div>
-            <div class="team-name">@junster</div>
-          </div>
-        </div>
-        <span class="team-role-badge">Trading Analyst</span>
-        <div class="team-socials">
-          <a href="https://x.com/zxjunster" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
         </div>
       </div>
     </div>
@@ -2990,30 +2919,6 @@
         });
       });
 
-      var teamGrid = document.getElementById('teamGrid');
-      var teamFilters = document.querySelectorAll('.team-filter');
-      if (teamGrid && teamFilters.length) {
-        teamFilters.forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            teamFilters.forEach(function(b) { b.classList.remove('active'); });
-            this.classList.add('active');
-            var filter = this.getAttribute('data-filter');
-            teamGrid.classList.add('filtering');
-            setTimeout(function() {
-              var cards = teamGrid.querySelectorAll('.team-card');
-              cards.forEach(function(card) {
-                var role = card.getAttribute('data-role');
-                if (filter === 'all' || role === filter) {
-                  card.classList.remove('hidden');
-                } else {
-                  card.classList.add('hidden');
-                }
-              });
-              teamGrid.classList.remove('filtering');
-            }, 150);
-          });
-        });
-      }
     })();
   </script>
 </body>
