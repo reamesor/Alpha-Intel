@@ -1613,6 +1613,7 @@
       margin-left: auto;
       margin-right: auto;
       box-sizing: border-box;
+      min-width: 0;
     }
     .social-feed-card {
       position: relative;
@@ -1700,22 +1701,28 @@
       flex-direction: column;
       position: relative;
       width: 100%;
+      max-width: 100%;
       overflow: hidden;
       min-width: 0;
+      box-sizing: border-box;
     }
     .social-feed-embed {
       width: 100%;
+      max-width: 100%;
       flex: 1;
       min-height: 500px;
       border: none;
-      overflow: auto;
+      overflow: hidden;
+      min-width: 0;
+      box-sizing: border-box;
     }
     .social-feed-embed.fb-embed {
       min-height: 560px;
       width: 100% !important;
       max-width: 100% !important;
-      min-width: 0;
+      min-width: 0 !important;
       overflow: hidden;
+      display: block;
     }
     .social-feed-embed.x-embed {
       min-height: 560px;
@@ -1761,21 +1768,6 @@
       text-decoration: none;
     }
     .social-feed-x-cta a:hover { text-decoration: underline; }
-    .x-tweet-embeds {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      padding: 1rem 1.5rem 0;
-      margin-top: 0.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .x-tweet-embeds .twitter-tweet {
-      margin: 0 auto;
-      max-width: 100%;
-    }
-    @media (max-width: 768px) {
-      .x-tweet-embeds { grid-template-columns: 1fr; padding: 1rem; }
-    }
     .social-feeds-discord-cta {
       padding: 1.25rem 1.5rem;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 100%);
@@ -2561,17 +2553,17 @@
     <span class="section-label">Latest Intel</span>
     <h2 class="section-title">Discover more from Alpha Intel</h2>
     <div class="resources-grid">
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://x.com/AlphaIntelMedia" class="resource-card" target="_blank" rel="noopener noreferrer" title="Follow Alpha Intel on X (Twitter)">
         <div class="meta">Intel</div>
         <h3>BTC breaks key resistance — what happens next</h3>
         <p>Technical and on-chain context for the next leg.</p>
       </a>
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://x.com/AlphaIntelMedia" class="resource-card" target="_blank" rel="noopener noreferrer" title="Follow Alpha Intel on X (Twitter)">
         <div class="meta">Alpha</div>
         <h3>Top 3 airdrop opportunities this week on MEXC</h3>
         <p>Early plays before they trend.</p>
       </a>
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer" title="Join the community on Discord">
         <div class="meta">Community</div>
         <h3>Why Filipino traders are dominating Web3 in 2026</h3>
         <p>Inside our Filipino-led, global community.</p>
@@ -3045,7 +3037,7 @@
           <span class="social-feed-live-badge" aria-hidden="true">Live</span>
         </div>
         <div class="social-feed-embed-wrap">
-          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100% !important; max-width: 100% !important;" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=340&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100% !important; max-width: 100% !important; min-width: 0 !important; border: none; overflow: hidden;" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
         </div>
       </div>
       <div class="social-feed-card">
@@ -3057,16 +3049,9 @@
           <div class="social-feed-embed x-embed" id="x-embed-container">
             <blockquote class="twitter-timeline" data-height="560" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders" data-tweet-limit="5" data-width="100%"><a href="https://x.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
           </div>
-          <div class="x-tweet-embeds" id="x-tweet-embeds" aria-label="Latest tweets">
-            <!-- Replace each status ID with a real tweet ID from https://x.com/AlphaIntelMedia (copy from a tweet URL) -->
-            <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark"><a href="https://x.com/AlphaIntelMedia/status/1000000000000000001"></a></blockquote>
-            <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark"><a href="https://x.com/AlphaIntelMedia/status/1000000000000000002"></a></blockquote>
-            <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark"><a href="https://x.com/AlphaIntelMedia/status/1000000000000000003"></a></blockquote>
-          </div>
           <div class="x-embed-fallback" id="x-embed-fallback" style="display: none;">
-            <p>Timeline didn’t load? Follow us on X for live updates.</p>
-            <p class="x-embed-tip">To show tweets above, replace the placeholder IDs in <code>index.html</code> (search for <code>1000000000000000001</code>) with real tweet IDs from your <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">X profile</a>.</p>
-            <a href="https://x.com/AlphaIntelMedia" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Open @AlphaIntelMedia on X →</a>
+            <p>Follow us on X for live updates, alpha, and market intel.</p>
+            <a href="https://x.com/AlphaIntelMedia" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Follow @AlphaIntelMedia on X →</a>
           </div>
           <p class="social-feed-x-cta">
             <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">View on X →</a>
