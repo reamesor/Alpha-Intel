@@ -10,15 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #04060e;
-      --gold: #f5c518;
-      --blue: #4fc3f7;
-      --purple: #b388ff;
-      --green: #69f0ae;
-      --white: #f0f2f5;
-      --muted: #8b92a8;
-      --card-bg: rgba(15, 18, 32, 0.8);
-      --border: rgba(245, 197, 24, 0.15);
+      --bg: #0a0a0a;
+      --bg-elevated: #111111;
+      --bg-card: #161616;
+      --green: #22c55e;
+      --green-bright: #4ade80;
+      --green-dim: rgba(34, 197, 94, 0.12);
+      --green-glow: rgba(34, 197, 94, 0.25);
+      --white: #fafafa;
+      --muted: #a1a1aa;
+      --border: rgba(34, 197, 94, 0.2);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +28,7 @@
       font-family: 'Outfit', sans-serif;
       background: var(--bg);
       color: var(--white);
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: hidden;
     }
     .noise {
@@ -39,7 +40,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Navbar */
+    /* Navbar — Qualytics-style clean */
     .navbar {
       position: fixed;
       top: 0;
@@ -50,7 +51,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background: rgba(4, 6, 14, 0.6);
+      background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid transparent;
@@ -67,10 +68,16 @@
       font-weight: 700;
       font-size: 1.35rem;
     }
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      display: block;
+    }
     .logo-hex {
       width: 40px;
       height: 40px;
-      background: var(--gold);
+      background: var(--green);
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       display: flex;
       align-items: center;
@@ -92,58 +99,46 @@
       font-size: 0.95rem;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-ctas {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-ctas { display: flex; align-items: center; gap: 0.75rem; }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.6rem 1.25rem;
+      padding: 0.65rem 1.35rem;
       border-radius: 8px;
       font-weight: 600;
       font-size: 0.9rem;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       border: none;
       cursor: pointer;
     }
     .btn:hover { transform: translateY(-1px); }
-    .btn-discord {
-      background: #5865f2;
-      color: white;
-    }
-    .btn-discord:hover { box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4); }
-    .btn-telegram {
-      background: #0088cc;
-      color: white;
-    }
-    .btn-telegram:hover { box-shadow: 0 4px 20px rgba(0, 136, 204, 0.4); }
-    .btn-gold {
-      background: var(--gold);
+    .btn-primary {
+      background: var(--green);
       color: var(--bg);
     }
-    .btn-gold:hover { box-shadow: 0 4px 20px rgba(245, 197, 24, 0.35); }
+    .btn-primary:hover { box-shadow: 0 4px 24px var(--green-glow); }
     .btn-outline {
       background: transparent;
-      color: var(--gold);
-      border: 2px solid var(--gold);
+      color: var(--green);
+      border: 2px solid var(--green);
     }
+    .btn-outline:hover { background: var(--green-dim); }
     .nav-toggle { display: none; }
 
-    /* Hero */
+    /* Hero — Qualytics-style: one headline, one paragraph, CTAs */
     .hero {
       position: relative;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 3rem;
-      padding: 8rem 2rem 4rem;
-      max-width: 1280px;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      max-width: 900px;
       margin: 0 auto;
     }
     .hero-bg {
@@ -152,72 +147,195 @@
       overflow: hidden;
       z-index: 0;
     }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.25;
-      animation: float 12s ease-in-out infinite;
-    }
-    .orb-1 { width: 400px; height: 400px; background: var(--gold); top: 10%; left: -10%; animation-delay: 0s; }
-    .orb-2 { width: 300px; height: 300px; background: var(--purple); bottom: 20%; right: 10%; animation-delay: -4s; }
-    .orb-3 { width: 250px; height: 250px; background: var(--blue); top: 50%; left: 30%; animation-delay: -8s; }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
-    }
-    .stars {
+    .hero-bg .banner-img {
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px, var(--white), transparent),
-        radial-gradient(2px 2px at 40px 70px, var(--blue), transparent),
-        radial-gradient(2px 2px at 50px 160px, var(--gold), transparent),
-        radial-gradient(2px 2px at 90px 40px, var(--purple), transparent),
-        radial-gradient(2px 2px at 130px 80px, var(--green), transparent);
-      background-size: 200px 200px;
-      background-repeat: repeat;
-      opacity: 0.4;
-      animation: twinkle 4s ease-in-out infinite;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
     }
-    @keyframes twinkle { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.7; } }
+    .hero-bg .glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, var(--bg) 70%);
+      pointer-events: none;
+    }
+    .hero-bg .glow-spot {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: var(--green);
+      filter: blur(140px);
+      opacity: 0.08;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     .hero-content { position: relative; z-index: 1; }
     .hero h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-size: clamp(2.5rem, 5.5vw, 3.5rem);
       line-height: 1.15;
-      margin-bottom: 1.25rem;
-      background: linear-gradient(135deg, var(--white) 0%, var(--gold) 50%, var(--blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
     }
-    .hero p {
+    .hero h1 .accent { color: var(--green); }
+    .hero .hero-sub {
       color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 480px;
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
     }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
     .hero-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem 2.5rem;
+      justify-content: center;
+      gap: 2rem 3rem;
     }
     .stat { display: flex; align-items: center; gap: 0.5rem; }
-    .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--gold); }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--green); font-size: 1.1rem; }
     .stat-label { color: var(--muted); font-size: 0.9rem; }
-    .hero-feed-wrap { position: relative; z-index: 1; }
+
+    /* Section block — Qualytics style */
+    .section-block {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      max-width: 640px;
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Problem / Solution — Qualytics narrative */
+    .problem-solution {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .problem-solution .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+    .problem-solution .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .problem-solution .card p { color: var(--muted); line-height: 1.7; }
+
+    /* What We Offer — feature grid like Qualytics */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .offer-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
+    .offer-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .offer-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+    .offer-card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* Results / Stats — Qualytics big numbers */
+    .results-section {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .results-item .big {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--green);
+      margin-bottom: 0.25rem;
+    }
+    .results-item .label { color: var(--muted); font-size: 0.95rem; }
+    .results-item .sublabel { color: var(--muted); font-size: 0.8rem; margin-top: 0.25rem; }
+
+    /* Marquee */
+    .marquee-wrap {
+      padding: 1rem 0;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .marquee {
+      display: flex;
+      gap: 4rem;
+      animation: scroll 30s linear infinite;
+      width: max-content;
+    }
+    .marquee span {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .marquee .price { color: var(--green); }
+    .marquee .label { color: var(--green-bright); }
+
+    /* Intel feed card */
+    .hero-feed-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      margin: 2rem auto 0;
+    }
     .intel-card {
-      background: var(--card-bg);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 1.5rem;
-      min-height: 320px;
-      display: flex;
-      flex-direction: column;
+      min-height: 200px;
     }
     .intel-card h3 {
       font-family: 'Syne', sans-serif;
@@ -245,7 +363,7 @@
       position: absolute;
       left: 1.5rem;
       right: 1.5rem;
-      top: 4rem;
+      top: 3.5rem;
       transition: opacity 0.5s ease;
     }
     .intel-item.active { opacity: 1; position: relative; top: 0; }
@@ -259,74 +377,10 @@
       font-weight: 700;
       margin-right: 0.5rem;
     }
-    .tag-breaking { background: rgba(244, 67, 54, 0.3); color: #ff8a80; }
-    .tag-bullish { background: rgba(105, 240, 174, 0.2); color: var(--green); }
-    .tag-watch { background: rgba(79, 195, 247, 0.2); color: var(--blue); }
-    .tag-degen { background: rgba(179, 136, 255, 0.2); color: var(--purple); }
-
-    /* Marquee */
-    .marquee-wrap {
-      padding: 1rem 0;
-      background: rgba(0,0,0,0.3);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .marquee {
-      display: flex;
-      gap: 4rem;
-      animation: scroll 30s linear infinite;
-      width: max-content;
-    }
-    .marquee span {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .marquee .price { color: var(--green); }
-    .marquee .label { color: var(--gold); }
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* Sections common */
-    section {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      margin-bottom: 0.5rem;
-    }
-    .section-sub { color: var(--muted); margin-bottom: 3rem; font-size: 1.1rem; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* What We Offer */
-    .offer-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .offer-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: border-color 0.3s, transform 0.2s;
-    }
-    .offer-card:hover {
-      border-color: rgba(245, 197, 24, 0.35);
-      transform: translateY(-4px);
-    }
-    .offer-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    .offer-card p { color: var(--muted); font-size: 0.95rem; }
+    .tag-breaking { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .tag-bullish { background: var(--green-dim); color: var(--green); }
+    .tag-watch { background: var(--green-dim); color: var(--green-bright); }
+    .tag-degen { background: var(--green-dim); color: var(--green); }
 
     /* Community */
     .community-grid {
@@ -336,7 +390,7 @@
       align-items: start;
     }
     .discord-mock {
-      background: #313338;
+      background: #1e1e1e;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--border);
@@ -344,7 +398,7 @@
     }
     .discord-sidebar {
       padding: 1rem;
-      border-right: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid var(--border);
       min-width: 160px;
     }
     .discord-sidebar .channel {
@@ -353,44 +407,33 @@
       color: var(--muted);
       border-radius: 4px;
     }
-    .discord-sidebar .channel:hover { background: rgba(255,255,255,0.06); color: var(--white); }
-    .discord-main {
-      padding: 1rem 1.5rem;
-      min-height: 280px;
-      flex: 1;
-    }
-    .discord-msg {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
+    .discord-sidebar .channel:hover { background: var(--green-dim); color: var(--green); }
+    .discord-main { padding: 1rem 1.5rem; min-height: 280px; flex: 1; }
+    .discord-msg { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
     .discord-avatar {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple), var(--blue));
+      background: linear-gradient(135deg, var(--green), #16a34a);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
       font-size: 0.9rem;
+      color: var(--bg);
       flex-shrink: 0;
     }
     .discord-body .name { font-weight: 600; font-size: 0.95rem; }
-    .discord-body .name .badge {
-      font-size: 0.7rem;
-      margin-left: 0.35rem;
-      opacity: 0.9;
-    }
+    .discord-body .name .badge { font-size: 0.7rem; margin-left: 0.35rem; color: var(--green); }
     .discord-body .text { color: var(--muted); font-size: 0.9rem; }
     .feature-boxes { display: flex; flex-direction: column; gap: 1rem; }
     .feature-box {
-      background: var(--card-bg);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.25rem 1.5rem;
     }
-    .feature-box h4 { font-family: 'Syne', sans-serif; margin-bottom: 0.35rem; }
+    .feature-box h4 { font-family: 'Syne', sans-serif; margin-bottom: 0.35rem; color: var(--white); }
     .feature-box p { color: var(--muted); font-size: 0.9rem; }
 
     /* Callers & KOLs */
@@ -400,7 +443,7 @@
       gap: 1.5rem;
     }
     .caller-card {
-      background: var(--card-bg);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
@@ -408,14 +451,14 @@
       transition: border-color 0.3s, transform 0.2s;
     }
     .caller-card:hover {
-      border-color: rgba(245, 197, 24, 0.35);
-      transform: translateY(-4px);
+      border-color: var(--green);
+      transform: translateY(-2px);
     }
     .caller-avatar {
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--purple));
+      background: linear-gradient(135deg, var(--green), #16a34a);
       margin: 0 auto 1rem;
       display: flex;
       align-items: center;
@@ -426,14 +469,10 @@
       color: var(--bg);
     }
     .caller-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 0.25rem; }
-    .caller-role {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-    .caller-role .badge { color: var(--gold); }
+    .caller-role { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .caller-role .badge { color: var(--green); }
     .caller-card a {
-      color: var(--blue);
+      color: var(--green);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
@@ -447,7 +486,7 @@
       gap: 1.5rem;
     }
     .platform-card {
-      background: var(--card-bg);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
@@ -458,32 +497,32 @@
       transition: border-color 0.3s, transform 0.2s;
     }
     .platform-card:hover {
-      border-color: rgba(245, 197, 24, 0.35);
-      transform: translateY(-4px);
+      border-color: var(--green);
+      transform: translateY(-2px);
     }
-    .platform-card .icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-    }
+    .platform-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
     .platform-card h3 { font-family: 'Syne', sans-serif; font-size: 1.15rem; }
-    .platform-card.partner { border-color: rgba(245, 197, 24, 0.4); }
+    .platform-card.partner { border-color: var(--green); }
+    .platform-card.partner p { color: var(--green); }
 
     /* CTA */
     .cta-section {
       text-align: center;
       padding: 5rem 2rem;
-      background: linear-gradient(180deg, transparent 0%, rgba(245, 197, 24, 0.03) 50%, transparent 100%);
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
     }
     .cta-section h2 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: clamp(2rem, 4vw, 2.75rem);
       margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
-    .cta-section p { color: var(--muted); margin-bottom: 1.5rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
     .cta-badge {
       display: inline-block;
-      background: rgba(105, 240, 174, 0.2);
+      background: var(--green-dim);
       color: var(--green);
       padding: 0.35rem 0.75rem;
       border-radius: 6px;
@@ -493,11 +532,11 @@
       margin-bottom: 1rem;
     }
 
-    /* Footer */
+    /* Footer — Qualytics-style columns */
     footer {
       border-top: 1px solid var(--border);
       padding: 4rem 2rem 2rem;
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
     }
     .footer-grid {
@@ -506,18 +545,23 @@
       gap: 2rem;
       margin-bottom: 2.5rem;
     }
-    .footer-brand .logo-hex {
+    .footer-brand .logo-hex,
+    .footer-brand .footer-logo {
       width: 36px;
       height: 36px;
-      font-size: 0.8rem;
+      object-fit: contain;
       margin-bottom: 0.75rem;
+      display: block;
     }
-    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 280px; }
+    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; }
     .footer-col h4 {
       font-family: 'Syne', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
       margin-bottom: 1rem;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .footer-col a {
       display: block;
@@ -526,17 +570,17 @@
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
     }
-    .footer-col a:hover { color: var(--gold); }
+    .footer-col a:hover { color: var(--green); }
     .footer-social {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       margin-bottom: 2rem;
     }
     .footer-social a {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--card-bg);
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -545,7 +589,7 @@
       text-decoration: none;
       transition: color 0.2s, border-color 0.2s;
     }
-    .footer-social a:hover { color: var(--gold); border-color: var(--gold); }
+    .footer-social a:hover { color: var(--green); border-color: var(--green); }
     .footer-bottom {
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
@@ -558,13 +602,11 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive */
     @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; }
-      .hero p { margin-left: auto; margin-right: auto; }
-      .hero-ctas { justify-content: center; }
-      .hero-stats { justify-content: center; }
+      .hero { min-height: auto; padding-top: 7rem; }
+      .problem-solution { grid-template-columns: 1fr; }
       .offer-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
       .community-grid { grid-template-columns: 1fr; }
       .callers-grid { grid-template-columns: repeat(2, 1fr); }
       .platforms-grid { grid-template-columns: repeat(2, 1fr); }
@@ -582,13 +624,10 @@
         cursor: pointer;
         padding: 5px;
       }
-      .nav-toggle span {
-        width: 24px;
-        height: 2px;
-        background: var(--white);
-      }
+      .nav-toggle span { width: 24px; height: 2px; background: var(--white); }
       .hero h1 { font-size: 2rem; }
       .offer-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
       .callers-grid { grid-template-columns: 1fr; }
       .platforms-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -601,7 +640,7 @@
 
   <nav class="navbar" id="navbar">
     <a href="#" class="nav-logo">
-      <div class="logo-hex">AI</div>
+      <img src="assets/logo.png" alt="Alpha Intel" width="40" height="40">
       <span>Alpha Intel</span>
     </a>
     <div class="nav-links">
@@ -611,8 +650,8 @@
       <a href="#platforms">Platforms</a>
     </div>
     <div class="nav-ctas">
-      <a href="https://discord.gg/alphaintel" class="btn btn-discord" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://t.me/alphaintelpublic" class="btn btn-telegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a href="https://t.me/alphaintelpublic" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Telegram</a>
     </div>
     <button class="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -621,16 +660,15 @@
 
   <header class="hero">
     <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-      <div class="stars"></div>
+      <img src="assets/banner.png" alt="" class="banner-img" aria-hidden="true">
+      <div class="glow"></div>
+      <div class="glow-spot"></div>
     </div>
     <div class="hero-content">
-      <h1>Your Edge in Crypto & Web3</h1>
-      <p>24/7 intelligence on markets, trade calls, and alpha. Join a Filipino-led community of 521+ members—free. No paywalls, just sharp news and insights on fintech, Web3, and crypto.</p>
+      <h1>Your edge in crypto & Web3.</h1>
+      <p class="hero-sub">Alpha Intel brings you sharp news and insights on fintech, Web3, and crypto—24/7. Join a Filipino-led community of 521+ members. No paywalls, no gatekeeping. Get trade calls, alpha, and market intel in one place.</p>
       <div class="hero-ctas">
-        <a href="https://discord.gg/alphaintel" class="btn btn-gold" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
+        <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
         <a href="https://x.com/AlphaIntelMedia" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Follow on X</a>
       </div>
       <div class="hero-stats">
@@ -682,9 +720,63 @@
     </div>
   </div>
 
-  <section id="offer" class="reveal">
-    <h2 class="section-title">What We Offer</h2>
-    <p class="section-sub">Everything you need to stay ahead in crypto and Web3.</p>
+  <section class="section-block reveal">
+    <span class="section-label">The Problem</span>
+    <h2 class="section-title">Crypto alpha is scattered. You're late to the move.</h2>
+    <p class="section-sub">News breaks on one app, callers post on another, and airdrops drop somewhere else. By the time you see it, the edge is gone. Traditional feeds don't keep up, and paid groups lock out beginners.</p>
+    <div class="problem-solution" style="margin-top: 2rem;">
+      <div class="card reveal">
+        <h3>Fragmented intel</h3>
+        <p>You're juggling Twitter, Telegram, Discord, and still missing moves. No single place ties together news, trade calls, and community.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Gatekept alpha</h3>
+        <p>Many groups charge for "alpha" or hide behind paywalls. Newcomers and non-whales get left out of the best signals and education.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block reveal">
+    <span class="section-label">The Solution</span>
+    <h2 class="section-title">One community. 24/7 intel. Free to join.</h2>
+    <p class="section-sub">Alpha Intel brings together breaking news, verified trade callers, Web3 alpha, and a Filipino-led community—all in one place. No paywalls. Join Discord, get alerts, and stay ahead.</p>
+    <div style="margin-top: 1.5rem;">
+      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
+    </div>
+  </section>
+
+  <section class="section-block results-section reveal">
+    <div class="section-block" style="padding-top: 3rem; padding-bottom: 3rem;">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">Why the community chooses Alpha Intel</h2>
+      <div class="results-grid">
+        <div class="results-item reveal">
+          <div class="big">521+</div>
+          <div class="label">Members online</div>
+          <div class="sublabel">Active Discord community</div>
+        </div>
+        <div class="results-item reveal">
+          <div class="big">24/7</div>
+          <div class="label">Coverage</div>
+          <div class="sublabel">News & alerts around the clock</div>
+        </div>
+        <div class="results-item reveal">
+          <div class="big">6+</div>
+          <div class="label">Platforms</div>
+          <div class="sublabel">Discord, X, Telegram, and more</div>
+        </div>
+        <div class="results-item reveal">
+          <div class="big">🇵🇭</div>
+          <div class="label">Filipino-led</div>
+          <div class="sublabel">Global reach, PH-powered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="offer" class="section-block reveal">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Everything you need to stay ahead in crypto and Web3</h2>
+    <p class="section-sub">Fast news, trade calls, alpha, and community—in one place.</p>
     <div class="offer-grid">
       <div class="offer-card reveal">
         <h3>⚡ Fastest Crypto News</h3>
@@ -713,9 +805,10 @@
     </div>
   </section>
 
-  <section id="community" class="reveal">
-    <h2 class="section-title">Community</h2>
-    <p class="section-sub">Where alpha flows 24/7. Join the conversation.</p>
+  <section id="community" class="section-block reveal">
+    <span class="section-label">Community</span>
+    <h2 class="section-title">Where alpha flows 24/7</h2>
+    <p class="section-sub">Join the conversation. Trade calls, airdrops, and PH channel—all in Discord.</p>
     <div class="community-grid">
       <div class="discord-mock reveal">
         <div class="discord-sidebar">
@@ -737,7 +830,7 @@
             <div class="discord-avatar">J</div>
             <div class="discord-body">
               <span class="name">Josh Linan <span class="badge">🔑 KOL</span></span>
-              <div class="text">New airdrop checklist in #airdrop-alerts — don’t sleep.</div>
+              <div class="text">New airdrop checklist in #airdrop-alerts — don't sleep.</div>
             </div>
           </div>
           <div class="discord-msg">
@@ -770,9 +863,10 @@
     </div>
   </section>
 
-  <section id="callers" class="reveal">
-    <h2 class="section-title">Callers & KOLs</h2>
-    <p class="section-sub">Verified voices sharing trade calls and alpha.</p>
+  <section id="callers" class="section-block reveal">
+    <span class="section-label">Callers & KOLs</span>
+    <h2 class="section-title">Verified voices sharing trade calls and alpha</h2>
+    <p class="section-sub">Follow our callers and KOLs for setups and insights.</p>
     <div class="callers-grid">
       <div class="caller-card reveal">
         <div class="caller-avatar">D</div>
@@ -813,9 +907,10 @@
     </div>
   </section>
 
-  <section id="platforms" class="reveal">
-    <h2 class="section-title">Platforms</h2>
-    <p class="section-sub">Find us everywhere. All links open in new tabs.</p>
+  <section id="platforms" class="section-block reveal">
+    <span class="section-label">Platforms</span>
+    <h2 class="section-title">Find us everywhere</h2>
+    <p class="section-sub">All links open in new tabs.</p>
     <div class="platforms-grid">
       <a href="https://discord.gg/alphaintel" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
         <div class="icon">💬</div>
@@ -845,23 +940,27 @@
       <a href="https://www.mexc.co/en-GB/acquisition/custom-sign-up?shareCode=mexc-3SqjB" class="platform-card partner reveal" target="_blank" rel="noopener noreferrer">
         <div class="icon">🟡</div>
         <h3>MEXC Partner</h3>
-        <p style="color: var(--gold); font-size: 0.9rem;">Sign up with our link</p>
+        <p style="font-size: 0.9rem;">Sign up with our link</p>
       </a>
     </div>
-    <p style="text-align: center; margin-top: 1rem;"><a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer" style="color: var(--blue);">linktr.ee/alphaintelmedia</a> · <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer" style="color: var(--blue);">alphaintelmedia.com</a></p>
+    <p style="text-align: center; margin-top: 1.25rem;">
+      <a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer" style="color: var(--green);">linktr.ee/alphaintelmedia</a>
+      <span style="color: var(--muted); margin: 0 0.5rem;">·</span>
+      <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer" style="color: var(--green);">alphaintelmedia.com</a>
+    </p>
   </section>
 
   <section class="cta-section reveal">
     <div class="cta-badge">FREE</div>
     <h2>Get your alpha for free.</h2>
     <p>No paywalls. Join Discord and get sharp news, trade calls, and Web3 intel—all free.</p>
-    <a href="https://discord.gg/alphaintel" class="btn btn-gold" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
+    <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
   </section>
 
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo-hex">AI</div>
+        <img src="assets/logo.png" alt="Alpha Intel" class="footer-logo" width="36" height="36">
         <p>Bringing you sharp news and insights on fintech, Web3, and crypto to the world.</p>
         <div class="footer-social">
           <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer" aria-label="Discord">💬</a>
@@ -899,7 +998,6 @@
 
   <script>
     (function() {
-      // Navbar border on scroll
       var nav = document.getElementById('navbar');
       function onScroll() {
         nav.classList.toggle('scrolled', window.scrollY > 20);
@@ -907,7 +1005,6 @@
       window.addEventListener('scroll', onScroll);
       onScroll();
 
-      // Scroll reveal (IntersectionObserver)
       var reveals = document.querySelectorAll('.reveal');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -922,7 +1019,6 @@
       }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
       reveals.forEach(function(el) { observer.observe(el); });
 
-      // Intel feed rotation every 6 seconds
       var items = document.querySelectorAll('.intel-item');
       var current = 0;
       function rotateIntel() {
@@ -933,11 +1029,8 @@
       }
       setInterval(rotateIntel, 6000);
 
-      // Marquee duplicate for seamless loop
       var marquee = document.querySelector('.marquee');
-      if (marquee) {
-        marquee.innerHTML = marquee.innerHTML + marquee.innerHTML;
-      }
+      if (marquee) marquee.innerHTML = marquee.innerHTML + marquee.innerHTML;
     })();
   </script>
 </body>
