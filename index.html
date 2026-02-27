@@ -145,7 +145,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 6rem;
+      padding: 7rem 2rem 5rem;
       overflow: hidden;
     }
     .hero-bg {
@@ -442,11 +442,12 @@
       transform: translateY(0);
     }
 
-    /* Section block */
+    /* Section block — center-aligned, compact */
     .section {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
     .section-label {
       font-family: 'Syne', sans-serif;
@@ -455,13 +456,13 @@
       color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
     .section-title {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
       letter-spacing: -0.02em;
       line-height: 1.2;
       color: var(--text);
@@ -471,13 +472,16 @@
       font-weight: 600;
       font-size: 1.25rem;
       color: var(--text);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     .section-body {
       color: var(--muted);
       font-size: 1.0625rem;
       line-height: 1.7;
       max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.25rem;
     }
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -486,12 +490,14 @@
     .problem-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 3rem;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
+    .problem-section > div:first-child { text-align: center; }
     .problem-visual {
       background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
       border: 1px solid var(--border);
@@ -580,14 +586,16 @@
     .solution-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
+    .solution-section .section-body { margin-left: auto; margin-right: auto; }
     .solution-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
       align-items: start;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
     .solution-tabs {
       display: flex;
@@ -618,6 +626,7 @@
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.7;
+      text-align: left;
     }
     .solution-pane.active { display: block; }
     .solution-visual {
@@ -776,10 +785,11 @@
     .how-section {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
-    .how-section .section-body { margin-bottom: 2.5rem; }
-    .steps-list { display: flex; flex-direction: column; gap: 2rem; }
+    .how-section .section-body { margin-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
+    .steps-list { display: flex; flex-direction: column; gap: 1.5rem; text-align: left; }
     .step-item {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -814,10 +824,10 @@
     .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
       background: var(--bg-elevated);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -837,17 +847,19 @@
 
     /* Callers / KOLs — cards like customer stories */
     .callers-section {
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
     .callers-section .callers-inner {
       max-width: 1200px;
       margin: 0 auto;
     }
-    .callers-section .section-body { margin-bottom: 2rem; }
+    .callers-section .section-body { margin-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
     .callers-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
+      text-align: left;
     }
     .caller-card {
       background: var(--bg-card);
@@ -891,14 +903,15 @@
     .team-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
-    .team-section .section-body { margin-bottom: 1.5rem; }
+    .team-section .section-body { margin-bottom: 1.25rem; margin-left: auto; margin-right: auto; }
     .team-filter-tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
       justify-content: center;
     }
     .team-filter-tabs button {
@@ -924,6 +937,7 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 1.25rem;
       transition: opacity 0.3s ease;
+      text-align: left;
     }
     .team-grid.filtering { opacity: 0.7; }
     .team-card {
@@ -1006,14 +1020,16 @@
     .bots-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
       border-top: 1px solid var(--border);
+      text-align: center;
     }
-    .bots-section .section-body { margin-bottom: 2rem; max-width: 640px; }
+    .bots-section .section-body { margin-bottom: 1.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .bots-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1.25rem;
+      text-align: left;
     }
     .bot-card {
       background: var(--bg-card);
@@ -1061,35 +1077,49 @@
       font-size: 0.875rem;
     }
 
-    /* Social feeds — keep site updated with Facebook & X */
+    /* Social feeds — live Facebook & X timeline embeds */
     .social-feeds-section {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
+      text-align: center;
     }
-    .social-feeds-section .section-title { margin-bottom: 0.75rem; }
-    .social-feeds-section .section-body { margin-bottom: 1.5rem; }
+    .social-feeds-section .section-label { margin-bottom: 0.5rem; }
+    .social-feeds-section .section-title { margin-bottom: 0.6rem; }
+    .social-feeds-section .section-body { margin-bottom: 1.5rem; max-width: 640px; margin-left: auto; margin-right: auto; }
     .social-feeds-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      align-items: start;
+      gap: 1.75rem;
+      align-items: stretch;
     }
     .social-feed-card {
-      background: var(--bg-card);
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(15, 15, 15, 0.98) 100%);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      min-height: 420px;
-      transition: border-color 0.25s ease;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .social-feed-card:hover { border-color: rgba(34, 197, 94, 0.3); }
+    .social-feed-card:hover {
+      border-color: rgba(34, 197, 94, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .social-feed-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
     .social-feed-card h3 {
       font-family: 'Syne', sans-serif;
       font-size: 1rem;
       font-weight: 600;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
       margin: 0;
       display: flex;
       align-items: center;
@@ -1100,23 +1130,81 @@
       text-decoration: none;
     }
     .social-feed-card h3 a:hover { text-decoration: underline; }
+    .social-feed-live-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .social-feed-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: social-live-pulse 2s ease-in-out infinite;
+    }
+    @keyframes social-live-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+    }
+    .social-feed-embed-wrap {
+      flex: 1;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
     .social-feed-embed {
       width: 100%;
-      min-height: 380px;
+      flex: 1;
+      min-height: 420px;
       border: none;
       overflow: hidden;
     }
-    .social-feed-embed.fb-embed { min-height: 500px; }
-    .social-feed-embed.x-embed { min-height: 400px; }
+    .social-feed-embed.fb-embed { min-height: 480px; }
+    .social-feed-embed.x-embed {
+      min-height: 480px;
+      display: block;
+    }
+    .social-feed-embed.x-embed iframe { width: 100% !important; max-width: 100% !important; }
+    .x-embed-fallback {
+      display: none;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 420px;
+      padding: 2rem;
+      background: var(--bg-elevated);
+      color: var(--muted);
+      font-size: 0.9375rem;
+      text-align: center;
+    }
+    .x-embed-fallback a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .x-embed-fallback a:hover { text-decoration: underline; }
     @media (max-width: 900px) {
-      .social-feeds-grid { grid-template-columns: 1fr; }
+      .social-feeds-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .social-feed-card { min-height: 460px; }
+      .social-feed-embed-wrap { min-height: 380px; }
+      .social-feed-embed { min-height: 380px; }
     }
 
     /* Final CTA banner */
     .cta-banner {
       position: relative;
       text-align: center;
-      padding: 5rem 2rem;
+      padding: 3.5rem 2rem;
       overflow: hidden;
     }
     .cta-banner-bg {
@@ -1142,13 +1230,15 @@
     }
 
     /* Resources / blog cards */
-    .resources-section { padding: 5rem 2rem; }
+    .resources-section { padding: 3.5rem 2rem; text-align: center; }
+    .resources-section .section-body { margin-left: auto; margin-right: auto; }
     .resources-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
       max-width: 1200px;
-      margin: 2rem auto 0;
+      margin: 1.5rem auto 0;
+      text-align: left;
     }
     .resource-card {
       background: var(--bg-card);
@@ -1168,25 +1258,27 @@
     .resource-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
     .resource-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
-    /* Footer */
+    /* Footer — center-aligned, compact */
     footer {
       border-top: 1px solid var(--border);
-      padding: 4rem 2rem 2rem;
+      padding: 3rem 2rem 1.5rem;
       max-width: 1200px;
       margin: 0 auto;
+      text-align: center;
     }
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
     .footer-brand .logo-img {
       width: 36px;
       height: 36px;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
-    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; line-height: 1.6; }
+    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-left: auto; margin-right: auto; }
+    .footer-col { text-align: center; }
     .footer-col h4 {
       font-family: 'Syne', sans-serif;
       font-size: 0.8125rem;
@@ -1205,10 +1297,11 @@
     }
     .footer-col a:hover { color: var(--primary); }
     .newsletter {
-      margin-top: 2rem;
-      padding-top: 2rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
     }
+    .newsletter-input-wrap { margin-left: auto; margin-right: auto; }
     .newsletter label {
       display: block;
       font-family: 'Syne', sans-serif;
@@ -1235,11 +1328,11 @@
     .newsletter-input-wrap input::placeholder { color: var(--muted); }
     .newsletter-input-wrap .btn { flex-shrink: 0; }
     .footer-bottom {
-      padding-top: 1.5rem;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       gap: 1rem;
       color: var(--muted);
@@ -1383,6 +1476,28 @@
       </a>
     </div>
   </div>
+
+  <section class="resources-section reveal">
+    <span class="section-label">Latest Intel</span>
+    <h2 class="section-title">Discover more from Alpha Intel</h2>
+    <div class="resources-grid">
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Intel</div>
+        <h3>BTC breaks key resistance — what happens next</h3>
+        <p>Technical and on-chain context for the next leg.</p>
+      </a>
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Alpha</div>
+        <h3>Top 3 airdrop opportunities this week on MEXC</h3>
+        <p>Early plays before they trend.</p>
+      </a>
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Community</div>
+        <h3>Why Filipino traders are dominating Web3 in 2026</h3>
+        <p>Inside our Filipino-led, global community.</p>
+      </a>
+    </div>
+  </section>
 
   <section class="problem-section reveal">
     <div>
@@ -1931,16 +2046,30 @@
   <section id="social-feeds" class="section social-feeds-section reveal">
     <span class="section-label">Latest from us</span>
     <h2 class="section-title">Stay updated with our posts</h2>
-    <p class="section-body">Follow us on <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> and <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">X</a> for news, alpha, and community updates. The feeds below show our latest posts.</p>
+    <p class="section-body">Follow us on <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Facebook</a> and <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">X</a> for news, alpha, and community updates. The feeds below load live from our pages and update automatically.</p>
     <div class="social-feeds-grid">
       <div class="social-feed-card">
-        <h3>Facebook · <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Alpha Intel</a></h3>
-        <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+        <div class="social-feed-card-header">
+          <h3>Facebook · <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Alpha Intel</a></h3>
+          <span class="social-feed-live-badge" aria-hidden="true">Live</span>
+        </div>
+        <div class="social-feed-embed-wrap">
+          <iframe class="social-feed-embed fb-embed" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAlphaIntelMedia&tabs=timeline&width=500&height=550&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Alpha Intel Facebook feed"></iframe>
+        </div>
       </div>
       <div class="social-feed-card">
-        <h3>X (Twitter) · <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">@AlphaIntelMedia</a></h3>
-        <div class="social-feed-embed x-embed">
-          <blockquote class="twitter-timeline" data-height="500" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders"><a href="https://x.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
+        <div class="social-feed-card-header">
+          <h3>X · <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">@AlphaIntelMedia</a></h3>
+          <span class="social-feed-live-badge" aria-hidden="true">Live</span>
+        </div>
+        <div class="social-feed-embed-wrap">
+          <div class="social-feed-embed x-embed" id="x-embed-container">
+            <blockquote class="twitter-timeline" data-height="520" data-dnt="true" data-theme="dark" data-chrome="noheader nofooter noborders noscrollbar" data-tweet-limit="5"><a href="https://x.com/AlphaIntelMedia">Tweets by AlphaIntelMedia</a></blockquote>
+          </div>
+          <div class="x-embed-fallback" id="x-embed-fallback" style="display: none;">
+            <p>Timeline didn’t load? View our latest posts on X.</p>
+            <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Open @AlphaIntelMedia on X →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1953,28 +2082,6 @@
       <p>Join thousands of traders and Web3 hunters staying ahead of the market every day. No paywalls. Just alpha.</p>
       <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord — Free</a>
       <div class="badge">FREE · No credit card needed</div>
-    </div>
-  </section>
-
-  <section class="resources-section reveal">
-    <span class="section-label">Latest Intel</span>
-    <h2 class="section-title">Discover more from Alpha Intel</h2>
-    <div class="resources-grid">
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
-        <div class="meta">Intel</div>
-        <h3>BTC breaks key resistance — what happens next</h3>
-        <p>Technical and on-chain context for the next leg.</p>
-      </a>
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
-        <div class="meta">Alpha</div>
-        <h3>Top 3 airdrop opportunities this week on MEXC</h3>
-        <p>Early plays before they trend.</p>
-      </a>
-      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
-        <div class="meta">Community</div>
-        <h3>Why Filipino traders are dominating Web3 in 2026</h3>
-        <p>Inside our Filipino-led, global community.</p>
-      </a>
     </div>
   </section>
 
@@ -1996,7 +2103,6 @@
         <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://tiktok.com/@alphaintelmedia" target="_blank" rel="noopener noreferrer">TikTok</a>
         <a href="https://www.mexc.co/en-GB/acquisition/custom-sign-up?shareCode=mexc-3SqjB" target="_blank" rel="noopener noreferrer">MEXC Partner</a>
-        <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer">Main Website</a>
       </div>
       <div class="footer-col">
         <h4>Links</h4>
@@ -2022,6 +2128,39 @@
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     (function() {
+      // Load X (Twitter) timeline when social-feeds section is visible (ensures live embed renders)
+      var socialSection = document.getElementById('social-feeds');
+      var xFallback = document.getElementById('x-embed-fallback');
+      if (socialSection) {
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            function loadTwitter() {
+              if (typeof twttr !== 'undefined' && twttr.widgets && twttr.widgets.load) {
+                twttr.widgets.load(socialSection);
+                setTimeout(function() {
+                  var container = document.getElementById('x-embed-container');
+                  var hasIframe = container && container.querySelector('iframe');
+                  if (xFallback && container && !hasIframe) {
+                    xFallback.style.display = 'flex';
+                    container.style.display = 'none';
+                  }
+                }, 4000);
+                return true;
+              }
+              return false;
+            }
+            if (!loadTwitter()) {
+              var attempts = 0;
+              var t = setInterval(function() {
+                if (loadTwitter() || ++attempts > 25) clearInterval(t);
+              }, 200);
+            }
+          });
+        }, { threshold: 0.2 });
+        io.observe(socialSection);
+      }
+
       var nav = document.getElementById('navbar');
       function onScroll() {
         nav.classList.toggle('scrolled', window.scrollY > 20);
