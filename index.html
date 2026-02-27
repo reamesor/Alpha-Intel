@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alpha Intel Media — Crypto & Web3 Intelligence Community</title>
-  <meta name="description" content="Bringing you sharp news and insights on fintech, Web3, and crypto to the world. Join 521+ members. Filipino-led. Free to join.">
+  <meta name="description" content="Get the sharpest crypto intel. 24/7 breaking news, trade calls, Web3 alpha — free. Filipino-led. Join Discord.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,14 +12,15 @@
     :root {
       --bg: #0a0a0a;
       --bg-elevated: #111111;
-      --bg-card: #161616;
-      --green: #22c55e;
-      --green-bright: #4ade80;
-      --green-dim: rgba(34, 197, 94, 0.12);
-      --green-glow: rgba(34, 197, 94, 0.25);
-      --white: #fafafa;
-      --muted: #a1a1aa;
-      --border: rgba(34, 197, 94, 0.2);
+      --bg-card: #141414;
+      --text: #e8edf8;
+      --muted: #8b95a8;
+      --primary: #22c55e;
+      --primary-dim: rgba(34, 197, 94, 0.15);
+      --primary-glow: rgba(34, 197, 94, 0.25);
+      --secondary: #4ade80;
+      --highlight: #86efac;
+      --border: rgba(34, 197, 94, 0.12);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,8 +28,8 @@
     body {
       font-family: 'Outfit', sans-serif;
       background: var(--bg);
-      color: var(--white);
-      line-height: 1.65;
+      color: var(--text);
+      line-height: 1.6;
       overflow-x: hidden;
     }
     .noise {
@@ -40,7 +41,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Navbar — Qualytics-style: transparent until scroll */
+    /* Nav — logo left, nav center, CTAs right */
     .navbar {
       position: fixed;
       top: 0;
@@ -53,7 +54,7 @@
       padding: 0.875rem 2rem;
       background: transparent;
       border-bottom: 1px solid transparent;
-      transition: background 0.35s ease, border-color 0.35s ease, padding 0.35s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .navbar.scrolled {
       background: rgba(10, 10, 10, 0.92);
@@ -64,519 +65,662 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
       text-decoration: none;
-      color: var(--white);
+      color: var(--text);
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
     }
-    .nav-logo img {
+    .nav-logo .accent { color: var(--primary); }
+    .nav-logo img, .footer-brand img.logo-img {
       width: 40px;
       height: 40px;
       object-fit: contain;
       display: block;
     }
     .logo-hex {
-      width: 40px;
-      height: 40px;
-      background: var(--green);
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: var(--bg);
     }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 2rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .nav-links a {
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--green); }
+    .nav-links a:hover { color: var(--primary); }
     .nav-ctas { display: flex; align-items: center; gap: 0.75rem; }
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.6875rem 1.5rem;
+      justify-content: center;
+      padding: 0.6rem 1.25rem;
       border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
       font-weight: 600;
       font-size: 0.9375rem;
       text-decoration: none;
-      transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.25s ease, background 0.25s ease;
-      border: none;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
       cursor: pointer;
     }
-    .btn:hover { transform: translateY(-2px); }
     .btn-primary {
-      background: var(--green);
+      background: var(--primary);
       color: var(--bg);
     }
-    .btn-primary:hover { box-shadow: 0 4px 24px var(--green-glow); }
+    .btn-primary:hover { box-shadow: 0 4px 20px var(--primary-glow); transform: translateY(-1px); }
     .btn-outline {
       background: transparent;
-      color: var(--green);
-      border: 2px solid var(--green);
+      color: var(--text);
+      border-color: rgba(232, 237, 248, 0.4);
     }
-    .btn-outline:hover { background: var(--green-dim); }
+    .btn-outline:hover { border-color: var(--text); background: rgba(232, 237, 248, 0.06); }
     .nav-toggle { display: none; }
 
-    /* Hero — Qualytics-style: clean, one headline, one paragraph, CTAs */
+    /* Hero — big headline, subheadline, two CTAs, glow */
     .hero {
       position: relative;
-      min-height: 88vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6rem 2rem 4rem;
-      max-width: 820px;
-      margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+      overflow: hidden;
     }
     .hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background: var(--bg);
+      background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+                  radial-gradient(ellipse 80% 50% at 50% 100%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
+                  var(--bg);
     }
-    .hero-content { position: relative; z-index: 1; }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
     .hero h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.5rem, 5.5vw, 3.5rem);
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      color: var(--white);
-      letter-spacing: -0.02em;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      letter-spacing: -0.03em;
     }
-    .hero h1 .accent { color: var(--green); }
     .hero .hero-sub {
       color: var(--muted);
       font-size: 1.125rem;
       max-width: 600px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 2rem;
       line-height: 1.7;
     }
-    .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.875rem; margin-bottom: 2.25rem; }
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.25rem 2rem;
-    }
-    .stat { display: flex; align-items: center; gap: 0.5rem; }
-    .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--green); font-size: 1.1rem; }
-    .stat-label { color: var(--muted); font-size: 0.9rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 
-    /* Section block — Qualytics rhythm and spacing */
-    .section-block {
+    /* Scrolling logo strip */
+    .logo-strip-wrap {
+      padding: 1.25rem 0;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .logo-strip {
+      display: flex;
+      gap: 3rem;
+      animation: strip-scroll 40s linear infinite;
+      width: max-content;
+    }
+    .logo-strip span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .logo-strip span.highlight { color: var(--primary); }
+    @keyframes strip-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Section block */
+    .section {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 4.5rem 2rem;
+      padding: 5rem 2rem;
     }
     .section-label {
       font-family: 'Syne', sans-serif;
       font-size: 0.8125rem;
       font-weight: 600;
-      color: var(--green);
+      color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 0.625rem;
+      margin-bottom: 0.75rem;
     }
     .section-title {
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
+      font-weight: 700;
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       margin-bottom: 0.75rem;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
       line-height: 1.2;
+      color: var(--text);
     }
     .section-sub {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .section-body {
       color: var(--muted);
       font-size: 1.0625rem;
-      margin-bottom: 1.75rem;
+      line-height: 1.7;
       max-width: 640px;
-      line-height: 1.65;
     }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* Problem / Solution — Qualytics narrative */
-    .problem-solution {
+    /* The Problem — two columns, graphic on right */
+    .problem-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .problem-visual {
+      background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-visual::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+    }
+    .problem-visual .placeholder {
+      position: relative;
+      z-index: 1;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* The Solution — tabs + image */
+    .solution-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .solution-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .solution-tab {
+      padding: 1rem 1.25rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .solution-tab:hover { color: var(--text); border-color: rgba(34, 197, 94, 0.3); }
+    .solution-tab.active {
+      background: var(--primary-dim);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .solution-pane {
+      display: none;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .solution-pane.active { display: block; }
+    .solution-visual {
+      background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-visual::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(79, 195, 247, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .solution-visual .placeholder { position: relative; z-index: 1; font-family: 'Space Mono', monospace; font-size: 0.875rem; color: var(--muted); }
+
+    /* How We Work — 4 steps */
+    .how-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .how-section .section-body { margin-bottom: 2.5rem; }
+    .steps-list { display: flex; flex-direction: column; gap: 2rem; }
+    .step-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
       gap: 1.5rem;
       align-items: start;
     }
-    .problem-solution .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(34, 197, 94, 0.3);
       border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.125rem;
+      color: var(--primary);
+      flex-shrink: 0;
     }
-    .problem-solution .card:hover {
-      border-color: rgba(34, 197, 94, 0.35);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    }
-    .problem-solution .card h3 {
+    .step-item h3 {
       font-family: 'Syne', sans-serif;
       font-size: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .problem-solution .card p { color: var(--muted); line-height: 1.7; }
-
-    /* What We Offer — feature grid like Qualytics */
-    .offer-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .offer-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.25rem;
-      transition: border-color 0.3s, transform 0.2s, box-shadow 0.2s;
-    }
-    .offer-card:hover {
-      border-color: var(--green);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-    .offer-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
+      font-weight: 600;
       margin-bottom: 0.5rem;
-      color: var(--white);
+      color: var(--text);
     }
-    .offer-card p { color: var(--muted); font-size: 0.95rem; }
+    .step-item p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
 
-    /* Results / Stats — Qualytics big numbers */
-    .results-section {
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
       background: var(--bg-elevated);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
+    .stat-card {
       text-align: center;
+      padding: 1.5rem 1rem;
     }
-    .results-item .big {
+    .stat-card .big {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      color: var(--green);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      color: var(--primary);
       margin-bottom: 0.25rem;
     }
-    .results-item .label { color: var(--muted); font-size: 0.95rem; }
-    .results-item .sublabel { color: var(--muted); font-size: 0.8rem; margin-top: 0.25rem; }
+    .stat-card .label { color: var(--muted); font-size: 0.9375rem; }
 
-    /* Marquee */
-    .marquee-wrap {
-      padding: 0.6rem 0;
-      background: var(--bg-elevated);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .marquee {
-      display: flex;
-      gap: 4rem;
-      animation: scroll 30s linear infinite;
-      width: max-content;
-    }
-    .marquee span {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .marquee .price { color: var(--green); }
-    .marquee .label { color: var(--green-bright); }
-
-    /* Intel feed card */
-    .hero-feed-wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 420px;
-      margin: 1.25rem auto 0;
-    }
-    .intel-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.25rem;
-      min-height: 200px;
-    }
-    .intel-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .intel-card h3::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-    .intel-item {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.95rem;
-      opacity: 0;
-      position: absolute;
-      left: 1.5rem;
-      right: 1.5rem;
-      top: 3.5rem;
-      transition: opacity 0.5s ease;
-    }
-    .intel-item.active { opacity: 1; position: relative; top: 0; }
-    .intel-item:last-child { border-bottom: none; }
-    .intel-tag {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      margin-right: 0.5rem;
-    }
-    .tag-breaking { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-    .tag-bullish { background: var(--green-dim); color: var(--green); }
-    .tag-watch { background: var(--green-dim); color: var(--green-bright); }
-    .tag-degen { background: var(--green-dim); color: var(--green); }
-
-    /* Community */
-    .community-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      align-items: start;
-    }
-    .discord-mock {
-      background: #1e1e1e;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      display: flex;
-    }
-    .discord-sidebar {
-      padding: 1rem;
-      border-right: 1px solid var(--border);
-      min-width: 160px;
-    }
-    .discord-sidebar .channel {
-      padding: 0.4rem 0.75rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      border-radius: 4px;
-    }
-    .discord-sidebar .channel:hover { background: var(--green-dim); color: var(--green); }
-    .discord-main { padding: 0.75rem 1rem; min-height: 220px; flex: 1; }
-    .discord-msg { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
-    .discord-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), #16a34a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--bg);
-      flex-shrink: 0;
-    }
-    .discord-body .name { font-weight: 600; font-size: 0.95rem; }
-    .discord-body .name .badge { font-size: 0.7rem; margin-left: 0.35rem; color: var(--green); }
-    .discord-body .text { color: var(--muted); font-size: 0.9rem; }
-    .feature-boxes { display: flex; flex-direction: column; gap: 0.75rem; }
-    .feature-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-    }
-    .feature-box h4 { font-family: 'Syne', sans-serif; margin-bottom: 0.35rem; color: var(--white); }
-    .feature-box p { color: var(--muted); font-size: 0.9rem; }
-
-    /* Callers & KOLs */
+    /* Callers / KOLs — cards like customer stories */
+    .callers-section { padding: 5rem 2rem; }
+    .callers-section .section-body { margin-bottom: 2rem; }
     .callers-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .caller-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.25rem;
-      text-align: center;
-      transition: border-color 0.3s, transform 0.2s;
+      padding: 1.5rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .caller-card:hover {
-      border-color: var(--green);
-      transform: translateY(-2px);
+      border-color: rgba(34, 197, 94, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
-    .caller-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), #16a34a);
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .caller-card .role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .caller-card h3 {
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: var(--bg);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
     }
-    .caller-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 0.25rem; }
-    .caller-role { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; }
-    .caller-role .badge { color: var(--green); }
     .caller-card a {
-      color: var(--green);
-      text-decoration: none;
+      color: var(--secondary);
       font-size: 0.9rem;
-      font-weight: 500;
+      text-decoration: none;
     }
     .caller-card a:hover { text-decoration: underline; }
 
-    /* Platforms */
-    .platforms-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+    /* Team section — filter tabs + role cards */
+    .team-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
     }
-    .platform-card {
+    .team-section .section-body { margin-bottom: 1.5rem; }
+    .team-filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    .team-filter-tabs button {
+      padding: 0.6rem 1.25rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.25rem;
-      text-align: center;
-      text-decoration: none;
-      color: var(--white);
-      display: block;
-      transition: border-color 0.3s, transform 0.2s;
+      border-radius: 8px;
+      color: var(--muted);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
-    .platform-card:hover {
-      border-color: var(--green);
+    .team-filter-tabs button:hover { color: var(--text); border-color: rgba(34, 197, 94, 0.4); }
+    .team-filter-tabs button.active {
+      background: var(--primary-dim);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      transition: opacity 0.3s ease;
+    }
+    .team-grid.filtering { opacity: 0.7; }
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .team-card:hover {
+      border-color: rgba(34, 197, 94, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .team-card.hidden { display: none; }
+    .team-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      display: block;
+      background: var(--bg-elevated);
+    }
+    .team-card .team-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .team-card .team-role-badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .team-card[data-role="caller"] .team-role-badge { background: rgba(34, 197, 94, 0.2); color: var(--primary); }
+    .team-card[data-role="kol"] .team-role-badge { background: rgba(179, 136, 255, 0.2); color: var(--highlight); }
+    .team-card[data-role="analyst"] .team-role-badge { background: rgba(79, 195, 247, 0.2); color: var(--secondary); }
+    .team-card[data-role="admin"] .team-role-badge { background: rgba(105, 240, 174, 0.2); color: #69f0ae; }
+    .team-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .team-socials a {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .team-socials a:hover { color: var(--primary); border-color: rgba(34, 197, 94, 0.4); }
+
+    /* Trading Bots section */
+    .bots-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .bots-section .section-body { margin-bottom: 2rem; max-width: 640px; }
+    .bots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .bot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .bot-card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .bot-card .bot-platform {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .bot-card .bot-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .bot-card .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    /* Final CTA banner */
+    .cta-banner {
+      position: relative;
+      text-align: center;
+      padding: 5rem 2rem;
+      overflow: hidden;
+    }
+    .cta-banner-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 60%), var(--bg-elevated);
+      border-top: 1px solid var(--border);
+    }
+    .cta-banner-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-banner h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .cta-banner p { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
+    .cta-banner .badge {
+      display: inline-block;
+      font-size: 0.875rem;
+      color: var(--primary);
+      margin-top: 1rem;
+    }
+
+    /* Resources / blog cards */
+    .resources-section { padding: 5rem 2rem; }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+    }
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.25s ease, transform 0.2s ease;
+    }
+    .resource-card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
       transform: translateY(-2px);
     }
-    .platform-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .platform-card h3 { font-family: 'Syne', sans-serif; font-size: 1.15rem; }
-    .platform-card.partner { border-color: var(--green); }
-    .platform-card.partner p { color: var(--green); }
+    .resource-card .meta { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .resource-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .resource-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
-    /* CTA */
-    .cta-section {
-      text-align: center;
-      padding: 4.5rem 2rem;
-      background: var(--bg-elevated);
-      border-top: 1px solid var(--border);
-    }
-    .cta-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-    .cta-section p { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
-    .cta-badge {
-      display: inline-block;
-      background: var(--green-dim);
-      color: var(--green);
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    /* Footer — Qualytics-style columns */
+    /* Footer */
     footer {
       border-top: 1px solid var(--border);
-      padding: 3.5rem 2rem 2rem;
+      padding: 4rem 2rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-    .footer-brand .logo-hex,
-    .footer-brand .footer-logo {
+    .footer-brand .logo-img {
       width: 36px;
       height: 36px;
-      object-fit: contain;
-      margin-bottom: 0.5rem;
-      display: block;
+      margin-bottom: 0.75rem;
     }
-    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; }
+    .footer-brand p { color: var(--muted); font-size: 0.95rem; max-width: 320px; line-height: 1.6; }
     .footer-col h4 {
       font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8125rem;
       font-weight: 600;
       margin-bottom: 1rem;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
     .footer-col a {
       display: block;
-      color: var(--white);
+      color: var(--text);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.9375rem;
       margin-bottom: 0.5rem;
     }
-    .footer-col a:hover { color: var(--green); }
-    .footer-social {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
+    .footer-col a:hover { color: var(--primary); }
+    .newsletter {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
     }
-    .footer-social a {
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
+    .newsletter label {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .newsletter-input-wrap {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 400px;
+    }
+    .newsletter-input-wrap input {
+      flex: 1;
+      padding: 0.75rem 1rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s, border-color 0.2s;
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9375rem;
     }
-    .footer-social a:hover { color: var(--green); border-color: var(--green); }
+    .newsletter-input-wrap input::placeholder { color: var(--muted); }
+    .newsletter-input-wrap .btn { flex-shrink: 0; }
     .footer-bottom {
-      padding-top: 1rem;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
@@ -584,18 +728,18 @@
       align-items: center;
       gap: 1rem;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.875rem;
     }
 
     @media (max-width: 1024px) {
-      .hero { min-height: auto; padding-top: 7rem; }
-      .problem-solution { grid-template-columns: 1fr; }
-      .offer-grid { grid-template-columns: repeat(2, 1fr); }
-      .results-grid { grid-template-columns: repeat(2, 1fr); }
-      .community-grid { grid-template-columns: 1fr; }
+      .nav-links { position: static; transform: none; }
+      .problem-section { grid-template-columns: 1fr; }
+      .solution-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
       .callers-grid { grid-template-columns: repeat(2, 1fr); }
-      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+      .resources-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -609,12 +753,12 @@
         cursor: pointer;
         padding: 5px;
       }
-      .nav-toggle span { width: 24px; height: 2px; background: var(--white); }
+      .nav-toggle span { width: 24px; height: 2px; background: var(--text); }
+      .hero { padding: 7rem 1.5rem 4rem; }
       .hero h1 { font-size: 2rem; }
-      .offer-grid { grid-template-columns: 1fr; }
-      .results-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
       .callers-grid { grid-template-columns: 1fr; }
-      .platforms-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
@@ -626,17 +770,18 @@
   <nav class="navbar" id="navbar">
     <a href="#" class="nav-logo">
       <img src="assets/logo.png" alt="Alpha Intel" width="40" height="40">
-      <span>Alpha Intel</span>
+      <span>Alpha<span class="accent">Intel</span></span>
     </a>
     <div class="nav-links">
       <a href="#offer">What We Offer</a>
       <a href="#community">Community</a>
       <a href="#callers">Callers</a>
+      <a href="#team">Team</a>
       <a href="#platforms">Platforms</a>
     </div>
     <div class="nav-ctas">
-      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://t.me/alphaintelpublic" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://t.me/alphaintelpublic" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord</a>
     </div>
     <button class="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -646,333 +791,492 @@
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <h1>Your edge in crypto & Web3.</h1>
-      <p class="hero-sub">Alpha Intel brings you sharp news and insights on fintech, Web3, and crypto—24/7. Join a Filipino-led community of 521+ members. No paywalls, no gatekeeping. Get trade calls, alpha, and market intel in one place.</p>
+      <h1>Get the sharpest crypto intel. Before everyone else.</h1>
+      <p class="hero-sub">Alpha Intel delivers 24/7 breaking news, trade calls, Web3 alpha, and community-driven insights across fintech and crypto — completely free.</p>
       <div class="hero-ctas">
-        <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
+        <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord — Free</a>
         <a href="https://x.com/AlphaIntelMedia" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Follow on X</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num">521+</span><span class="stat-label">Discord online</span></div>
-        <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Coverage</span></div>
-        <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Platforms</span></div>
-        <div class="stat"><span class="stat-num">PH</span><span class="stat-label">Filipino-led</span></div>
-      </div>
-    </div>
-    <div class="hero-feed-wrap">
-      <div class="intel-card">
-        <h3>Live Intel Feed</h3>
-        <div class="intel-items">
-          <div class="intel-item active" data-index="0">
-            <span class="intel-tag tag-breaking">BREAKING</span> SEC delays spot ETH ETF decision — market reacts.
-          </div>
-          <div class="intel-item" data-index="1">
-            <span class="intel-tag tag-bullish">BULLISH</span> Major exchange lists new memecoin; volume spikes.
-          </div>
-          <div class="intel-item" data-index="2">
-            <span class="intel-tag tag-watch">WATCH</span> Bitcoin dominance at key level; alt season watch.
-          </div>
-          <div class="intel-item" data-index="3">
-            <span class="intel-tag tag-degen">DEGEN</span> New airdrop campaign live — 5 chains supported.
-          </div>
-          <div class="intel-item" data-index="4">
-            <span class="intel-tag tag-breaking">BREAKING</span> Fed signals rate hold; risk assets rally.
-          </div>
-          <div class="intel-item" data-index="5">
-            <span class="intel-tag tag-bullish">BULLISH</span> Institutional inflows into BTC products rise.
-          </div>
-        </div>
       </div>
     </div>
   </header>
 
-  <div class="marquee-wrap">
-    <div class="marquee">
-      <span class="price">BTC $97,250</span>
-      <span class="price">ETH $3,420</span>
-      <span class="price">SOL $218</span>
-      <span class="label">FREE TO JOIN</span>
-      <span class="label">MEXC PARTNER</span>
-      <span class="price">BTC $97,250</span>
-      <span class="price">ETH $3,420</span>
-      <span class="price">SOL $218</span>
-      <span class="label">FREE TO JOIN</span>
-      <span class="label">MEXC PARTNER</span>
+  <div class="logo-strip-wrap">
+    <div class="logo-strip" id="logoStrip">
+      <span class="highlight">Discord</span>
+      <span>Twitter / X</span>
+      <span class="highlight">Telegram</span>
+      <span>Instagram</span>
+      <span class="highlight">Facebook</span>
+      <span>TikTok</span>
+      <span class="highlight">MEXC Exchange</span>
+      <span class="highlight">Discord</span>
+      <span>Twitter / X</span>
+      <span class="highlight">Telegram</span>
+      <span>Instagram</span>
+      <span class="highlight">Facebook</span>
+      <span>TikTok</span>
+      <span class="highlight">MEXC Exchange</span>
     </div>
   </div>
 
-  <section class="section-block reveal">
-    <span class="section-label">The Problem</span>
-    <h2 class="section-title">Crypto alpha is scattered. You're late to the move.</h2>
-    <p class="section-sub">News breaks on one app, callers post on another, and airdrops drop somewhere else. By the time you see it, the edge is gone. Traditional feeds don't keep up, and paid groups lock out beginners.</p>
-    <div class="problem-solution" style="margin-top: 1.25rem;">
-      <div class="card reveal">
-        <h3>Fragmented intel</h3>
-        <p>You're juggling Twitter, Telegram, Discord, and still missing moves. No single place ties together news, trade calls, and community.</p>
-      </div>
-      <div class="card reveal">
-        <h3>Gatekept alpha</h3>
-        <p>Many groups charge for "alpha" or hide behind paywalls. Newcomers and non-whales get left out of the best signals and education.</p>
-      </div>
+  <section class="problem-section reveal">
+    <div>
+      <span class="section-label">The Problem</span>
+      <h2 class="section-title">Crypto moves fast. Most traders are always a step behind.</h2>
+      <p class="section-body">By the time news hits mainstream media, the move is already over. Retail traders miss entries, buy tops, and exit bottoms — not from lack of effort, but lack of the right intelligence at the right time. Generic crypto Twitter is noisy. Paid groups overpromise. And most communities don't have real callers with track records.</p>
+    </div>
+    <div class="problem-visual">
+      <span class="placeholder">Visual: Alpha Intel edge</span>
     </div>
   </section>
 
-  <section class="section-block reveal">
+  <section id="offer" class="solution-section reveal">
     <span class="section-label">The Solution</span>
-    <h2 class="section-title">One community. 24/7 intel. Free to join.</h2>
-    <p class="section-sub">Alpha Intel brings together breaking news, verified trade callers, Web3 alpha, and a Filipino-led community—all in one place. No paywalls. Join Discord, get alerts, and stay ahead.</p>
-    <div style="margin-top: 1rem;">
-      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
-    </div>
-  </section>
-
-  <section class="section-block results-section reveal">
-    <div class="section-block" style="padding-top: 2rem; padding-bottom: 2rem;">
-      <h2 class="section-title" style="text-align: center; margin-bottom: 1.25rem;">Why the community chooses Alpha Intel</h2>
-      <div class="results-grid">
-        <div class="results-item reveal">
-          <div class="big">521+</div>
-          <div class="label">Members online</div>
-          <div class="sublabel">Active Discord community</div>
+    <h2 class="section-title">Alpha Intel gives you the edge that used to cost thousands.</h2>
+    <div class="solution-grid">
+      <div>
+        <div class="solution-tabs">
+          <button type="button" class="solution-tab active" data-tab="tab1">Breaking News</button>
+          <button type="button" class="solution-tab" data-tab="tab2">Caller Alerts</button>
+          <button type="button" class="solution-tab" data-tab="tab3">Web3 Alpha</button>
+          <button type="button" class="solution-tab" data-tab="tab4">Community</button>
         </div>
-        <div class="results-item reveal">
-          <div class="big">24/7</div>
-          <div class="label">Coverage</div>
-          <div class="sublabel">News & alerts around the clock</div>
-        </div>
-        <div class="results-item reveal">
-          <div class="big">6+</div>
-          <div class="label">Platforms</div>
-          <div class="sublabel">Discord, X, Telegram, and more</div>
-        </div>
-        <div class="results-item reveal">
-          <div class="big">PH</div>
-          <div class="label">Filipino-led</div>
-          <div class="sublabel">Global reach, PH-powered</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="offer" class="section-block reveal">
-    <span class="section-label">What We Offer</span>
-    <h2 class="section-title">Everything you need to stay ahead in crypto and Web3</h2>
-    <p class="section-sub">Fast news, trade calls, alpha, and community—in one place.</p>
-    <div class="offer-grid">
-      <div class="offer-card reveal">
-        <h3>⚡ Fastest Crypto News</h3>
-        <p>24/7 breaking news and alerts so you never miss a move.</p>
-      </div>
-      <div class="offer-card reveal">
-        <h3>📞 Trade Calls & Setups</h3>
-        <p>Verified callers share alerts and setups in real time.</p>
-      </div>
-      <div class="offer-card reveal">
-        <h3>💎 Web3 & DeFi Alpha</h3>
-        <p>Airdrop gems, new launches, and on-chain opportunities.</p>
-      </div>
-      <div class="offer-card reveal">
-        <h3>📊 Market Analysis</h3>
-        <p>Technical and on-chain analysis from the community.</p>
-      </div>
-      <div class="offer-card reveal">
-        <h3>🤝 Community & Networking</h3>
-        <p>500+ members, Filipino-led, global reach. Connect and grow.</p>
-      </div>
-      <div class="offer-card reveal">
-        <h3>📚 Education for Newbies</h3>
-        <p>AMAs, tutorials, and Filipino support for beginners.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="community" class="section-block reveal">
-    <span class="section-label">Community</span>
-    <h2 class="section-title">Where alpha flows 24/7</h2>
-    <p class="section-sub">Join the conversation. Trade calls, airdrops, and PH channel—all in Discord.</p>
-    <div class="community-grid">
-      <div class="discord-mock reveal">
-        <div class="discord-sidebar">
-          <div class="channel"># trade-calls</div>
-          <div class="channel"># airdrop-alerts</div>
-          <div class="channel"># ph-channel</div>
-          <div class="channel"># market-talk</div>
-          <div class="channel"># degens</div>
-        </div>
-        <div class="discord-main">
-          <div class="discord-msg">
-            <div class="discord-avatar">D</div>
-            <div class="discord-body">
-              <span class="name">Diablo <span class="badge">👑 Caller</span></span>
-              <div class="text">BTC holding above 96k, next target 100k. Longs still valid.</div>
-            </div>
+        <div class="solution-panes" style="margin-top: 1.5rem;">
+          <div class="solution-pane active" id="tab1">
+            <p>24/7 real-time coverage of BTC, altcoins, DeFi, and macro events. We surface what matters before it trends.</p>
           </div>
-          <div class="discord-msg">
-            <div class="discord-avatar">J</div>
-            <div class="discord-body">
-              <span class="name">Josh Linan <span class="badge">🔑 KOL</span></span>
-              <div class="text">New airdrop checklist in #airdrop-alerts — don't sleep.</div>
-            </div>
+          <div class="solution-pane" id="tab2">
+            <p>Verified callers post real trade setups with entry, target, and thesis. No vague signals — just actionable plays.</p>
           </div>
-          <div class="discord-msg">
-            <div class="discord-avatar">P</div>
-            <div class="discord-body">
-              <span class="name">PPzylhe <span class="badge">VIP</span></span>
-              <div class="text">PH channel AMA this Friday — bring your questions.</div>
-            </div>
+          <div class="solution-pane" id="tab3">
+            <p>Early airdrop gems, under-the-radar DeFi protocols, and MEXC listings before they go mainstream.</p>
+          </div>
+          <div class="solution-pane" id="tab4">
+            <p>500+ active Discord members, Filipino-led with global reach. Accountability partners, mentors, and serious traders.</p>
           </div>
         </div>
       </div>
-      <div class="feature-boxes">
-        <div class="feature-box reveal">
-          <h4>Callers & KOLs</h4>
-          <p>Verified trade callers and key opinion leaders share alpha daily.</p>
+      <div class="solution-visual">
+        <span class="placeholder">Screenshot / graphic</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="how-section reveal">
+    <span class="section-label">How We Work</span>
+    <h2 class="section-title">Four steps to staying ahead.</h2>
+    <p class="section-body">Join free, get the intel, make your move, and grow with the community.</p>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Join Free</h3>
+          <p>Join our Discord or follow on Telegram and X. No credit card, no subscription — just show up and get access instantly.</p>
         </div>
-        <div class="feature-box reveal">
-          <h4>VIP & Community Leaders</h4>
-          <p>Stable Jezreelino, 0xShiroe (BASE), Jaydyr, and more lead the community.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Get the Intel</h3>
+          <p>Callers, KOLs, and the Alpha Intel team post real-time alerts, news, and analysis across all channels 24/7.</p>
         </div>
-        <div class="feature-box reveal">
-          <h4>Filipino-Powered, Global Reach</h4>
-          <p>Led from the Philippines, serving crypto enthusiasts worldwide.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Make Your Move</h3>
+          <p>Use the trade setups, news context, and Web3 plays to make informed decisions before the crowd.</p>
         </div>
-        <div class="feature-box reveal">
-          <h4>100% Free to Join</h4>
-          <p>No paywalls. Join Discord, Telegram, and all platforms for free.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Grow With the Community</h3>
+          <p>Share plays, learn from callers, earn roles, and level up alongside traders who are serious about building edge.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="callers" class="section-block reveal">
+  <div class="stats-row reveal">
+    <div class="stat-card">
+      <div class="big">521+</div>
+      <div class="label">Discord Members Online</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">24/7</div>
+      <div class="label">Live Coverage</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">6+</div>
+      <div class="label">Active Platforms</div>
+    </div>
+    <div class="stat-card">
+      <div class="big">100%</div>
+      <div class="label">Free Forever</div>
+    </div>
+  </div>
+
+  <section id="callers" class="callers-section reveal">
     <span class="section-label">Callers & KOLs</span>
-    <h2 class="section-title">Verified voices sharing trade calls and alpha</h2>
-    <p class="section-sub">Follow our callers and KOLs for setups and insights.</p>
+    <h2 class="section-title">Voices you can trust.</h2>
+    <p class="section-body">Verified callers and key opinion leaders sharing trade setups and alpha daily.</p>
     <div class="callers-grid">
-      <div class="caller-card reveal">
-        <div class="caller-avatar">D</div>
-        <h3>Diablo</h3>
-        <p class="caller-role"><span class="badge">CALLER 👑</span></p>
-        <a href="https://x.com/DiabloBuilder" target="_blank" rel="noopener noreferrer">@DiabloBuilder → X</a>
+      <div class="caller-card">
+        <div class="role">CALLER</div>
+        <h3>@Diablo</h3>
+        <a href="https://x.com/DiabloBuilder" target="_blank" rel="noopener noreferrer">x.com/DiabloBuilder</a>
       </div>
-      <div class="caller-card reveal">
-        <div class="caller-avatar">B</div>
-        <h3>BullyBoy</h3>
-        <p class="caller-role"><span class="badge">CALLER 👑</span></p>
-        <a href="https://x.com/tonyboiixxx" target="_blank" rel="noopener noreferrer">@tonyboiixxx → X</a>
+      <div class="caller-card">
+        <div class="role">CALLER</div>
+        <h3>@BullyBoy</h3>
+        <a href="https://x.com/tonyboiixxx" target="_blank" rel="noopener noreferrer">x.com/tonyboiixxx</a>
       </div>
-      <div class="caller-card reveal">
-        <div class="caller-avatar">B</div>
-        <h3>BASCHI GLAZER OG</h3>
-        <p class="caller-role"><span class="badge">CALLER 👑</span></p>
-        <a href="https://x.com/fakesohji" target="_blank" rel="noopener noreferrer">@fakesohji → X</a>
+      <div class="caller-card">
+        <div class="role">CALLER</div>
+        <h3>@BASCHI GLAZER OG</h3>
+        <a href="https://x.com/fakesohji" target="_blank" rel="noopener noreferrer">x.com/fakesohji</a>
       </div>
-      <div class="caller-card reveal">
-        <div class="caller-avatar">J</div>
+      <div class="caller-card">
+        <div class="role">KOL</div>
         <h3>Josh Linan</h3>
-        <p class="caller-role"><span class="badge">KOL 🔑</span></p>
-        <a href="https://www.facebook.com/0xjosh" target="_blank" rel="noopener noreferrer">0xjosh → Facebook</a>
+        <a href="https://www.facebook.com/0xjosh" target="_blank" rel="noopener noreferrer">facebook.com/0xjosh</a>
       </div>
-      <div class="caller-card reveal">
-        <div class="caller-avatar">C</div>
+      <div class="caller-card">
+        <div class="role">KOL</div>
         <h3>!Carrot</h3>
-        <p class="caller-role"><span class="badge">KOL 🔑</span> #1 Copy Trader</p>
+        <p style="color: var(--muted); font-size: 0.9rem;">#1 Copy Trader</p>
         <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer">Join Discord</a>
       </div>
-      <div class="caller-card reveal">
-        <div class="caller-avatar">A</div>
+      <div class="caller-card">
+        <div class="role">ADMIN</div>
         <h3>Alpha Quest</h3>
-        <p class="caller-role"><span class="badge">KOL 🔑</span> Admin · engages.io</p>
+        <p style="color: var(--muted); font-size: 0.9rem;">engages.io</p>
         <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer">Join Discord</a>
       </div>
     </div>
   </section>
 
-  <section id="platforms" class="section-block reveal">
-    <span class="section-label">Platforms</span>
-    <h2 class="section-title">Find us everywhere</h2>
-    <p class="section-sub">All links open in new tabs.</p>
-    <div class="platforms-grid">
-      <a href="https://discord.gg/alphaintel" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">💬</div>
-        <h3>Discord</h3>
-        <p style="color: var(--muted); font-size: 0.9rem;">Join the server</p>
+  <section id="team" class="team-section reveal">
+    <span class="section-label">Meet the Team</span>
+    <h2 class="section-title">The People Behind the Alpha</h2>
+    <p class="section-body">Callers, analysts, and community builders — real people with real track records.</p>
+    <div class="team-filter-tabs">
+      <button type="button" class="team-filter active" data-filter="all">All</button>
+      <button type="button" class="team-filter" data-filter="caller">Callers</button>
+      <button type="button" class="team-filter" data-filter="kol">KOLs</button>
+      <button type="button" class="team-filter" data-filter="analyst">Trading Analysts</button>
+      <button type="button" class="team-filter" data-filter="admin">Admins</button>
+    </div>
+    <div class="team-grid" id="teamGrid">
+      <div class="team-card" data-role="caller">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Diablo&size=112&background=22c55e&color=fff" alt="Diablo">
+        <div class="team-name">@Diablo</div>
+        <span class="team-role-badge">Caller</span>
+        <div class="team-socials">
+          <a href="https://x.com/DiabloBuilder" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="caller">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=BullyBoy&size=112&background=22c55e&color=fff" alt="BullyBoy">
+        <div class="team-name">@BullyBoy</div>
+        <span class="team-role-badge">Caller</span>
+        <div class="team-socials">
+          <a href="https://x.com/tonyboiixxx" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="caller">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=BASCHI+GLAZER+OG&size=112&background=22c55e&color=fff" alt="BASCHI GLAZER OG">
+        <div class="team-name">@BASCHI GLAZER OG</div>
+        <span class="team-role-badge">Caller</span>
+        <div class="team-socials">
+          <a href="https://x.com/fakesohji" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Zygfrid&size=112&background=b388ff&color=fff" alt="Zygfrid">
+        <div class="team-name">@Zygfrid</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://x.com/ZygfridS" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://www.facebook.com/zygtvofficial/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Pancake&size=112&background=b388ff&color=fff" alt="Pancake">
+        <div class="team-name">@Pancake</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/pancakesyruplex" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+          <a href="https://x.com/PancakeSyrupNFT" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://www.instagram.com/lex.on.track/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+          <a href="https://www.tiktok.com/@lex.on.track" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Stable+Jezreelino&size=112&background=b388ff&color=fff" alt="Stable Jezreelino">
+        <div class="team-name">@Stable Jezreelino</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://x.com/jezreelino" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Souei&size=112&background=b388ff&color=fff" alt="Souei">
+        <div class="team-name">@Souei</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/profile.php?id=61581812799877" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+          <a href="https://x.com/souei_nft" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=King+Bisakol&size=112&background=b388ff&color=fff" alt="King Bisakol">
+        <div class="team-name">@King Bisakol</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+          <a href="https://x.com/kngcsms" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Nabong&size=112&background=b388ff&color=fff" alt="Nabong">
+        <div class="team-name">@Nabong</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://x.com/__nabongggg" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=MAiDEN&size=112&background=b388ff&color=fff" alt="MAiDEN">
+        <div class="team-name">@! MAiDEN</div>
+        <span class="team-role-badge">KOL / Team</span>
+        <div class="team-socials">
+          <a href="https://x.com/0xmaidentrades" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Chillwil&size=112&background=b388ff&color=fff" alt="Chillwil">
+        <div class="team-name">@Chillwil</div>
+        <span class="team-role-badge">KOL / Team (Will not DM you)</span>
+        <div class="team-socials">
+          <a href="https://x.com/ChillWil31" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=takaw&size=112&background=b388ff&color=fff" alt="takaw">
+        <div class="team-name">@takaw</div>
+        <span class="team-role-badge">KOL / Streamer</span>
+        <div class="team-socials">
+          <a href="https://x.com/takawtv" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+          <a href="https://www.tiktok.com/@takawtv" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
+          <a href="https://www.twitch.tv/takawtv" target="_blank" rel="noopener noreferrer" aria-label="Twitch">Tw</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="kol">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Josh+Linan&size=112&background=b388ff&color=fff" alt="Josh Linan">
+        <div class="team-name">@Josh Linan</div>
+        <span class="team-role-badge">KOL</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/0xjosh" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Baschiqt&size=112&background=4fc3f7&color=fff" alt="Baschiqt">
+        <div class="team-name">@Baschiqt</div>
+        <span class="team-role-badge">Trading Analyst</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/basch1" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=LARRY+GADON+AI&size=112&background=4fc3f7&color=fff" alt="LARRY GADON AI">
+        <div class="team-name">@LARRY GADON AI</div>
+        <span class="team-role-badge">Trading Analyst (I DONT DM!!!)</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/share/19kZeXxwtW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Ramen+AI&size=112&background=4fc3f7&color=fff" alt="Ramen/AI">
+        <div class="team-name">@Ramen/AI</div>
+        <span class="team-role-badge">Trading Analyst</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/profile.php?id=61579147065139" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Angkol+Jeen&size=112&background=4fc3f7&color=fff" alt="Angkol Jeen">
+        <div class="team-name">@Angkol Jeen</div>
+        <span class="team-role-badge">Trading Analyst</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/profile.php?id=61581650404303" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=shnncrypt&size=112&background=4fc3f7&color=fff" alt="shnncrypt">
+        <div class="team-name">@shnncrypt</div>
+        <span class="team-role-badge">Trading Analyst</span>
+        <div class="team-socials">
+          <a href="https://www.facebook.com/shnncrypt" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="analyst">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=junster&size=112&background=4fc3f7&color=fff" alt="junster">
+        <div class="team-name">@junster</div>
+        <span class="team-role-badge">Trading Analyst</span>
+        <div class="team-socials">
+          <a href="https://x.com/zxjunster" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="admin">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Alpha+Quest&size=112&background=69f0ae&color=0a0a0a" alt="Alpha Quest">
+        <div class="team-name">Alpha Quest</div>
+        <span class="team-role-badge">Admin</span>
+        <div class="team-socials">
+          <a href="https://engages.io" target="_blank" rel="noopener noreferrer" aria-label="Site">Site</a>
+        </div>
+      </div>
+      <div class="team-card" data-role="admin">
+        <img class="team-avatar" src="https://ui-avatars.com/api/?name=Carl+bot&size=112&background=69f0ae&color=0a0a0a" alt="Carl-bot">
+        <div class="team-name">Carl-bot</div>
+        <span class="team-role-badge">Admin Bot</span>
+        <div class="team-socials">
+          <a href="https://carl.gg" target="_blank" rel="noopener noreferrer" aria-label="Site">Site</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bots" class="bots-section reveal">
+    <span class="section-label">Partner Tools</span>
+    <h2 class="section-title">Supported Trading Bots</h2>
+    <p class="section-body">Support Alpha Intel by using these partner bots. These are the tools our community trusts for fast, on-chain execution.</p>
+    <div class="bots-subsection" style="margin-bottom: 1.5rem;">
+      <h3 style="font-family: 'Syne', sans-serif; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem;">Web Trading Bots</h3>
+      <div class="bots-grid">
+        <div class="bot-card">
+          <div class="bot-platform">Web</div>
+          <div class="bot-name">Trojan</div>
+          <a href="https://trojan.com/@ZYGFRID" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+        <div class="bot-card">
+          <div class="bot-platform">Web</div>
+          <div class="bot-name">Padre</div>
+          <a href="https://trade.padre.gg/rk/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+        <div class="bot-card">
+          <div class="bot-platform">Web</div>
+          <div class="bot-name">Axiom</div>
+          <a href="https://axiom.trade/@zygfrid" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+      </div>
+    </div>
+    <div class="bots-subsection" style="margin-bottom: 1.5rem;">
+      <h3 style="font-family: 'Syne', sans-serif; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem;">Telegram Bots (Solana)</h3>
+      <div class="bots-grid">
+        <div class="bot-card">
+          <div class="bot-platform">Telegram</div>
+          <div class="bot-name">Bloom</div>
+          <a href="https://t.me/BloomSolana_bot?start=ref_N9CNKXS4SV" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+        <div class="bot-card">
+          <div class="bot-platform">Telegram</div>
+          <div class="bot-name">Trojan</div>
+          <a href="https://t.me/hector_trojanbot?start=r-elliotremedy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+        <div class="bot-card">
+          <div class="bot-platform">Telegram</div>
+          <div class="bot-name">Banana Gun</div>
+          <a href="https://t.me/BananaGun_bot?start=ref_AlphaIntel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+        <div class="bot-card">
+          <div class="bot-platform">Telegram</div>
+          <div class="bot-name">Bonkbot</div>
+          <a href="https://app.telemetry.io/@xrld6" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+      </div>
+    </div>
+    <div class="bots-subsection">
+      <h3 style="font-family: 'Syne', sans-serif; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem;">Telegram Bots (ETH / BNB / Multi-chain)</h3>
+      <div class="bots-grid">
+        <div class="bot-card">
+          <div class="bot-platform">Telegram</div>
+          <div class="bot-name">Maestro</div>
+          <a href="https://t.me/maestro?start=r-zygfrid" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Use referral</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner reveal">
+    <div class="cta-banner-bg"></div>
+    <div class="cta-banner-content">
+      <h2>Get your alpha for free.</h2>
+      <p>Join thousands of traders and Web3 hunters staying ahead of the market every day. No paywalls. Just alpha.</p>
+      <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord — Free</a>
+      <div class="badge">FREE · No credit card needed</div>
+    </div>
+  </section>
+
+  <section class="resources-section reveal">
+    <span class="section-label">Latest Intel</span>
+    <h2 class="section-title">Discover more from Alpha Intel</h2>
+    <div class="resources-grid">
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Intel</div>
+        <h3>BTC breaks key resistance — what happens next</h3>
+        <p>Technical and on-chain context for the next leg.</p>
       </a>
-      <a href="https://x.com/AlphaIntelMedia" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">𝕏</div>
-        <h3>Twitter / X</h3>
-        <p style="color: var(--muted); font-size: 0.9rem;">@AlphaIntelMedia</p>
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Alpha</div>
+        <h3>Top 3 airdrop opportunities this week on MEXC</h3>
+        <p>Early plays before they trend.</p>
       </a>
-      <a href="https://t.me/alphaintelpublic" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">✈️</div>
-        <h3>Telegram</h3>
-        <p style="color: var(--muted); font-size: 0.9rem;">Public channel</p>
-      </a>
-      <a href="https://instagram.com/AlphaIntelMedia" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">📸</div>
-        <h3>Instagram</h3>
-        <p style="color: var(--muted); font-size: 0.9rem;">@AlphaIntelMedia</p>
-      </a>
-      <a href="https://www.facebook.com/AlphaIntelMedia" class="platform-card reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">👍</div>
-        <h3>Facebook</h3>
-        <p style="color: var(--muted); font-size: 0.9rem;">AlphaIntelMedia</p>
-      </a>
-      <a href="https://www.mexc.co/en-GB/acquisition/custom-sign-up?shareCode=mexc-3SqjB" class="platform-card partner reveal" target="_blank" rel="noopener noreferrer">
-        <div class="icon">🟡</div>
-        <h3>MEXC Partner</h3>
-        <p style="font-size: 0.9rem;">Sign up with our link</p>
+      <a href="https://discord.gg/alphaintel" class="resource-card" target="_blank" rel="noopener noreferrer">
+        <div class="meta">Community</div>
+        <h3>Why Filipino traders are dominating Web3 in 2026</h3>
+        <p>Inside our Filipino-led, global community.</p>
       </a>
     </div>
-    <p style="text-align: center; margin-top: 1.25rem;">
-      <a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer" style="color: var(--green);">linktr.ee/alphaintelmedia</a>
-      <span style="color: var(--muted); margin: 0 0.5rem;">·</span>
-      <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer" style="color: var(--green);">alphaintelmedia.com</a>
-    </p>
   </section>
 
-  <section class="cta-section reveal">
-    <div class="cta-badge">FREE</div>
-    <h2>Get your alpha for free.</h2>
-    <p>No paywalls. Join Discord and get sharp news, trade calls, and Web3 intel—all free.</p>
-    <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join Discord Free</a>
-  </section>
-
-  <footer>
+  <footer id="platforms">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="Alpha Intel" class="footer-logo" width="36" height="36">
+        <img src="assets/logo.png" alt="Alpha Intel" class="logo-img" width="36" height="36">
         <p>Bringing you sharp news and insights on fintech, Web3, and crypto to the world.</p>
-        <div class="footer-social">
-          <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer" aria-label="Discord">💬</a>
-          <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
-          <a href="https://t.me/alphaintelpublic" target="_blank" rel="noopener noreferrer" aria-label="Telegram">✈️</a>
-          <a href="https://instagram.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
-          <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer" aria-label="Facebook">👍</a>
-          <a href="https://tiktok.com/@alphaintelmedia" target="_blank" rel="noopener noreferrer" aria-label="TikTok">🎵</a>
-        </div>
       </div>
       <div class="footer-col">
         <h4>Community</h4>
         <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="https://t.me/alphaintelpublic" target="_blank" rel="noopener noreferrer">Telegram</a>
         <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+        <a href="https://instagram.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
       <div class="footer-col">
-        <h4>Resources</h4>
-        <a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer">Linktree</a>
-        <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer">Main Site</a>
+        <h4>Platforms</h4>
+        <a href="https://www.facebook.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://tiktok.com/@alphaintelmedia" target="_blank" rel="noopener noreferrer">TikTok</a>
         <a href="https://www.mexc.co/en-GB/acquisition/custom-sign-up?shareCode=mexc-3SqjB" target="_blank" rel="noopener noreferrer">MEXC Partner</a>
+        <a href="https://alphaintelmedia.com" target="_blank" rel="noopener noreferrer">Main Website</a>
       </div>
       <div class="footer-col">
-        <h4>Info</h4>
-        <a href="#offer">What We Offer</a>
-        <a href="#callers">Callers & KOLs</a>
-        <a href="#platforms">Platforms</a>
+        <h4>Links</h4>
+        <a href="https://linktr.ee/alphaintelmedia" target="_blank" rel="noopener noreferrer">Linktree</a>
+        <a href="https://discord.gg/alphaintel" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <a href="https://x.com/AlphaIntelMedia" target="_blank" rel="noopener noreferrer">Latest News</a>
+      </div>
+    </div>
+    <div class="newsletter">
+      <label for="newsletter-email">Subscribe for daily crypto intel</label>
+      <div class="newsletter-input-wrap">
+        <input type="email" id="newsletter-email" placeholder="Your email" aria-label="Email for newsletter">
+        <a href="https://discord.gg/alphaintel" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Subscribe</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Alpha Intel Media</span>
+      <span>© 2026 Alpha Intel Media. All rights reserved.</span>
       <span>Filipino-Led · Global Reach</span>
     </div>
   </footer>
@@ -991,27 +1295,51 @@
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            var children = entry.target.querySelectorAll('.reveal');
-            children.forEach(function(el, i) {
-              setTimeout(function() { el.classList.add('visible'); }, i * 100);
-            });
           }
         });
-      }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
       reveals.forEach(function(el) { observer.observe(el); });
 
-      var items = document.querySelectorAll('.intel-item');
-      var current = 0;
-      function rotateIntel() {
-        items.forEach(function(item, i) {
-          item.classList.toggle('active', i === current);
-        });
-        current = (current + 1) % items.length;
-      }
-      setInterval(rotateIntel, 6000);
+      var strip = document.getElementById('logoStrip');
+      if (strip) strip.innerHTML = strip.innerHTML + strip.innerHTML;
 
-      var marquee = document.querySelector('.marquee');
-      if (marquee) marquee.innerHTML = marquee.innerHTML + marquee.innerHTML;
+      var tabs = document.querySelectorAll('.solution-tab');
+      var panes = document.querySelectorAll('.solution-pane');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var id = this.getAttribute('data-tab');
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          panes.forEach(function(p) { p.classList.remove('active'); });
+          this.classList.add('active');
+          var pane = document.getElementById(id);
+          if (pane) pane.classList.add('active');
+        });
+      });
+
+      var teamGrid = document.getElementById('teamGrid');
+      var teamFilters = document.querySelectorAll('.team-filter');
+      if (teamGrid && teamFilters.length) {
+        teamFilters.forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            teamFilters.forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            var filter = this.getAttribute('data-filter');
+            teamGrid.classList.add('filtering');
+            setTimeout(function() {
+              var cards = teamGrid.querySelectorAll('.team-card');
+              cards.forEach(function(card) {
+                var role = card.getAttribute('data-role');
+                if (filter === 'all' || role === filter) {
+                  card.classList.remove('hidden');
+                } else {
+                  card.classList.add('hidden');
+                }
+              });
+              teamGrid.classList.remove('filtering');
+            }, 150);
+          });
+        });
+      }
     })();
   </script>
 </body>
